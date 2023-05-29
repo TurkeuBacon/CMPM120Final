@@ -1,0 +1,8 @@
+class Item extends Sprite
+{
+    constructor(scene, x, y, frame, canPickup)
+    {
+        this.canPickup = canPickup;
+        super(scene, x, y, frame);
+    }
+}
