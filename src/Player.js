@@ -1,4 +1,4 @@
-class Player extends Sprite
+class Player extends Phaser.Sprite
 {
     constructor(scene, x, y, texture, frame)
     {

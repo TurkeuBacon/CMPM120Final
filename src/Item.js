@@ -1,4 +1,4 @@
-class Item extends Sprite
+class Item extends Phaser.Sprite
 {
     constructor(scene, x, y, frame, canPickup)
     {
