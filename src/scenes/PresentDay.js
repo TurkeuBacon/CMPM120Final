@@ -10,7 +10,7 @@ class PresentDay extends Phaser.Scene
 
     preload()
     {
-        this.load.path = './assets/';
+        this.load.path = '../assets/';
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32})
         this.load.image('background', '/Scene_PresentDay/prototype_hub_layout_1960S.jpg');
     }

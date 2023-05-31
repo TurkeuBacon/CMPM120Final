@@ -8,7 +8,7 @@ class MainMenu extends Phaser.Scene
 
     preload()
     {
-        this.load.path = './assets/';
+        this.load.path = '../assets/';
         this.load.image('TitleArt', 'Scene_MainMenu/TitleArtPlaceholder.png');
         this.load.image('BackgroundArt', 'Scene_MainMenu/BackgroundArt.png');
         this.load.image('ButtonArt', 'Scene_MainMenu/ShittyButton.png');
