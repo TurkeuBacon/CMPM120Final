@@ -1,3 +1,17 @@
+/*
+As of June 1st 2023 this file was written by Gabe,
+Ask him any questions you have about these classes
+*/
+
+/*
+The base class for directional inputs.
+
+I'm (Gabriel) designing the player to operate on the direction string,
+so each child of DirectionalInput will have one two jobs:
+    -Convert player inputs into a direction
+    -Communicate these inputs to the HUD UI if necessary ex. Displaying
+    the virtual touch joystick
+*/
 class DirectionalInputDevice
 {
     constructor(scene)
@@ -8,65 +22,95 @@ class DirectionalInputDevice
     }
 }
 
+/*
+A Joystick for touchscreen directional inputs
+
+* The joystick has an area in the bottom left corner of the screen where it can activate.
+* When there is a press in that area, the joystick will appear at that initial location
+until the press is released.
+* While the joystick is active, sliding the pointer will cause the "Stick" to move within
+it's movement radius.
+* The direction the stick points relative to the starting press can be read as inputs either
+through the input property (the relative xy position of the stick), or through the direction
+property (The direction the stick is pointing, represented as a string: "neutral", "up",
+"down", "left", or "right")
+*/
 class TouchJoystick extends DirectionalInputDevice
 {
     constructor(scene, touchArea, backRadius, stickRadius, stickMoveRadius, minForDirection)
     {
         super(scene);
-        this.touchArea = touchArea;
-        this.backRadius = backRadius;
-        this.stickRadius = stickRadius;
-        this.stickMoveRadius = stickMoveRadius;
+        this.joystickUIData = // All data pertaining to the joystick's visuals
+        {
+            "backgroundRadius": backRadius, // The radius of the joystick background
+            "stickRadius" : stickRadius, // The radius of the joystick stick
+            "backgroundColor" : 0x888888, // The color of the joystick background
+            "stickColor" : 0xaaffaa, // The color of the joystick stick
+            "backgroundAlpha" : .75, // The opacity of the joystick background
+            "stickAlpha" : .5, // The opacity of the joystick stick
+        };
+        this.touchArea = touchArea; // The percentage of width and height that will trigger the joystick. (The joystick will always be triggered in the bottom left)
+        this.stickMoveRadius = stickMoveRadius; // How far the stick can move from the center of the joystick
 
-        this.input = {'x': 0, 'y': 0};
-        this.joystickStartScreen = {'x': 0, 'y': 0};
-        this.joystickStartWorld = {'x': 0, 'y': 0};
-        this.enabled = false;
-        this.waitForNextPress = false;
+        this.input = {'x': 0, 'y': 0}; // The current raw output of the joystick
+        this.joystickStartScreen = {'x': 0, 'y': 0}; // Where the current joystick is located
+        this.active = false; // Is the joystick currently being used
+        this.waitForNextPress = false; // Indicates if joystick checks should wait for the next click/touch
         this.minForDirection = minForDirection;
     }
 
     update()
     {
-        let cam = this.scene.cameras.main;
-        let zoom = this.scene.cameras.main.zoom;
+        // The current active pointer (pointers handle both mouse and touch inputs)
         let pointer = this.scene.input.activePointer;
+        // The position of the pointer with each axis normalized between zero and one
+        // Left side x=0. Right side x=1. Top y=0. Bottom y=1
         let pointerPositionNormalized = new Phaser.Math.Vector2(pointer.position.x/this.scene.sys.game.canvas.width, pointer.position.y/this.scene.sys.game.canvas.height);
 
-        if(!this.enabled && !this.waitForNextPress && pointer.isDown)
+        /*
+        The condition for a new joystick press
+        Sets the joystick active and saves the starting position
+        Sets waitForNextPress to true if the press was outside the joystick area
+        */
+        if(!this.active && !this.waitForNextPress && pointer.isDown)
         {
             if(pointerPositionNormalized.x < (this.touchArea.width) && pointerPositionNormalized.y > (1-this.touchArea.height))
             {
-                this.joystickStartWorld = {'x': pointer.worldX, 'y': pointer.worldY};
+                this.joystickStartScreen = {'x': pointer.position.x, 'y': pointer.position.y};
 
-                this.backCircle = this.scene.add.circle(300, 300, this.backRadius, 0x888888, 0.5);
-                this.stickCircle = this.scene.add.circle(300, 300, this.stickRadius, 0xaaffaa, 0.75);
-
-                this.backCircle.setScrollFactor(0, 0);
-                this.stickCircle.setScrollFactor(0, 0);
-
-                this.enabled = true;
+                this.active = true;
             }
             else
             {
                 this.waitForNextPress = true;
             }
         }
-        else if(this.enabled && pointer.isDown)
+        
+        /*
+        The condition for an active joystick
+        Calculates the joystick direction
+        */
+        else if(this.active && pointer.isDown)
         {
-            //Do Joystick Stuff
-            let inputX = pointer.worldX - this.joystickStartWorld.x;
-            let inputY = pointer.worldY - this.joystickStartWorld.y;
+            let inputX = pointer.position.x - this.joystickStartScreen.x; // The X position of pointer relative to the starting position
+            let inputY = pointer.position.y - this.joystickStartScreen.y; // The Y position of pointer relative to the starting position
+            // The magnitude of the relative position vector
+            // Used to normalize the input
             let magnitude = Math.sqrt(Math.pow(inputX, 2) + Math.pow(inputY, 2));
+            // Clamps the magnitude of the dirctional vector to the stick move radius while preserving the direction itself
             if(magnitude > this.stickMoveRadius )
             {
                 inputX = inputX / magnitude * this.stickMoveRadius;
                 inputY = inputY / magnitude * this.stickMoveRadius;
             }
-            this.stickCircle.setPosition(this.joystickStartWorld.x + inputX, this.joystickStartWorld.y + inputY);
 
+            // Sets the final raw input of the joystick
+            // A 2D vector with a magnitude between 0 and 1
             this.input = {'x': inputX / this.stickMoveRadius, 'y': -inputY / this.stickMoveRadius}
 
+            // Determining the discrete direction of the joystick
+            // The basic idea is that x > y means a horizonal input and y > x means a vertical input
+            // the sign of x or y is the used to determine left/right or up/down
             if(Math.abs(this.input.x) > Math.abs(this.input.y) && this.input.x > this.minForDirection)
             {
                 this.direction = "right";
@@ -88,20 +132,43 @@ class TouchJoystick extends DirectionalInputDevice
                 this.direction = "neutral";
             }
         }
+
+        /*
+        Condition for no touch inputs detected
+        If active: set inactive, reset the input vector and direction to the neutral states
+        Always sets waitForNextPress to false, since we have ended the invalid press
+        */
         if(!pointer.isDown)
         {
-            if(this.enabled)
+            if(this.active)
             {
-                //Destroy Joystick UI Elements
-                this.backCircle.destroy();
-                this.stickCircle.destroy();
-
                 this.input = {'x': 0, 'y': 0};
                 this.direction = "neutral";
-                this.enabled = false;
+                this.active = false;
             }
             this.waitForNextPress = false;
         }
+        /*
+        An event trigger that the HUD Scene listens for
+        It sends the data needed to properly display the joystick UI
+
+        This is the area of the code I a least familiar with, it was based off this code example:
+        https://labs.phaser.io/edit.html?src=src%5Cscenes%5Cui%20scene%20es6.js
+        */
+        this.scene.events.emit('setJoystickUI',
+            this.active,
+            {
+                'background': 
+                {
+                    'x': this.joystickStartScreen.x, 'y': this.joystickStartScreen.y
+                },
+                'stick': 
+                {
+                    'x': this.joystickStartScreen.x + this.input.x * this.stickMoveRadius, 'y': this.joystickStartScreen.y - this.input.y * this.stickMoveRadius
+                }
+            },
+            this.joystickUIData
+            );
     }
 }
 export default TouchJoystick;

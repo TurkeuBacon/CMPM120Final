@@ -1,5 +1,6 @@
 import MainMenu from "./scenes/MainMenu.js";
 import PresentDay from "./scenes/PresentDay.js";
+import HUD from "./scenes/HUD.js";
 
 let config = {
     mode: Phaser.Scale.FIT,
@@ -11,7 +12,7 @@ let config = {
         default: 'arcade',
         debug: true
     },
-    scene: [MainMenu, PresentDay],
+    scene: [MainMenu, PresentDay, HUD],
 }
 
 let game = new Phaser.Game(config);
