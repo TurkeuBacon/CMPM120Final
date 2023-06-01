@@ -1,5 +1,6 @@
 import Player from '../Player.js'
 import CameraManager from '../CameraManager.js'
+import HUD from './HUD.js'
 import TouchJoystick from '../InputDevices.js'
 class PresentDay extends Phaser.Scene
 {
