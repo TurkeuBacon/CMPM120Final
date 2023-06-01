@@ -1,5 +1,6 @@
 import Player from '../Player.js'
 import CameraManager from '../CameraManager.js'
+import HUD from './HUD.js'
 import TouchJoystick from '../InputDevices.js'
 class PresentDay extends Phaser.Scene
 {
@@ -17,6 +18,8 @@ class PresentDay extends Phaser.Scene
 
     create()
     {
+        this.hudScene = this.scene.launch('present_day_hud');
+
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
         this.background = this.add.image(screenWidth/2, screenHeight/2, 'background');
