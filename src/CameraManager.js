@@ -1,9 +1,20 @@
+import Player from "./Player.js";
+import PlayerCamera from "./PlayerCamera.js";
+
 class CameraManager {
-    constructor(scene, target){
-        this.scene = scene;
-        this.target = target;
-        this.scene.cameras.main.startFollow(this.target);
-        this.scene.cameras.main.setZoom(2);
+    constructor(){
+        this.playerCamera;
+        this.hudCamera;
+        this.ModernDayCamera;
+        this.NinetiesCamera;
+        this.SeventeenHCamera;
+    }
+    assignCamera(camerasItem){
+        if (camerasItem instanceof PlayerCamera){
+            this.playerCamera = camerasItem;
+        } else {
+            console.error("Invalid camera item.");
+        }
     }
 }
 
