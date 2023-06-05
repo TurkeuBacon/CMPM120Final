@@ -1,5 +1,3 @@
-import Player from "./Player";
-
 class PlayerCamera {
     constructor(scene, target){
         this.scene = scene;
