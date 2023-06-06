@@ -6,6 +6,7 @@ import Map from "./Map.js";
 class MapState {
     //While not set up yet, I believe that if we group our members in groups associated with a time period it will be easier to mitigate our tweens for them
     constructor(playerCamera, player, map1700, map1960, mapPresent){
+        //switch this?
         this.playerCamera = playerCamera;
         this.player = player;
         this.map1700 = map1700;
@@ -15,9 +16,7 @@ class MapState {
         this.currentMap = mapPresent;
     }
     showMap(){
-        this.player.depth = 1;
-        this.currentMap.depth = 0;
-        this.currentMap.alpha = 1;
+        
     }
     
     //Function to switch maps. Takes in a string
@@ -31,9 +30,7 @@ class MapState {
             }
         }
         //should theoretically work
-        this.currentMap.setVisible(false);
-        this.currentMap = this.nextMap;
-        this.currentMap.setVisible(true);
+        
     }
 
 }

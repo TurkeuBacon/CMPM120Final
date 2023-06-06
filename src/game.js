@@ -16,3 +16,12 @@ let config = {
 }
 
 let game = new Phaser.Game(config);
+
+/*function enableFullscreen(){
+    if(game.scale.isFullscreen){
+        game.scale.stopFullscreen();
+    }
+    else{
+        game.scale.startFullscreen();
+    }
+}*/

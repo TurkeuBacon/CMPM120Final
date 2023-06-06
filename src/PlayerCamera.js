@@ -1,9 +1,10 @@
-class PlayerCamera {
-    constructor(scene, target){
+class PlayerCamera extends Phaser.Camera
+{
+    constructor(scene, target, ){
         this.scene = scene;
         this.target = target;
-        this.scene.cameras.main.startFollow(this.target);
-        this.scene.cameras.main.setZoom(2);
+        this.startFollow(this.target);
+        this.setZoom(2);
     }
 }
 
