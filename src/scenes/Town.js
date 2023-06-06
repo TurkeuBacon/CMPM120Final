@@ -27,14 +27,13 @@ class Town extends Phaser.Scene
         this.load.image('testin4', '/Testing/weird.png');
         this.load.image('testin5', '/Testing/jungle.jpg');
         this.load.image('testin6', '/Testing/dragon.png');
-        this.load.image('fstest', '/assets/HUD/fullscreen_button.png')
     }
 
     create()
     {
         //Since our camera will be taking care of hud, should we change this line of code below?
         //Also, should we restructure this .js to be our main scene that alters between timelines? (Daniel)
-        this.add.sprite(100,100,'fstest').setInteractable();
+        //this.add.sprite(100,100,'fstest').setInteractable();
         this.hudScene = this.scene.launch('town_hud');
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
