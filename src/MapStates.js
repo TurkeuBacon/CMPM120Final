@@ -1,11 +1,16 @@
 import PlayerCamera from "./PlayerCamera.js";
 import Player from "./Player.js";
+import Map from "./Map.js";
+
+
 class MapState {
     //While not set up yet, I believe that if we group our members in groups associated with a time period it will be easier to mitigate our tweens for them
     constructor(playerCamera, player, map1700, map1960, mapPresent){
         this.playerCamera = playerCamera;
         this.player = player;
-        this.maps = [map1700, map1960, mapPresent];
+        this.map1700 = map1700;
+        this.map1960 = map1960;
+        this.mapPresent = mapPresent;
         //this.groups = [group1700, group1960, groupPresent];
         this.currentMap = mapPresent;
     }
