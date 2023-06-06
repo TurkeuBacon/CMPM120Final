@@ -1,8 +1,8 @@
-class PresentDay_HUD extends Phaser.Scene
+class Town_HUD extends Phaser.Scene
 {
     constructor()
     {
-        super('present_day_hud');
+        super('town_hud');
     }
 
     preload()
@@ -11,7 +11,7 @@ class PresentDay_HUD extends Phaser.Scene
 
     create()
     {
-        this.scene.get('present_day').events.on('setJoystickUI', function (joystickActive, joystickPosition, joystickData) {
+        this.scene.get('town').events.on('setJoystickUI', function (joystickActive, joystickPosition, joystickData) {
             if(!this.joystickElements)
             {
                 console.log("Creating Joystick Elements");
@@ -50,4 +50,4 @@ class PresentDay_HUD extends Phaser.Scene
     }
 }
 
-export default PresentDay_HUD;
+export default Town_HUD;

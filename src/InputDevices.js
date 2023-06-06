@@ -12,11 +12,14 @@ so each child of DirectionalInput will have one two jobs:
     -Communicate these inputs to the HUD UI if necessary ex. Displaying
     the virtual touch joystick
 */
-class DirectionalInputDevice
+class DirectionalInputDevice extends Phaser.GameObjects.GameObject
 {
     constructor(scene)
     {
+        super(scene, "inputDevice");
         this.scene = scene;
+        this.scene.add.existing(this);
+        this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
         
         this.direction = "neutral";
     }
@@ -59,7 +62,7 @@ class TouchJoystick extends DirectionalInputDevice
         this.minForDirection = minForDirection;
     }
 
-    update()
+    update(time, delta)
     {
         // The current active pointer (pointers handle both mouse and touch inputs)
         let pointer = this.scene.input.activePointer;

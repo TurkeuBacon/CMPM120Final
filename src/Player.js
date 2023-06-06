@@ -6,6 +6,7 @@ class Player extends Phaser.GameObjects.Sprite
         this.inventory = [];
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
         this.keys = scene.input.keyboard.addKeys('W,A,S,D');
         this.inputDevice = inputDevice;
 

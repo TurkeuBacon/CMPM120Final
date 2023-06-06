@@ -7,11 +7,11 @@ import MapState from '../MapStates.js'
 
 //Gabe can we switch PresentDay to a class called World instead? I think it would make more sense since we won't be having separate scenes.
     //didn't want to change your code here because it t's associated with "Present Day" (Daniel)
-class PresentDay extends Phaser.Scene
+class Town extends Phaser.Scene
 {
     constructor()
     {
-        super('present_day');
+        super('town');
     }
 
     preload()
@@ -33,7 +33,7 @@ class PresentDay extends Phaser.Scene
     {
         //Since our camera will be taking care of hud, should we change this line of code below? 
         //Also, should we restructure this .js to be our main scene that alters between timelines? (Daniel)
-        this.hudScene = this.scene.launch('present_day_hud');
+        this.hudScene = this.scene.launch('town_hud');
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
         /*this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
@@ -64,9 +64,9 @@ class PresentDay extends Phaser.Scene
         var dragon = this.add.image(screenWidth/2, screenHeight/2, 'testin6');
         group3.add(jungle);
         group3.add(dragon);
-        var map1700s = new Map("Map1700s", this.add.image(screenWidth/2, screenHeight/2, '1700sMap'), group1);
-        var map1960s = new Map("Map1960s", this.add.image(screenWidth/2, screenHeight/2, '1960sMap'), group2);
-        var mapPresent = new Map("MapPresent", this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap'), group3);
+        //var map1700s = new Map("Map1700s", this.add.image(screenWidth/2, screenHeight/2, '1700sMap'), group1);
+        //var map1960s = new Map("Map1960s", this.add.image(screenWidth/2, screenHeight/2, '1960sMap'), group2);
+        //var mapPresent = new Map("MapPresent", this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap'), group3);
         //Camera for player
         this.PlayerCamera = new PlayerCamera(this,this.player);
         //Assigns our camera manager the player camera
@@ -75,12 +75,12 @@ class PresentDay extends Phaser.Scene
 
     }
 
-    update()
+    update(time, delta)
     {
-        this.joystick.update();
-        this.player.update();
+        // this.joystick.update();
+        // this.player.update();
 
     }
 }
 
-export default PresentDay;
+export default Town;
