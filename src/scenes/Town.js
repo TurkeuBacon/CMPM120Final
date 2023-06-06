@@ -4,7 +4,7 @@ import HUD from './HUD.js'
 import TouchJoystick from '../InputDevices.js'
 import PlayerCamera from '../PlayerCamera.js'
 import MapState from '../MapStates.js'
-
+import Map from '../Map.js'
 //Gabe can we switch PresentDay to a class called World instead? I think it would make more sense since we won't be having separate scenes.
     //didn't want to change your code here because it t's associated with "Present Day" (Daniel)
 class Town extends Phaser.Scene
@@ -27,46 +27,54 @@ class Town extends Phaser.Scene
         this.load.image('testin4', '/Testing/weird.png');
         this.load.image('testin5', '/Testing/jungle.jpg');
         this.load.image('testin6', '/Testing/dragon.png');
+        this.load.image('fstest', '/assets/HUD/fullscreen_button.png')
     }
 
     create()
     {
-        //Since our camera will be taking care of hud, should we change this line of code below? 
+        //Since our camera will be taking care of hud, should we change this line of code below?
         //Also, should we restructure this .js to be our main scene that alters between timelines? (Daniel)
+        this.add.sprite(100,100,'fstest').setInteractable();
         this.hudScene = this.scene.launch('town_hud');
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
-        /*this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
-        this.PresentDayBG.depth = 0;
-        this.PresentDayBG.alpha = 0;
+        this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
+        this.PresentDayBG.depth = 1;
+        this.PresentDayBG.alpha = 1;
         this.BeginningTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1700sMap');
-        this.BeginningTimeBG.depth = 0;
-        this.BeginningTimeBG.alpha = 0;
+        this.BeginningTimeBG.depth = 1;
+        this.BeginningTimeBG.alpha = 1;
         this.MiddleTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1960sMap'); 
-        this.MiddleTimeBG.depth = 0;
-        this.MiddleTimeBG.alpha = 0;*/
+        this.MiddleTimeBG.depth = 1;
+        this.MiddleTimeBG.alpha = 1;
         
         this.joystick = new TouchJoystick(this, {'width': 0.33, 'height': .5}, 100, 50, 75, 0.5);
         this.player = new Player(this, 100, 100, 'player', 1, this.joystick);
+        this.player.depth = 2;
         //testing for groups
-        var group1 = this.add.group();
-        var group2 = this.add.group();
-        var group3 = this.add.group();
-        var link = this.add.image(screenWidth/2, screenHeight/2, 'testin1');
-        var mario = this.add.image(screenWidth/2, screenHeight/2, 'testin2');
-        group1.add(link);
-        group1.add(mario);
-        var sonic = this.add.image(screenWidth/2, screenHeight/2, 'testin3');
-        var weird = this.add.image(screenWidth/2, screenHeight/2, 'testin4');
-        group2.add(sonic);
-        group2.add(weird);
-        var jungle = this.add.image(screenWidth/2, screenHeight/2, 'testin5');
-        var dragon = this.add.image(screenWidth/2, screenHeight/2, 'testin6');
-        group3.add(jungle);
-        group3.add(dragon);
-        //var map1700s = new Map("Map1700s", this.add.image(screenWidth/2, screenHeight/2, '1700sMap'), group1);
-        //var map1960s = new Map("Map1960s", this.add.image(screenWidth/2, screenHeight/2, '1960sMap'), group2);
-        //var mapPresent = new Map("MapPresent", this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap'), group3);
+        this.group1 = this.add.group();
+        this.group2 = this.add.group();
+        this.group3 = this.add.group();
+        this.link = this.add.image(screenWidth/2, screenHeight/2, 'testin1').setScale(0.3);
+        this.mario = this.add.image(screenWidth/2, screenHeight/2, 'testin2').setScale(0.3);
+        this.group1.add(this.link);
+        this.group1.add(this.mario);
+        this.sonic = this.add.image(screenWidth/2, screenHeight/2, 'testin3').setScale(0.3);
+        this.weird = this.add.image(screenWidth/2, screenHeight/2, 'testin4').setScale(0.3);
+        this.group2.add(this.sonic);
+        this.group2.add(this.weird);
+        this.jungle = this.add.image(screenWidth/2, screenHeight/2, 'testin5').setScale(0.3);
+        this.dragon = this.add.image(screenWidth/2, screenHeight/2, 'testin6').setScale(0.3);
+        this.group3.add(this.jungle);
+        this.group3.add(this.dragon);
+        this.PresentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
+        this.SixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
+        this.EarlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
+        this.PresentDayMap.Vanish();
+        this.EarlyMap.Vanish();
+        this.SixtiesMap.Vanish();
+        this.SixtiesMap.showMap();
+        //this.SixtiesMap.Vanish();
         //Camera for player
         this.PlayerCamera = new PlayerCamera(this,this.player);
         //Assigns our camera manager the player camera
