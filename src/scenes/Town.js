@@ -79,10 +79,11 @@ class Town extends Phaser.Scene
         this.PlayerCamera = new PlayerCamera(this,this.player);
         this.MapManager = new MapState(this.PlayerCamera, this.player, this.EarlyMap, this.SixtiesMap, this.PresentDayMap);
         this.MapManager.initialize();
-        this.MapManager.switchTimes("1700s");
-        //Assigns our camera manager the player camera
-        //this.CameraManager.assignCamera(this.PlayerCamera);
-        
+        //used to trigger a test on mapstate transitions
+        this.input.keyboard.on('keydown-X', function(event) {
+            // Your code here
+            this.MapManager.switchTimes("1700s");
+        }, this);
 
     }
 

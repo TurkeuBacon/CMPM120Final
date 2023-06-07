@@ -12,7 +12,7 @@ class MapState {
     }
     initialize(){
         for (let i = 0; i < this.maps.length; i++){
-            this.maps[i].Vanish();
+            this.maps[i].VanishInstant();
         }
         this.maps[2].showMap();
         this.currentMap = this.maps[2];
@@ -27,11 +27,8 @@ class MapState {
                 break;
             }
         }
-        this.currentMap.Vanish();
+        this.currentMap.Vanish(this.nextMap);
         this.currentMap = this.nextMap;
-        this.currentMap.showMap();
-        //should theoretically work
-        
     }
 
 }
