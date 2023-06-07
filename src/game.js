@@ -3,7 +3,7 @@ import Town from "./scenes/Town.js";
 import HUD from "./scenes/HUD.js";
 
 let config = {
-    mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.RESIZE,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     type: Phaser.WEBGL,
     pixelArt: true,
@@ -17,11 +17,3 @@ let config = {
 
 let game = new Phaser.Game(config);
 
-/*function enableFullscreen(){
-    if(game.scale.isFullscreen){
-        game.scale.stopFullscreen();
-    }
-    else{
-        game.scale.startFullscreen();
-    }
-}*/

@@ -18,9 +18,9 @@ class Town extends Phaser.Scene
     {
         this.load.path = '../assets/';
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32})
-        this.load.image('PresentDayMap', '/Scene_PresentDay/prototype_hub_layout_1960S.jpg');
-        this.load.image('1700sMap', '/Scene_1700s/town_past.png');
-        this.load.image('1960sMap', '/Scene_1960s/Town_without_home_repo_past.png');
+        this.load.image('PresentDayMap', '/Scene_PresentDay/PresentDay.png');
+        this.load.image('1700sMap', '/Scene_1700s/1700s.png');
+        this.load.image('1960sMap', '/Scene_1960s/1960s.png');
         this.load.image('testin1', '/Testing/mario.png');
         this.load.image('testin2', '/Testing/link.jpg');
         this.load.image('testin3', '/Testing/sonic.jpg');
@@ -28,7 +28,7 @@ class Town extends Phaser.Scene
         this.load.image('testin5', '/Testing/jungle.jpg');
         this.load.image('testin6', '/Testing/dragon.png');
     }
-
+    
     create()
     {
         //Since our camera will be taking care of hud, should we change this line of code below?
@@ -48,34 +48,38 @@ class Town extends Phaser.Scene
         this.MiddleTimeBG.alpha = 1;
         
         this.joystick = new TouchJoystick(this, {'width': 0.33, 'height': .5}, 100, 50, 75, 0.5);
-        this.player = new Player(this, 100, 100, 'player', 1, this.joystick);
+        this.player = new Player(this, 500, 500, 'player', 1, this.joystick);
         this.player.depth = 2;
         //testing for groups
         this.group1 = this.add.group();
         this.group2 = this.add.group();
         this.group3 = this.add.group();
         this.link = this.add.image(screenWidth/2, screenHeight/2, 'testin1').setScale(0.3);
+        this.link.depth = 1;
         this.mario = this.add.image(screenWidth/2, screenHeight/2, 'testin2').setScale(0.3);
+        this.mario.depth = 1;
         this.group1.add(this.link);
         this.group1.add(this.mario);
         this.sonic = this.add.image(screenWidth/2, screenHeight/2, 'testin3').setScale(0.3);
+        this.sonic.depth = 1;
         this.weird = this.add.image(screenWidth/2, screenHeight/2, 'testin4').setScale(0.3);
+        this.weird.depth = 1;
         this.group2.add(this.sonic);
         this.group2.add(this.weird);
         this.jungle = this.add.image(screenWidth/2, screenHeight/2, 'testin5').setScale(0.3);
+        this.jungle.depth = 1;
         this.dragon = this.add.image(screenWidth/2, screenHeight/2, 'testin6').setScale(0.3);
+        this.dragon.depth = 1;
         this.group3.add(this.jungle);
         this.group3.add(this.dragon);
         this.PresentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
         this.SixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
         this.EarlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
-        this.PresentDayMap.Vanish();
-        this.EarlyMap.Vanish();
-        this.SixtiesMap.Vanish();
-        this.SixtiesMap.showMap();
-        //this.SixtiesMap.Vanish();
         //Camera for player
         this.PlayerCamera = new PlayerCamera(this,this.player);
+        this.MapManager = new MapState(this.PlayerCamera, this.player, this.EarlyMap, this.SixtiesMap, this.PresentDayMap);
+        this.MapManager.initialize();
+        this.MapManager.switchTimes("1700s");
         //Assigns our camera manager the player camera
         //this.CameraManager.assignCamera(this.PlayerCamera);
         
