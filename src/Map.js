@@ -7,18 +7,43 @@ class Map {
         this.mapImage = mapImage;
         this.visible = false;
     }
-    Vanish(){
-        this.group.setVisible(false);
-        this.mapImage.setVisible(false);
-        this.visible = false; 
-        return this.visible;
-    }
     showMap(){
         this.group.setVisible(true);
         this.mapImage.setVisible(true);
         this.visible = true;
         return this.visible;
     }
+    VanishInstant(){
+        this.visible = false;
+        this.group.setVisible(false);
+        this.mapImage.setVisible(false);
+    }
+    Vanish(nextMap){
+        const blackScreen = this.scene.add.rectangle(
+            this.scene.cameras.main.centerX,
+            this.scene.cameras.main.centerY,
+            this.scene.cameras.main.width,
+            this.scene.cameras.main.height,
+            0x000000
+        );
+        blackScreen.setDepth(2);
+        blackScreen.alpha = 0;
+        this.scene.tweens.add({
+            targets: blackScreen,
+            alpha: 1,
+            duration: 2000,
+            onComplete: () => {
+                this.visible = false;
+                this.group.setVisible(false);
+                this.mapImage.setVisible(false);
+                nextMap.showMap();
+                blackScreen.setVisible(false);
+                return this.visible;
+            }
+        });
+        
+    }
+    
     getName(){
         return this.mapName;
     }
