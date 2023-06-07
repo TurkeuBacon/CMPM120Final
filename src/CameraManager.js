@@ -19,7 +19,7 @@ class CameraManager
         this.playerCamera.setTarget(target);
     }
 
-    makeUI(object)
+    addUI(object)
     {
         this.hudContainer.add(object);
         return object;

@@ -37,6 +37,10 @@ class Town extends Phaser.Scene
         this.hudScene = this.scene.launch('town_hud');
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
+
+        this.cameraManager = new CameraManager(this);
+        this.cameraManager.addUI(this.add.rectangle(100, 100, 40, 40, 0xff0000, 1));
+
         this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
         this.PresentDayBG.depth = 1;
         this.PresentDayBG.alpha = 1;
@@ -50,6 +54,7 @@ class Town extends Phaser.Scene
         this.joystick = new TouchJoystick(this, {'width': 0.33, 'height': .5}, 100, 50, 75, 0.5);
         this.player = new Player(this, 500, 500, 'player', 1, this.joystick);
         this.player.depth = 2;
+        this.cameraManager.setPlayerCameraTarget(this.player);
         //testing for groups
         this.group1 = this.add.group();
         this.group2 = this.add.group();
@@ -75,8 +80,7 @@ class Town extends Phaser.Scene
         this.PresentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
         this.SixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
         this.EarlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
-        //Camera for player
-        this.PlayerCamera = new PlayerCamera(this,this.player);
+        
         this.MapManager = new MapState(this.PlayerCamera, this.player, this.EarlyMap, this.SixtiesMap, this.PresentDayMap);
         this.MapManager.initialize();
         //used to trigger a test on mapstate transitions
