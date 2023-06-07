@@ -1,6 +1,5 @@
 import Player from '../Player.js'
 import CameraManager from '../CameraManager.js'
-import HUD from './HUD.js'
 import TouchJoystick from '../InputDevices.js'
 import PlayerCamera from '../PlayerCamera.js'
 import MapState from '../MapStates.js'
@@ -34,7 +33,7 @@ class Town extends Phaser.Scene
         //Since our camera will be taking care of hud, should we change this line of code below?
         //Also, should we restructure this .js to be our main scene that alters between timelines? (Daniel)
         //this.add.sprite(100,100,'fstest').setInteractable();
-        this.hudScene = this.scene.launch('town_hud');
+        //this.hudScene = this.scene.launch('town_hud');
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
 

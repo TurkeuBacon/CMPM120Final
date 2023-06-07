@@ -44,15 +44,6 @@ class TouchJoystick extends DirectionalInputDevice
     constructor(scene, touchArea, backRadius, stickRadius, stickMoveRadius, minForDirection)
     {
         super(scene);
-        this.joystickUIData = // All data pertaining to the joystick's visuals
-        {
-            "backgroundRadius": backRadius, // The radius of the joystick background
-            "stickRadius" : stickRadius, // The radius of the joystick stick
-            "backgroundColor" : 0x888888, // The color of the joystick background
-            "stickColor" : 0xaaffaa, // The color of the joystick stick
-            "backgroundAlpha" : .75, // The opacity of the joystick background
-            "stickAlpha" : .5, // The opacity of the joystick stick
-        };
         this.touchArea = touchArea; // The percentage of width and height that will trigger the joystick. (The joystick will always be triggered in the bottom left)
         this.stickMoveRadius = stickMoveRadius; // How far the stick can move from the center of the joystick
 
@@ -61,6 +52,24 @@ class TouchJoystick extends DirectionalInputDevice
         this.active = false; // Is the joystick currently being used
         this.waitForNextPress = false; // Indicates if joystick checks should wait for the next click/touch
         this.minForDirection = minForDirection;
+
+        this.joystickElements =
+                {
+                    "background":
+                        this.cm.addUI(this.scene.add.circle(
+                            0,
+                            0,
+                            backRadius,
+                            0x888888,
+                            .75)),
+                    "stick":
+                        this.cm.addUI(this.scene.add.circle(
+                            0,
+                            0,
+                            stickRadius,
+                            0xaaffaa,
+                            .5))
+                };
     }
 
     update(time, delta)
@@ -159,20 +168,35 @@ class TouchJoystick extends DirectionalInputDevice
         This is the area of the code I a least familiar with, it was based off this code example:
         https://labs.phaser.io/edit.html?src=src%5Cscenes%5Cui%20scene%20es6.js
         */
-        this.scene.events.emit('setJoystickUI',
-            this.active,
+       let joystickPosition = {
+            'background': 
             {
-                'background': 
-                {
-                    'x': this.joystickStartScreen.x, 'y': this.joystickStartScreen.y
-                },
-                'stick': 
-                {
-                    'x': this.joystickStartScreen.x + this.input.x * this.stickMoveRadius, 'y': this.joystickStartScreen.y - this.input.y * this.stickMoveRadius
-                }
+                'x': this.joystickStartScreen.x, 'y': this.joystickStartScreen.y
             },
-            this.joystickUIData
-            );
+            'stick': 
+            {
+                'x': this.joystickStartScreen.x + this.input.x * this.stickMoveRadius, 'y': this.joystickStartScreen.y - this.input.y * this.stickMoveRadius
+            }
+        }
+        this.joystickElements.background.setVisible(this.active);
+        this.joystickElements.stick.setVisible(this.active);
+        
+        this.joystickElements.background.setPosition(joystickPosition.background.x, joystickPosition.background.y);
+        this.joystickElements.stick.setPosition(joystickPosition.stick.x, joystickPosition.stick.y);
+        // this.scene.events.emit('setJoystickUI',
+        //     this.active,
+        //     {
+        //         'background': 
+        //         {
+        //             'x': this.joystickStartScreen.x, 'y': this.joystickStartScreen.y
+        //         },
+        //         'stick': 
+        //         {
+        //             'x': this.joystickStartScreen.x + this.input.x * this.stickMoveRadius, 'y': this.joystickStartScreen.y - this.input.y * this.stickMoveRadius
+        //         }
+        //     },
+        //     this.joystickUIData
+        //     );
     }
 }
 export default TouchJoystick;

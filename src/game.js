@@ -1,6 +1,5 @@
 import MainMenu from "./scenes/MainMenu.js";
 import Town from "./scenes/Town.js";
-import HUD from "./scenes/HUD.js";
 
 let config = {
     mode: Phaser.Scale.RESIZE,
@@ -12,7 +11,7 @@ let config = {
         default: 'arcade',
         debug: true
     },
-    scene: [MainMenu, Town, HUD],
+    scene: [MainMenu, Town],
 }
 
 let game = new Phaser.Game(config);
