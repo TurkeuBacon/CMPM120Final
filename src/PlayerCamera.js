@@ -1,10 +1,20 @@
-class PlayerCamera
+class PlayerCamera extends Phaser.Cameras.Scene2D.Camera
 {
-    constructor(scene, target){
-        this.scene = scene;
+    constructor(scene, zoom=2, target=null){
+        let canvas = scene.sys.game.canvas;
+        super(0, 0, canvas.width, canvas.height);
+        if(target != null)
+        {
+            this.setTarget(target);
+        }
+        this.setZoom(zoom);
+    }
+
+    setTarget(target)
+    {
+        this.stopFollow();
         this.target = target;
-        this.scene.cameras.main.startFollow(this.target);
-        this.scene.cameras.main.setZoom(2);
+        this.startFollow(this.target);
     }
 }
 

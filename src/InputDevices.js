@@ -20,6 +20,7 @@ class DirectionalInputDevice extends Phaser.GameObjects.GameObject
         this.scene = scene;
         this.scene.add.existing(this);
         this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
+        this.cm = this.scene.cameraManager;
         
         this.direction = "neutral";
     }
