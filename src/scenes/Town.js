@@ -4,6 +4,8 @@ import TouchJoystick from '../InputDevices.js'
 import PlayerCamera from '../PlayerCamera.js'
 import MapState from '../MapStates.js'
 import Map from '../Map.js'
+import Dialogue from '../Dialogue.js' 
+import DialogueManager from '../DialogueManager.js' 
 //Gabe can we switch PresentDay to a class called World instead? I think it would make more sense since we won't be having separate scenes.
     //didn't want to change your code here because it t's associated with "Present Day" (Daniel)
 class Town extends Phaser.Scene
@@ -26,6 +28,7 @@ class Town extends Phaser.Scene
         this.load.image('testin4', '/Testing/weird.png');
         this.load.image('testin5', '/Testing/jungle.jpg');
         this.load.image('testin6', '/Testing/dragon.png');
+        this.load.image('dialogueBox', '/HUD/text_box.pngz');
     }
     
     create()
@@ -39,6 +42,11 @@ class Town extends Phaser.Scene
 
         this.cameraManager = new CameraManager(this);
         this.cameraManager.addUI(this.add.rectangle(100, 100, 40, 40, 0xff0000, 1));
+
+        this.dialogueManager = new DialogueManager(this, 'dialogueBox');
+        this.dialogueManager.addDialogue('one');
+        this.dialogueManager.addDialogue('one');
+        this.dialogueManager.addDialogue('two');
 
         this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
         this.PresentDayBG.depth = 1;
@@ -79,10 +87,13 @@ class Town extends Phaser.Scene
         this.PresentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
         this.SixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
         this.EarlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
-        
+        //testing dialogue
+        this.Dialogue = new Dialogue(this, "HELLO", )
         this.MapManager = new MapState(this.PlayerCamera, this.player, this.EarlyMap, this.SixtiesMap, this.PresentDayMap);
         this.MapManager.initialize();
         //used to trigger a test on mapstate transitions
+        this.Dialogue = new Dialogue("123dfo 13214")
+        this.Dialogue.writeDialogue();
         this.input.keyboard.on('keydown-X', function(event) {
             // Your code here
             this.MapManager.switchTimes("1700s");
