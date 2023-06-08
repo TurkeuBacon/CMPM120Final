@@ -11,6 +11,24 @@ class Player extends Phaser.GameObjects.Sprite
         this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
         this.keys = scene.input.keyboard.addKeys('W,A,S,D');
         this.inputDevice = inputDevice;
+        let canvas = scene.sys.game.canvas;
+
+        this.interractionButton = this.scene.add.circle(canvas.width-200, canvas.height-200, 100, 0x0000ff, 1).setAlpha(0.5);
+        this.interractionButton.setInteractive();
+        this.interractionButton.on('pointerdown', (pointer, gameObject) =>
+        {
+            this.scene.events.emit('playerInterractDown');
+        });
+        this.disableInput = false;
+        this.scene.events.on('freezeInput', (freeze) => {
+            this.disableInput = freeze;
+            this.interractionButton.setVisible(!freeze).setActive(!freeze);
+        });
+        // this.interractionButton.on('pointerup', (pointer, gameObject) =>
+        // {
+        //     this.scene.events.emit('playerInterractUp');
+        // });
+        this.scene.cameraManager.addUI(this.interractionButton);
 
         this.anims.create(
             {

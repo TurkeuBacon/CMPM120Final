@@ -8,31 +8,12 @@ class Npc extends Phaser.GameObjects.Sprite
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setImmovable(true);
-        this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
-        this.waitForNextPlayerCollision = true;
-        scene.physics.add.collider(this, this.scene.player,
-            ()=>
+        scene.events.on('playerInterractDown', ()=>{
+            if(this.scene.physics.collide(this, this.scene.player))
             {
-                if(!this.waitForNextPlayerCollision)
-                {
-                    console.log("Collide Enter");
-                    this.waitForNextPlayerCollision = true;
-                    this.playDialogue();
-                }
-            },
-            ()=>
-            {
-                return !this.waitForNextPlayerCollision;
-            });
-    }
-
-    update(time, delta)
-    {
-        if(this.waitForNextPlayerCollision && !this.scene.physics.collide(this, this.scene.player))
-        {
-            console.log("Player Left");
-            this.waitForNextPlayerCollision = false;
-        }
+                this.playDialogue();
+            }
+        });
     }
 
     addDialogue(text, repeat)

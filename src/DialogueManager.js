@@ -104,7 +104,6 @@ class DialogueManager
             }
             if(this.click && !this.waitNextClick)
             {
-                console.log("Wait");
                 this.waitNextClick = true;
             }
             await this.wait(50);
