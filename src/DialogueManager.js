@@ -29,12 +29,12 @@ class DialogueManager
         this.scene.input.on('pointerup', ()=>{ this.click = false; this.waitNextClick = false; });
     }
     
-    playDialogue(dialogue)
+    playDialogue(dialogue, preprocess=true)
     {
         if(this.playing) return false;
         this.playing = true;
         this.dialogueBoxContainer.alpha = 1;
-        this.writeDialogue(dialogue);
+        this.writeDialogue(dialogue, preprocess);
         this.scene.events.emit('freezeInput', true );
 
         return true;
@@ -84,10 +84,11 @@ class DialogueManager
         return outputText;
     }
 
-    async writeDialogue(text, preprocess=true){
+    async writeDialogue(text, preprocess){
         let lineCount = 0;
         if(preprocess)
         {
+            console.log("Hi");
             text = this.preprocessText(text);
         }
         let textProgress = "";
