@@ -18,16 +18,17 @@ class Npc extends Phaser.GameObjects.Sprite
         const jsonLines = json.lines;
         for(let i = 0; i < jsonLines.length; i++)
         {
-            this.addDialogue(jsonLines[i].text, jsonLines[i].repeat);
+            this.addDialogue(jsonLines[i].text, jsonLines[i].repeat, jsonLines[i].delays);
         }
         this.depth = 2;
     }
 
-    addDialogue(text, repeat)
+    addDialogue(text, repeat, delays=[])
     {
         this.dialogueLines.push({
             text: text,
-            repeat: repeat
+            repeat: repeat,
+            delays: delays
         });
     }
 
@@ -43,7 +44,7 @@ class Npc extends Phaser.GameObjects.Sprite
             console.error("No Dialogue Lines Left");
             return false;
         }
-        let success = this.scene.dialogueManager.playDialogue(this.dialogueLines[this.currentLine].text);
+        let success = this.scene.dialogueManager.playDialogue(this.dialogueLines[this.currentLine].text, this.dialogueLines[this.currentLine].delays);
         if(success && !this.dialogueLines[this.currentLine].repeat)
         {
             this.currentLine += 1;

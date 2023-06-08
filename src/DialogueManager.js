@@ -25,16 +25,17 @@ class DialogueManager
         this.maxCharPerLine = 25;
         this.click = false;
         this.waitNextClick = false;
+        this.framesClicked = 0;
         this.scene.input.on('pointerdown', ()=>{ this.click = true; });
-        this.scene.input.on('pointerup', ()=>{ this.click = false; this.waitNextClick = false; });
+        this.scene.input.on('pointerup', ()=>{ this.click = false; this.waitNextClick = false; this.framesClicked = 0; });
     }
     
-    playDialogue(dialogue, preprocess=true)
+    playDialogue(dialogue, delays, preprocess=true)
     {
         if(this.playing) return false;
         this.playing = true;
         this.dialogueBoxContainer.alpha = 1;
-        this.writeDialogue(dialogue, preprocess);
+        this.writeDialogue(dialogue, delays, preprocess);
         this.scene.events.emit('freezeInput', true );
 
         return true;
@@ -63,7 +64,21 @@ class DialogueManager
         let outputText = "";
         while(true)
         {
-            if(startingI+this.maxCharPerLine >= text.length)
+            let lastNewLineI = -1;
+            for(let i = (startingI+this.maxCharPerLine); i >= startingI; i--)
+            {
+                if(text[i] == '\n')
+                {
+                    lastNewLineI = i;
+                    break;
+                }
+            }
+            if(lastNewLineI >= 0)
+            {
+                outputText += (text.substring(startingI, lastNewLineI) + "\n");
+                startingI = lastNewLineI+1;
+            }
+            else if(startingI+this.maxCharPerLine >= text.length)
             {
                 outputText += text.substring(startingI, text.length);
                 break;
@@ -84,8 +99,11 @@ class DialogueManager
         return outputText;
     }
 
-    async writeDialogue(text, preprocess){
+    async writeDialogue(text, delays, preprocess){
         let lineCount = 0;
+        let currDelay = 0;
+        let delayTime = 50;
+        this.framesClicked = 0;
         if(preprocess)
         {
             console.log("Hi");
@@ -93,6 +111,11 @@ class DialogueManager
         }
         let textProgress = "";
         for (let i = 0; i < text.length; i++){
+            if(currDelay < delays.length && i+1 == delays[currDelay].charI)
+            {
+                delayTime = delays[currDelay].delay;
+                currDelay++;
+            }
             textProgress += text[i];
             this.textObj.setText(textProgress);
             if (text[i] == '\n'){
@@ -103,11 +126,18 @@ class DialogueManager
                     textProgress = "";
                 }
             }
-            if(this.click && !this.waitNextClick)
+            if(this.click)
             {
+                this.framesClicked++;
+                if(this.framesClicked > 5)
+                {
+                    delayTime = 15;
+                }
+
                 this.waitNextClick = true;
             }
-            await this.wait(50);
+            await this.wait(delayTime);
+            delayTime = 50;
         }
         while(!this.click || this.waitNextClick) await this.wait(1);
         this.onDialogueComplete();

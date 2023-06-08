@@ -16,6 +16,14 @@ class Town extends Phaser.Scene
         super('town');
     }
 
+    loadNpc(npcKey, npcPath)
+    {
+        this.load.json(npcKey, npcPath);
+        this.load.on("filecomplete-json-" + npcKey, function (key, type, data) {
+            this.load.spritesheet(key + 'Texture', '/Npcs/NpcTextures/' + data.texture, { frameWidth: 16, frameHeight: 32});
+        }, this);
+    }
+
     preload()
     {
         this.load.path = '../assets/';
@@ -33,10 +41,7 @@ class Town extends Phaser.Scene
         this.load.image('testin7', '/Testing/wack.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
 
-        this.load.json('girl', '/Npcs/npc1.json');
-        this.load.on("filecomplete-json-girl", function (key, type, data) {
-            this.load.spritesheet(key + 'Texture', '/Npcs/NpcTextures/' + data.texture, { frameWidth: 16, frameHeight: 32});
-        }, this);
+        this.loadNpc('girl', '/Npcs/npc1.json');
     }
     
     create()
