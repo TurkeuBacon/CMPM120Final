@@ -78,6 +78,7 @@ class Player extends Phaser.GameObjects.Sprite
             this.task = task.nextTask;
         }
     }
+    
     update(){
         this.handleMovement();
     }
