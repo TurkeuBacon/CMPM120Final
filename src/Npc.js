@@ -1,8 +1,9 @@
 class Npc extends Phaser.GameObjects.Sprite
 {
-    constructor(scene, x, y, texture, frame)
+    constructor(scene, jsonKey)
     {
-        super(scene, x, y, texture, frame);
+        const json = scene.cache.json.get(jsonKey);
+        super(scene, json.x, json.y, jsonKey + "Texture", json.frame);
         this.dialogueLines = [];
         this.currentLine = 0;
         scene.add.existing(this);
@@ -14,6 +15,12 @@ class Npc extends Phaser.GameObjects.Sprite
                 this.playDialogue();
             }
         });
+        const jsonLines = json.lines;
+        for(let i = 0; i < jsonLines.length; i++)
+        {
+            this.addDialogue(jsonLines[i].text, jsonLines[i].repeat);
+        }
+        this.depth = 2;
     }
 
     addDialogue(text, repeat)

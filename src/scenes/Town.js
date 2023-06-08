@@ -19,7 +19,7 @@ class Town extends Phaser.Scene
     preload()
     {
         this.load.path = '../assets/';
-        this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32})
+        this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
         this.load.image('PresentDayMap', '/Scene_PresentDay/PresentDay.png');
         this.load.image('1700sMap', '/Scene_1700s/1700s.png');
         this.load.image('1960sMap', '/Scene_1960s/1960s.png');
@@ -30,6 +30,11 @@ class Town extends Phaser.Scene
         this.load.image('testin5', '/Testing/jungle.jpg');
         this.load.image('testin6', '/Testing/dragon.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
+
+        this.load.json('girl', '/Npcs/npc1.json');
+        this.load.on("filecomplete-json-girl", function (key, type, data) {
+            this.load.spritesheet(key + 'Texture', '/Npcs/NpcTextures/' + data.texture, { frameWidth: 16, frameHeight: 32});
+        }, this);
     }
     
     create()
@@ -61,10 +66,12 @@ class Town extends Phaser.Scene
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
 
-        this.testNpc = new Npc(this, 200, 200, 'player', 0);
-        this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
-        this.testNpc.depth = 2;
+        this.testNpc = new Npc(this, 'girl');
+        this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
+        //this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
+        //this.testNpc.depth = 2;
         //this.testNpc.playDialogue();
+
         //testing for groups
         this.group1 = this.add.group();
         this.group2 = this.add.group();

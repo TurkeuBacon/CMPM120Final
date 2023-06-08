@@ -13,11 +13,11 @@ class DialogueManager
         this.textObj = this.scene.add.text(0, 0, 'TESTING',{
             fontSize: '45px',
             maxLines: 3,
-            fixedWidth: this.dialogueBox.width-25,
-            fixedHeight: this.dialogueBox.height-25,
+            fixedWidth: this.dialogueBox.width-35,
+            fixedHeight: this.dialogueBox.height-35,
             boundsAlignH: 'right',
             boundsAlignV: 'top',
-            wordWrap: {width: this.dialogueBox.width-25}
+            wordWrap: {width: this.dialogueBox.width-35}
         }).setOrigin(0.5, 0.5);
         this.dialogueBoxContainer.add(this.textObj);
         this.dialogueBoxContainer.alpha = 0;
@@ -115,3 +115,6 @@ class DialogueManager
 }
 
 export default DialogueManager
+
+//https://knowyourmeme.com/memes/oo-ee-a-e-a-tiktok-sound
+//https://www.youtube.com/watch?v=d-ePyjHkdN0
