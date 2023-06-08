@@ -53,6 +53,15 @@ class TouchJoystick extends DirectionalInputDevice
         this.waitForNextPress = false; // Indicates if joystick checks should wait for the next click/touch
         this.minForDirection = minForDirection;
 
+        this.disableInput = false;
+        this.scene.events.on('freezeInput', (freeze) => {
+            this.disableInput = freeze;
+            this.active = false;
+            this.joystickElements.background.setVisible(this.active);
+            this.joystickElements.stick.setVisible(this.active);
+            this.direction = "neutral";
+        });
+
         this.joystickElements =
                 {
                     "background":
@@ -74,6 +83,8 @@ class TouchJoystick extends DirectionalInputDevice
 
     update(time, delta)
     {
+        if(this.disableInput) return;
+
         // The current active pointer (pointers handle both mouse and touch inputs)
         let pointer = this.scene.input.activePointer;
         // The position of the pointer with each axis normalized between zero and one

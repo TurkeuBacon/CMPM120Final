@@ -5,7 +5,8 @@ import PlayerCamera from '../PlayerCamera.js'
 import MapState from '../MapStates.js'
 import Map from '../Map.js'
 import Dialogue from '../Dialogue.js' 
-import DialogueManager from '../DialogueManager.js' 
+import DialogueManager from '../DialogueManager.js'
+import Npc from '../Npc.js'
 //Gabe can we switch PresentDay to a class called World instead? I think it would make more sense since we won't be having separate scenes.
     //didn't want to change your code here because it t's associated with "Present Day" (Daniel)
 class Town extends Phaser.Scene
@@ -28,7 +29,7 @@ class Town extends Phaser.Scene
         this.load.image('testin4', '/Testing/weird.png');
         this.load.image('testin5', '/Testing/jungle.jpg');
         this.load.image('testin6', '/Testing/dragon.png');
-        this.load.image('dialogueBox', '/HUD/text_box.pngz');
+        this.load.image('dialogueBox', '/HUD/text_box.png');
     }
     
     create()
@@ -44,9 +45,6 @@ class Town extends Phaser.Scene
         this.cameraManager.addUI(this.add.rectangle(100, 100, 40, 40, 0xff0000, 1));
 
         this.dialogueManager = new DialogueManager(this, 'dialogueBox');
-        this.dialogueManager.addDialogue('one');
-        this.dialogueManager.addDialogue('one');
-        this.dialogueManager.addDialogue('two');
 
         this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
         this.PresentDayBG.depth = 1;
@@ -62,6 +60,11 @@ class Town extends Phaser.Scene
         this.player = new Player(this, 500, 500, 'player', 1, this.joystick);
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
+
+        this.testNpc = new Npc(this, 200, 200, 'player', 0);
+        this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
+        this.testNpc.depth = 2;
+        //this.testNpc.playDialogue();
         //testing for groups
         this.group1 = this.add.group();
         this.group2 = this.add.group();
@@ -92,8 +95,6 @@ class Town extends Phaser.Scene
         this.MapManager = new MapState(this.PlayerCamera, this.player, this.EarlyMap, this.SixtiesMap, this.PresentDayMap);
         this.MapManager.initialize();
         //used to trigger a test on mapstate transitions
-        this.Dialogue = new Dialogue("123dfo 13214")
-        this.Dialogue.writeDialogue();
         this.input.keyboard.on('keydown-X', function(event) {
             // Your code here
             this.MapManager.switchTimes("1700s");

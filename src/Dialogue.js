@@ -8,12 +8,10 @@
 
 
 class Dialogue {
-    constructor(Text){
-        this.Text = Text;
-        this.TextNum = 20;
-        this.Count = 0;
+    constructor(text, repeat=false){
+        this.text = text;
+        this.repeat = repeat;
     }
-    
 }
 
 export default Dialogue;

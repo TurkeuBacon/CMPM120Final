@@ -1,5 +1,6 @@
 class AudioManager{
-    constructor(){
+    constructor(scene){
+        this.scene = scene;
         this.audioObjects = [];
     }
     
