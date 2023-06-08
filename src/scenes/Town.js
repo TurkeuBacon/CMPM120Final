@@ -23,12 +23,14 @@ class Town extends Phaser.Scene
         this.load.image('PresentDayMap', '/Scene_PresentDay/PresentDay.png');
         this.load.image('1700sMap', '/Scene_1700s/1700s.png');
         this.load.image('1960sMap', '/Scene_1960s/1960s.png');
+        this.load.image('PresentDayInt', '/Scene_PresentDay/Interior.png');
         this.load.image('testin1', '/Testing/mario.png');
         this.load.image('testin2', '/Testing/link.jpg');
         this.load.image('testin3', '/Testing/sonic.jpg');
         this.load.image('testin4', '/Testing/weird.png');
         this.load.image('testin5', '/Testing/jungle.jpg');
         this.load.image('testin6', '/Testing/dragon.png');
+        this.load.image('testin7', '/Testing/wack.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
 
         this.load.json('girl', '/Npcs/npc1.json');
@@ -60,7 +62,8 @@ class Town extends Phaser.Scene
         this.MiddleTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1960sMap'); 
         this.MiddleTimeBG.depth = 1;
         this.MiddleTimeBG.alpha = 1;
-        
+        //
+        this.presentDayIntBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayInt');
         this.joystick = new TouchJoystick(this, {'width': 0.33, 'height': .5}, 100, 50, 75, 0.5);
         this.player = new Player(this, 500, 500, 'player', 1, this.joystick);
         this.player.depth = 2;
@@ -76,6 +79,7 @@ class Town extends Phaser.Scene
         this.group1 = this.add.group();
         this.group2 = this.add.group();
         this.group3 = this.add.group();
+        this.group4 = this.add.group();
         this.link = this.add.image(screenWidth/2, screenHeight/2, 'testin1').setScale(0.3);
         this.link.depth = 1;
         this.mario = this.add.image(screenWidth/2, screenHeight/2, 'testin2').setScale(0.3);
@@ -94,12 +98,13 @@ class Town extends Phaser.Scene
         this.dragon.depth = 1;
         this.group3.add(this.jungle);
         this.group3.add(this.dragon);
-        this.PresentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
-        this.SixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
-        this.EarlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
-        //testing dialogue
-        this.Dialogue = new Dialogue(this, "HELLO", )
-        this.MapManager = new MapState(this.PlayerCamera, this.player, this.EarlyMap, this.SixtiesMap, this.PresentDayMap);
+        this.weird = this.add.image(screenWidth/2, screenHeight/2, 'testin7').setScale(0.3);
+        this.group4.add(this.weird);
+        this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
+        this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
+        this.earlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
+        this.presentDayInt = new Map (this, "PresentDayInt",  this.presentDayIntBG, this.group4);
+        this.MapManager = new MapState(this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.presentDayInt);
         this.MapManager.initialize();
         //used to trigger a test on mapstate transitions
         this.input.keyboard.on('keydown-X', function(event) {

@@ -1,4 +1,5 @@
 //Needs to hold map data (Image, group association)
+//implement Hitbox functionality
 class Map {
     constructor(scene, mapName, mapImage, group){
         this.scene = scene;
@@ -42,6 +43,13 @@ class Map {
             }
         });
         
+    }
+    //used to make our hitbox gone when needed (by associating it with group)
+    addHitbox(x,y){
+        let hitbox = new Hitbox(this.scene, x, y);
+        this.group.add(hitbox);
+
+        return hitBox;
     }
     
     getName(){
