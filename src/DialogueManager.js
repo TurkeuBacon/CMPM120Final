@@ -1,3 +1,4 @@
+import AudioManager from "./AudioManager.js";
 
 
 class DialogueManager
@@ -13,11 +14,11 @@ class DialogueManager
         this.textObj = this.scene.add.text(0, 0, 'TESTING',{
             fontSize: '45px',
             maxLines: 3,
-            fixedWidth: this.dialogueBox.width-25,
-            fixedHeight: this.dialogueBox.height-25,
+            fixedWidth: this.dialogueBox.width-35,
+            fixedHeight: this.dialogueBox.height-35,
             boundsAlignH: 'right',
             boundsAlignV: 'top',
-            wordWrap: {width: this.dialogueBox.width-25}
+            wordWrap: {width: this.dialogueBox.width-35}
         }).setOrigin(0.5, 0.5);
         this.dialogueBoxContainer.add(this.textObj);
         this.dialogueBoxContainer.alpha = 0;
@@ -25,16 +26,17 @@ class DialogueManager
         this.maxCharPerLine = 25;
         this.click = false;
         this.waitNextClick = false;
+        this.framesClicked = 0;
         this.scene.input.on('pointerdown', ()=>{ this.click = true; });
-        this.scene.input.on('pointerup', ()=>{ this.click = false; this.waitNextClick = false; });
+        this.scene.input.on('pointerup', ()=>{ this.click = false; this.waitNextClick = false; this.framesClicked = 0; });
     }
     
-    playDialogue(dialogue, preprocess=true)
+    playDialogue(dialogue, delays, preprocess=true)
     {
         if(this.playing) return false;
         this.playing = true;
         this.dialogueBoxContainer.alpha = 1;
-        this.writeDialogue(dialogue, preprocess);
+        this.writeDialogue(dialogue, delays, preprocess);
         this.scene.events.emit('freezeInput', true );
 
         return true;
@@ -63,7 +65,21 @@ class DialogueManager
         let outputText = "";
         while(true)
         {
-            if(startingI+this.maxCharPerLine >= text.length)
+            let lastNewLineI = -1;
+            for(let i = (startingI+this.maxCharPerLine); i >= startingI; i--)
+            {
+                if(text[i] == '\n')
+                {
+                    lastNewLineI = i;
+                    break;
+                }
+            }
+            if(lastNewLineI >= 0)
+            {
+                outputText += (text.substring(startingI, lastNewLineI) + "\n");
+                startingI = lastNewLineI+1;
+            }
+            else if(startingI+this.maxCharPerLine >= text.length)
             {
                 outputText += text.substring(startingI, text.length);
                 break;
@@ -84,34 +100,56 @@ class DialogueManager
         return outputText;
     }
 
-    async writeDialogue(text, preprocess){
+    async writeDialogue(text, delays, preprocess){
         let lineCount = 0;
+        let currDelay = 0;
+        let delayTime = 50;
+        this.framesClicked = 0;
         if(preprocess)
         {
             console.log("Hi");
             text = this.preprocessText(text);
         }
         let textProgress = "";
+        AudioManager.getInstance(this.scene).addSfx('npcAudio', true, 1.5);
         for (let i = 0; i < text.length; i++){
+            if(currDelay < delays.length && i+1 == delays[currDelay].charI)
+            {
+                delayTime = delays[currDelay].delay;
+                currDelay++;
+            }
             textProgress += text[i];
             this.textObj.setText(textProgress);
             if (text[i] == '\n'){
                 lineCount++;
                 if(lineCount % 3 == 0)
                 {
+                    AudioManager.getInstance(this.scene).stopSfx('npcAudio');
                     while(!this.click || this.waitNextClick) await this.wait(1);
+                    AudioManager.getInstance(this.scene).addSfx('npcAudio', true, 1.5);
                     textProgress = "";
                 }
             }
-            if(this.click && !this.waitNextClick)
+            if(this.click)
             {
+                this.framesClicked++;
+                if(this.framesClicked > 5)
+                {
+                    delayTime = 15;
+                }
+
                 this.waitNextClick = true;
             }
-            await this.wait(50);
+            await this.wait(delayTime);
+            delayTime = 50;
         }
+        AudioManager.getInstance(this.scene).stopSfx('npcAudio');
         while(!this.click || this.waitNextClick) await this.wait(1);
         this.onDialogueComplete();
     }
 }
 
 export default DialogueManager
+
+//https://knowyourmeme.com/memes/oo-ee-a-e-a-tiktok-sound
+//https://www.youtube.com/watch?v=d-ePyjHkdN0

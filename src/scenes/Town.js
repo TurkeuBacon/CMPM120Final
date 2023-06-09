@@ -4,7 +4,7 @@ import TouchJoystick from '../InputDevices.js'
 import PlayerCamera from '../PlayerCamera.js'
 import MapState from '../MapStates.js'
 import Map from '../Map.js'
-import Dialogue from '../Dialogue.js' 
+import AudioManager from '../AudioManager.js' 
 import DialogueManager from '../DialogueManager.js'
 import Npc from '../Npc.js'
 //Gabe can we switch PresentDay to a class called World instead? I think it would make more sense since we won't be having separate scenes.
@@ -16,22 +16,35 @@ class Town extends Phaser.Scene
         super('town');
     }
 
+    loadNpc(npcKey, npcPath)
+    {
+        this.load.json(npcKey, npcPath);
+        this.load.on("filecomplete-json-" + npcKey, function (key, type, data) {
+            this.load.spritesheet(key + 'Texture', '/Npcs/NpcTextures/' + data.texture, { frameWidth: 16, frameHeight: 32});
+        }, this);
+    }
+    loadAudio(audioKey, audioPath, volume=1)
+    {
+        this.load.audio(audioKey, audioPath);
+        this.load.on("filecomplete-audio-" + audioKey, function (key, type, data) {
+            AudioManager.getInstance(this).addAudio(key, volume);
+        }, this);
+    }
+
     preload()
     {
         this.load.path = '../assets/';
-        this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32})
+        this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
         this.load.image('PresentDayMap', '/Scene_PresentDay/PresentDay.png');
         this.load.image('1700sMap', '/Scene_1700s/1700s.png');
         this.load.image('1960sMap', '/Scene_1960s/1960s.png');
         this.load.image('PresentDayInt', '/Scene_PresentDay/Interior.png');
-        this.load.image('testin1', '/Testing/mario.png');
-        this.load.image('testin2', '/Testing/link.jpg');
-        this.load.image('testin3', '/Testing/sonic.jpg');
-        this.load.image('testin4', '/Testing/weird.png');
-        this.load.image('testin5', '/Testing/jungle.jpg');
-        this.load.image('testin6', '/Testing/dragon.png');
-        this.load.image('testin7', '/Testing/wack.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
+
+        this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.02);
+        this.loadAudio('npcAudio', 'npcAudio.mp3', 0.1);
+
+        this.loadNpc('girl', '/Npcs/npc1.json');
     }
     
     create()
@@ -44,9 +57,11 @@ class Town extends Phaser.Scene
         const screenHeight = this.sys.game.config.height;
 
         this.cameraManager = new CameraManager(this);
-        this.cameraManager.addUI(this.add.rectangle(100, 100, 40, 40, 0xff0000, 1));
 
         this.dialogueManager = new DialogueManager(this, 'dialogueBox');
+
+        AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', true, true);
+
 
         this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
         this.PresentDayBG.depth = 1;
@@ -64,35 +79,17 @@ class Town extends Phaser.Scene
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
 
-        this.testNpc = new Npc(this, 200, 200, 'player', 0);
-        this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
-        this.testNpc.depth = 2;
+        this.testNpc = new Npc(this, 'girl');
+        this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
+        //this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
+        //this.testNpc.depth = 2;
         //this.testNpc.playDialogue();
+
         //testing for groups
         this.group1 = this.add.group();
         this.group2 = this.add.group();
         this.group3 = this.add.group();
         this.group4 = this.add.group();
-        this.link = this.add.image(screenWidth/2, screenHeight/2, 'testin1').setScale(0.3);
-        this.link.depth = 1;
-        this.mario = this.add.image(screenWidth/2, screenHeight/2, 'testin2').setScale(0.3);
-        this.mario.depth = 1;
-        this.group1.add(this.link);
-        this.group1.add(this.mario);
-        this.sonic = this.add.image(screenWidth/2, screenHeight/2, 'testin3').setScale(0.3);
-        this.sonic.depth = 1;
-        this.weird = this.add.image(screenWidth/2, screenHeight/2, 'testin4').setScale(0.3);
-        this.weird.depth = 1;
-        this.group2.add(this.sonic);
-        this.group2.add(this.weird);
-        this.jungle = this.add.image(screenWidth/2, screenHeight/2, 'testin5').setScale(0.3);
-        this.jungle.depth = 1;
-        this.dragon = this.add.image(screenWidth/2, screenHeight/2, 'testin6').setScale(0.3);
-        this.dragon.depth = 1;
-        this.group3.add(this.jungle);
-        this.group3.add(this.dragon);
-        this.weird = this.add.image(screenWidth/2, screenHeight/2, 'testin7').setScale(0.3);
-        this.group4.add(this.weird);
         this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
         this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
         this.earlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
