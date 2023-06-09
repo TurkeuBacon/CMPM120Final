@@ -91,15 +91,16 @@ class Town extends Phaser.Scene
         this.group3 = this.add.group();
         this.group4 = this.add.group();
         this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
+        this.presentDayMap.initializeHitboxes();
         this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
         this.earlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
         this.presentDayInt = new Map (this, "PresentDayInt",  this.presentDayIntBG, this.group4);
-        this.MapManager = new MapState(this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.presentDayInt);
-        this.MapManager.initialize();
+        this.presentDayInt.initializeHitboxes();
+        this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.presentDayInt);
+        this.mapManager.initialize();
         //used to trigger a test on mapstate transitions
         this.input.keyboard.on('keydown-X', function(event) {
-            // Your code here
-            this.MapManager.switchTimes("1700s");
+            this.mapManager.loadingZone("1700s", this.player.x, this.player.y);
         }, this);
 
     }
