@@ -9,6 +9,7 @@ class Map {
         this.group = group;
         this.mapImage = mapImage;
         this.visible = false;
+        this.initialized = false;
     }
     showMap(){
         this.group.setVisible(true);
@@ -17,8 +18,18 @@ class Map {
             children.forEach((child) => { 
                 this.scene.physics.world.enable(child);
             });
+        //an initial call to hitboxes if not called yet. Here to prevent reuse.
+        if (this.initialized == false){
+            this.initializeHitboxes();
+            this.initialized = true;
+        } else {
+            children.forEach((child) => {
+                this.scene.physics.world.enable(child);
+            });
+        }
         this.visible = true;
         this.scene.events.emit('freezeInput', false);
+        
         return this.visible;
     }
     VanishInstant(){
@@ -46,7 +57,8 @@ class Map {
                 this.visible = false;
                 this.group.setVisible(false);
                 let children = this.group.getChildren();
-                children.forEach((child) => { 
+                children.forEach((child) => {
+                    console.log("hello"); 
                     this.scene.physics.world.disable(child);
                 });
                 this.mapImage.setVisible(false);
@@ -57,16 +69,18 @@ class Map {
         }); 
     }
     initializeHitboxes(){
-        console.log(this.mapName);
+        //console.log(this.mapName);
         switch (this.mapName){
             case "Present Day":
-                this.addHitbox(528,160, 100, 50, "PresentDayInt", 794, 767);
-                this.addHitbox(-14, 169, 50, 20, "PresentDayInt", -75, 786);
-                this.addHitbox(999, 187, 50, 20, "PresentDayInt", 817, 252);
+                this.addHitbox(518, 174, 50, 20, "PresentDayInt", 998, 349);
+                this.addHitbox(-14, 178, 50, 20, "PresentDayInt", -84, 329);
+                this.addHitbox(997, 180, 100, 20, "PresentDayInt", 527, 244);
                 break;
             case "PresentDayInt":
-                this.addHitbox(794, 800, 100, 20, "Present Day", 516, 216);
-                this.addHitbox(-75, 820, 50, 20, "Present Day", -15, 198);
+                this.addHitbox(998, 375, 50, 20, "Present Day", 514, 203);
+                this.addHitbox(-84, 355, 50, 20, "Present Day", -16, 206);
+                this.addHitbox(525, 272, 50, 20, "Present Day", 1001, 208);
+                
         }
     }
     //used to make our hitbox gone when needed (by associating it with group)
