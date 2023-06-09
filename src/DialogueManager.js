@@ -1,3 +1,4 @@
+import AudioManager from "./AudioManager.js";
 
 
 class DialogueManager
@@ -110,6 +111,7 @@ class DialogueManager
             text = this.preprocessText(text);
         }
         let textProgress = "";
+        AudioManager.getInstance(this.scene).addSfx('npcAudio', true, 1.5);
         for (let i = 0; i < text.length; i++){
             if(currDelay < delays.length && i+1 == delays[currDelay].charI)
             {
@@ -122,7 +124,9 @@ class DialogueManager
                 lineCount++;
                 if(lineCount % 3 == 0)
                 {
+                    AudioManager.getInstance(this.scene).stopSfx('npcAudio');
                     while(!this.click || this.waitNextClick) await this.wait(1);
+                    AudioManager.getInstance(this.scene).addSfx('npcAudio', true, 1.5);
                     textProgress = "";
                 }
             }
@@ -139,6 +143,7 @@ class DialogueManager
             await this.wait(delayTime);
             delayTime = 50;
         }
+        AudioManager.getInstance(this.scene).stopSfx('npcAudio');
         while(!this.click || this.waitNextClick) await this.wait(1);
         this.onDialogueComplete();
     }

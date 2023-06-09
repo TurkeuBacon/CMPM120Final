@@ -8,12 +8,6 @@
     
     "lines": [
         {
-            "text": "This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.",
-            "delays": [],
-            "repeat": true,
-            "item": {}
-        },
-        {
             "text": "Hey\n\n\nWanna hear a secret?\n\n\nFuck you!",
             "delays": [],
             "repeat": false,
