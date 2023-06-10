@@ -15,6 +15,7 @@ class Map {
         this.group.setVisible(true);
         this.mapImage.setVisible(true);
         let children = this.group.getChildren();
+        //WEIRD
             children.forEach((child) => { 
                 this.scene.physics.world.enable(child);
             });
@@ -80,13 +81,14 @@ class Map {
                 this.addHitbox(518, 210, 50, 20, "PresentDayInt", 998, 349);
                 this.addHitbox(-16, 178, 40, 20, "PresentDayInt", -84, 329);
                 this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
-                this.addHitbox(986, 790, 50, 20, "PresentDayInt", 879, 811);
+                this.addHitbox(986, 795, 50, 20, "PresentDayInt", 879, 811);
                 this.addHitbox(71, 790, 50, 20, "PresentDayInt", 97, 814);
                 this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538, false, true);
                 //Bounds Initialization
                 this.addBounds(500, 950, 1500, 50, "Present Day");
                 this.addBounds(1218, 473, 50, 1500, "Present Day");
                 this.addBounds(501, -48, 1500, 50, "Present Day");
+                this.addBounds(-175, 690, 50, 500, "Present Day");
                 //Library
                 this.addBounds(44, 139, 266, 100,"Present Day");
                 //house
@@ -94,22 +96,32 @@ class Map {
                 //Home Repo
                 this.addBounds(1002, 135, 355, 115, "Present Day");
                 //Town Hall
-                this.addBounds(520, 156, 350, 90, "Present Day");
+                this.addBounds(520, 170, 350, 90, "Present Day");
+                //House
+                this.addBounds(956, 760, 295, 90, "Present Day");
+
+                
                 break;
             case "PresentDayInt":
-                this.addHitbox(998, 375, 50, 20, "Present Day", 514, 250);
+                this.addHitbox(998, 375, 50, 20, "Present Day", 514, 240);
                 this.addHitbox(-84, 355, 50, 20, "Present Day", -16, 206);
                 this.addHitbox(525, 272, 50, 20, "Present Day", 1001, 212);
-                this.addHitbox(879, 850, 50, 20, "Present Day", 976, 816);
+                this.addHitbox(879, 850, 50, 20, "Present Day", 976, 825);
                 this.addHitbox(97, 843, 50, 20, "Present Day", 71, 816);
+                //this.addBounds(1140, -40, )
                 //this.addHitbox(95, 842, 50, 20, "Present Day", 71, 810);
                 break;
             case "Initial Park":
                 this.addHitbox(1160, 364, 20, 1000, "Present Day", -193, 339, false, true);
+                //BOUNDS
+                this.addBounds(443, 665, 2000, 20, "Initial Park");
+                this.addBounds(1140, -340, 50, 1000, "Initial Park");
+                this.addBounds(530, -340, 2000, 50, "Initial Park");
+                this.addBounds(-100, 75, 50, 2000, "Initial Park");
+             
                 
         }
     }
-    //used to make our hitbox gone when needed (by associating it with group)
     addHitbox(x,y, width, height, mapName, destX, destY, keepX=false, keepY=false){
         let hitBox = new Hitbox(this.scene, x, y, width, height, mapName, destX, destY, keepX, keepY);
         this.group.add(hitBox);

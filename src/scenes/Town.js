@@ -50,7 +50,7 @@ class Town extends Phaser.Scene
         this.load.image('1960sFloor', '/Scene_1960s/1960s.png');
         this.load.image('PresentDayInt', '/Scene_PresentDay/Interior.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
-        
+        this.load.image('treeRight', '/Scene_PresentDay/tree_right.png');
         this.load.image('parkStart', '/Scene_PresentDay/Park_Initial.png');
         this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
@@ -158,6 +158,9 @@ class Town extends Phaser.Scene
         this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
         this.trees.depth = 3;
         this.trees.alpha = 1;
+        this.treesRight = this.add.image(screenWidth/2-65, screenHeight/2-150, 'treeRight');
+        this.treesRight.depth = 3;
+        this.treesRight.alpha = 1;
         this.buildingPresent = this.add.image(screenWidth/2, screenHeight/2, 'presentDayHousing');
         this.buildingPresent.depth = 4;
         this.buildingPresent.alpha = 1;
@@ -197,6 +200,11 @@ class Town extends Phaser.Scene
         //Adding for groups
         this.group1.add(this.trees);
         this.group1.add(this.buildingPresent);
+        this.group1.add(this.testNpc);
+        this.group1.add(this.npc2);
+        this.group1.add(this.purpleGuy);
+        //
+        this.group5.add(this.treesRight);
         //
         this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
         this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
@@ -216,8 +224,8 @@ class Town extends Phaser.Scene
     {
         // this.joystick.update();
         // this.player.update();
-        //console.log("x " + this.player.x);
-        //console.log("y " + this.player.y);
+        console.log("x " + this.player.x);
+        console.log("y " + this.player.y);
 
     }
 }
