@@ -83,13 +83,17 @@ class Player extends Phaser.GameObjects.Sprite
         {
             this.taskText.setText("No Task");
         }
-        console.log("Setting Task: " + task.text);
-        this.taskText.setText(task.text);
-        this.task = task;
+        else
+        {
+            console.log("Setting Task: " + task.text);
+            this.taskText.setText(task.text);
+            this.task = task;
+        }
     }
 
     addItem(item)
     {
+        console.log("Aquired: " + item.itemKey);
         this.inventory.push(item);
         item.setVisible(false);
         item.setActive(false);
