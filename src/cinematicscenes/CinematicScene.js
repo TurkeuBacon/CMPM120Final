@@ -30,6 +30,9 @@ class Cinematic extends Phaser.Scene{
 
         let startButton = this.add.image(canvasWidth/2, canvasHeight/2+200, 'ButtonArt');
         startButton.setScale(0.4);
+        this.time.delayedCall(15000, function() {
+            this.scene.start('poop'); // Start the new scene
+          }, [], this);
         this.tweens.add({
             targets:backgroundArt,
             alpha:{from:1, to:0},
@@ -53,6 +56,7 @@ class Cinematic extends Phaser.Scene{
                     repeat:0,
         });
     }
+    
 }
 
 export default Cinematic;

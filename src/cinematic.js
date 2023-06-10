@@ -16,4 +16,4 @@ let config = {
     scene: [Cinematic,C2,],
 }
 
-let game = new Phaser.Game(yes);
+let game = new Phaser.Game(cofig);

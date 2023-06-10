@@ -10,6 +10,12 @@ import Npc from '../Npc.js'
 import PurpleGuy from '../PurpleGuy.js'
 
 class C2 extends Phaser.Scene{
+    constructor(){
+        super('poop');
+    }
+    preload(){
+        
+    }
     create(){
         this.add.text(200,200,'tes');
     }
