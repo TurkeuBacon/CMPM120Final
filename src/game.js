@@ -2,8 +2,9 @@ import MainMenu from "./scenes/MainMenu.js";
 import Town from "./scenes/Town.js";
 
 let config = {
-    mode: Phaser.Scale.RESIZE,
+    scale:{mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     type: Phaser.WEBGL,
     pixelArt: true,
     backgroundColor: 0x00000,
