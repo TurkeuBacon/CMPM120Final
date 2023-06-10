@@ -11,13 +11,25 @@
             "text": "Hey\n\n\nWanna hear a secret?\n\n\nFuck you!",
             "delays": [],
             "repeat": false,
-            "item": {}
+            "item": null
         },
         {
             "text": "HAHAHAHAHAHA.\nIDIOT",
             "delays": [
                 {"charI": 14, "delay": 500}
             ],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Anyways, heres a gun",
+            "delays": [],
+            "repeat": false,
+            "item": "testItem"
+        },
+        {
+            "text": "Now leave me alone bitch",
+            "delays": [],
             "repeat": true,
             "item": null
         }

@@ -1,5 +1,5 @@
 import AudioManager from "./AudioManager.js";
-
+import Item from "./Item.js";
 
 class DialogueManager
 {
@@ -31,12 +31,12 @@ class DialogueManager
         this.scene.input.on('pointerup', ()=>{ this.click = false; this.waitNextClick = false; this.framesClicked = 0; });
     }
     
-    playDialogue(dialogue, delays, preprocess=true)
+    playDialogue(dialogue, preprocess=true)
     {
         if(this.playing) return false;
         this.playing = true;
         this.dialogueBoxContainer.alpha = 1;
-        this.writeDialogue(dialogue, delays, preprocess);
+        this.writeDialogue(dialogue.text, dialogue.delays, preprocess, dialogue.item);
         this.scene.events.emit('freezeInput', true );
 
         return true;
@@ -100,7 +100,7 @@ class DialogueManager
         return outputText;
     }
 
-    async writeDialogue(text, delays, preprocess){
+    async writeDialogue(text, delays, preprocess, item=null){
         let lineCount = 0;
         let currDelay = 0;
         let delayTime = 50;
@@ -144,6 +144,11 @@ class DialogueManager
             delayTime = 50;
         }
         AudioManager.getInstance(this.scene).stopSfx('npcAudio');
+        console.log(item);
+        if(item != null)
+        {
+            this.scene.player.addItem(new Item(this.scene, item));
+        }
         while(!this.click || this.waitNextClick) await this.wait(1);
         this.onDialogueComplete();
     }
