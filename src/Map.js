@@ -20,10 +20,12 @@ class Map {
             });
         //an initial call to hitboxes if not called yet. Here to prevent reuse.
         if (this.initialized == false){
+            console.log("initialized");
             this.initializeZone();
             this.initialized = true;
         } else {
             children.forEach((child) => {
+                //console.log("being enabled");
                 this.scene.physics.world.enable(child);
             });
         }
@@ -47,7 +49,7 @@ class Map {
         );
         this.scene.events.emit('freezeInput', true);
         this.scene.cameraManager.addUI(blackScreen);
-        blackScreen.setDepth(2);
+        blackScreen.setDepth(10);
         blackScreen.alpha = 0;
         this.scene.tweens.add({
             targets: blackScreen,
@@ -56,9 +58,11 @@ class Map {
             onComplete: () => {
                 this.visible = false;
                 this.group.setVisible(false);
+                let i = 0;
                 let children = this.group.getChildren();
-                children.forEach((child) => {
-                    console.log("hello"); 
+                children.forEach((child) => { 
+                    i++;
+                    //console.log(this.mapName + i);
                     this.scene.physics.world.disable(child);
                 });
                 this.mapImage.setVisible(false);
@@ -66,29 +70,39 @@ class Map {
                 nextMap.showMap();
                 return true;
             }
-        }); 
+        });
+        console.log("Vanished Finished");
     }
     initializeZone(){
         //console.log(this.mapName);
         switch (this.mapName){
             case "Present Day":
-                this.addHitbox(518, 174, 50, 20, "PresentDayInt", 998, 349);
+                this.addHitbox(518, 210, 50, 20, "PresentDayInt", 998, 349);
                 this.addHitbox(-16, 178, 40, 20, "PresentDayInt", -84, 329);
-                this.addHitbox(1000, 180, 70, 20, "PresentDayInt", 527, 244);
+                this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
                 this.addHitbox(986, 790, 50, 20, "PresentDayInt", 879, 811);
-                this.addHitbox(71, 785, 50, 20, "PresentDayInt", 97, 814);
+                this.addHitbox(71, 790, 50, 20, "PresentDayInt", 97, 814);
                 this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538, false, true);
                 //Bounds Initialization
                 this.addBounds(500, 950, 1500, 50, "Present Day");
                 this.addBounds(1218, 473, 50, 1500, "Present Day");
-                this.addBounds(501, -115, 1500, 50, "Present Day");
+                this.addBounds(501, -48, 1500, 50, "Present Day");
+                //Library
+                this.addBounds(44, 139, 266, 100,"Present Day");
+                //house
+                this.addBounds(47, 755, 295, 90,"Present Day");
+                //Home Repo
+                this.addBounds(1002, 135, 355, 115, "Present Day");
+                //Town Hall
+                this.addBounds(520, 156, 350, 90, "Present Day");
                 break;
             case "PresentDayInt":
-                this.addHitbox(998, 375, 50, 20, "Present Day", 514, 203);
+                this.addHitbox(998, 375, 50, 20, "Present Day", 514, 250);
                 this.addHitbox(-84, 355, 50, 20, "Present Day", -16, 206);
-                this.addHitbox(525, 272, 50, 20, "Present Day", 1001, 208);
+                this.addHitbox(525, 272, 50, 20, "Present Day", 1001, 212);
                 this.addHitbox(879, 850, 50, 20, "Present Day", 976, 816);
-                this.addHitbox(95, 842, 50, 20, "Present Day", 71, 813);
+                this.addHitbox(97, 843, 50, 20, "Present Day", 71, 816);
+                //this.addHitbox(95, 842, 50, 20, "Present Day", 71, 810);
                 break;
             case "Initial Park":
                 this.addHitbox(1160, 364, 20, 1000, "Present Day", -193, 339, false, true);

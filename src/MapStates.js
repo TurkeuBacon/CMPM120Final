@@ -29,29 +29,32 @@ class MapState {
             }
         }
 
-        if (typeof this.nextMap != 'undefined'){
+        if (typeof this.nextMap != 'undefined' && this.currentMap.getName() != this.nextMap.getName()){
+            console.log("Next Map " + this.nextMap.mapName);
             if(this.nextMap.getName().includes("Int") || this.nextMap.getName().includes("Park")){
-                    this.currentMap.Vanish(this.nextMap, 600);
+                    this.currentMap.Vanish(this.nextMap, 700);
                     this.currentMap = this.nextMap;
-                    this.scene.time.delayedCall(600, () => {
+                    console.log("Set Current Map 1 " + this.currentMap.mapName);
+                    this.scene.time.delayedCall(700, () => {
                         if(!keepX) this.player.x = destX;
                         if(!keepY) this.player.y = destY;
                     });
             }
-            //extremely messy, but takes care of cases of being inside.
-            if (this.currentMap.getName().includes("Int") || this.currentMap.getName().includes("Park")){
+            else if (this.currentMap.getName().includes("Int") || this.currentMap.getName().includes("Park")){
                     this.currentMap.Vanish(this.nextMap, 600);
                     this.currentMap = this.nextMap;
+                    console.log("Set Current Map 2" + this.currentMap.mapName);
                     this.scene.time.delayedCall(600, () => {
                         if(!keepX) this.player.x = destX;
                         if(!keepY) this.player.y = destY;
                     });
             }
             else {
-                console.log(this.nextMap.getName());
+                console.log("TIE TAVEL");
                 this.currentMap.Vanish(this.nextMap, 2000);
                 this.currentMap = this.nextMap;
                 this.scene.time.delayedCall(2000, () => {
+                    
                     if(!keepX) this.player.x = destX;
                     if(!keepY) this.player.y = destY;
                 });
