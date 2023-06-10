@@ -1,8 +1,11 @@
 class Task
 {
-    constructor(item, nextTask)
+    constructor(itemKey, text, nextTask)
     {
-        this.item = item;
+        this.text = text;
+        this.itemKey = itemKey;
         this.nextTask = nextTask;
     }
 }
+
+export default Task

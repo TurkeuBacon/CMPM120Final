@@ -1,9 +1,23 @@
-class Item extends Phaser.Sprite
+class Item extends Phaser.GameObjects.Sprite
 {
-    constructor(scene, x, y, frame, canPickup)
+    constructor(scene, jsonKey)
     {
-        super(scene, x, y, frame);
-        this.canPickup = canPickup;
+        const json = scene.cache.json.get(jsonKey);
+        super(scene, json.x, json.y, jsonKey + "Texture");
+        this.canPickup = json.canPickup;
         scene.add.existing(this);
+        scene.physics.add.existing(this);
+        this.itemKey = jsonKey;
+
+        scene.events.on('playerInterractDown', ()=>{
+            if(this.canPickup && this.scene.physics.collide(this, this.scene.player))
+            {
+                this.scene.player.addItem(this);
+            }
+        });
+
+        this.depth = 2;
     }
 }
+
+export default Item

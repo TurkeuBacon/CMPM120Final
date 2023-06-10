@@ -1,3 +1,5 @@
+import Task from "./Task.js"
+
 class Player extends Phaser.GameObjects.Sprite
 {
     constructor(scene, x, y, texture, frame, inputDevice)
@@ -31,6 +33,17 @@ class Player extends Phaser.GameObjects.Sprite
         //     this.scene.events.emit('playerInterractUp');
         // });
         this.scene.cameraManager.addUI(this.interractionButton);
+
+        let taskBoxSize = {w: 400, h: 200}
+        this.taskBox = scene.add.rectangle(canvas.width-taskBoxSize.w, 0, taskBoxSize.w, taskBoxSize.h, 0x00aaff, 0.5).setOrigin(0, 0);
+        this.taskText = scene.add.text(canvas.width - this.taskBox.width/2, this.taskBox.height/2, "No Task",{
+            fontSize: '30px',
+            wordWrap: {width: this.taskBox.width-10}
+        }).setOrigin(.5, .5);
+        scene.cameraManager.addUI(this.taskBox);
+        scene.cameraManager.addUI(this.taskText);
+
+        this.setTask(new Task('testItem', "Find The Gun", null));
 
         this.anims.create(
             {
@@ -66,18 +79,26 @@ class Player extends Phaser.GameObjects.Sprite
     }
 
     setTask(task) {
+        if(task == null || task == undefined)
+        {
+            this.taskText.setText("No Task");
+        }
+        console.log("Setting Task: " + task.text);
+        this.taskText.setText(task.text);
         this.task = task;
     }
 
-    pickupItem(item)
+    addItem(item)
     {
-        if(item.canPickup == false) return;
         this.inventory.push(item);
+        item.setVisible(false);
         item.setActive(false);
-        if(task.item == item)
+        this.scene.physics.world.disable(item);
+        if(this.task.itemKey == item.itemKey)
         {
+            console.log("next task");
             //Todo: task completed stuff
-            this.task = task.nextTask;
+            this.setTask(this.task.nextTask);
         }
     }
     

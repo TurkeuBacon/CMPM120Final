@@ -8,6 +8,7 @@ import AudioManager from '../AudioManager.js'
 import DialogueManager from '../DialogueManager.js'
 import Npc from '../Npc.js'
 import PurpleGuy from '../PurpleGuy.js'
+import Item from '../Item.js'
 
 class Town extends Phaser.Scene
 {
@@ -16,6 +17,13 @@ class Town extends Phaser.Scene
         super('town');
     }
 
+    loadItem(itemKey, itemPath)
+    {
+        this.load.json(itemKey, itemPath);
+        this.load.on("filecomplete-json-" + itemKey, function (key, type, data) {
+            this.load.image(key + 'Texture', '/Items/ItemTextures/' + data.texture);
+        }, this);
+    }
     loadNpc(npcKey, npcPath)
     {
         this.load.json(npcKey, npcPath);
@@ -58,6 +66,8 @@ class Town extends Phaser.Scene
         this.load.image('leg_right', '/PurpleGuy/leg_right.png');
         this.load.image('ankle_foot_left', '/PurpleGuy/ankle_foot_left.png');
         this.load.image('ankle_foot_right', '/PurpleGuy/ankle_foot_right.png');
+
+        this.loadItem('testItem', '/Items/itemTest.json');
 
         this.loadNpc('girl', '/Npcs/npc1.json');
     }
@@ -164,6 +174,8 @@ class Town extends Phaser.Scene
 
         this.testNpc = new Npc(this, 'girl');
         this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
+
+        this.testItem = new Item(this, 'testItem');
         //this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
         //this.testNpc.depth = 2;
         //this.testNpc.playDialogue();
