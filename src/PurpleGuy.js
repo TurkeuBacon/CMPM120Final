@@ -5,19 +5,17 @@ class PurpleGuy extends Phaser.GameObjects.Container
         super(scene, x, y);
         this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
         scene.add.existing(this);
-        this.torsoImage = scene.add.image(parts.torso.x, parts.torso.y, parts.torso.image);
-        this.add(this.torsoImage);
         
-        this.headImage = scene.add.image(parts.head.x, parts.head.y, parts.head.image);
+        this.headImage = scene.physics.add.image(parts.head.x, parts.head.y, parts.head.image).setOrigin(.55, 1);
         this.add(this.headImage);
 
         this.upperArmLContainer = scene.add.container(parts.upperArmL.x, parts.upperArmL.y);
-        this.upperArmLImage = scene.add.image(0, 0, parts.upperArmL.image);
+        this.upperArmLImage = scene.physics.add.image(0, 0, parts.upperArmL.image).setOrigin(.85, .15);
         this.upperArmRContainer = scene.add.container(parts.upperArmR.x, parts.upperArmR.y);
-        this.upperArmRImage = scene.add.image(0, 0, parts.upperArmR.image);
+        this.upperArmRImage = scene.physics.add.image(0, 0, parts.upperArmR.image).setOrigin(.15, .15);
 
-        this.forearmLImage = scene.add.image(parts.forearmL.x, parts.forearmL.y, parts.forearmL.image);
-        this.forearmRImage = scene.add.image(parts.forearmR.x, parts.forearmR.y, parts.forearmR.image);
+        this.forearmLImage = scene.physics.add.image(parts.forearmL.x, parts.forearmL.y, parts.forearmL.image).setOrigin(0.65, 0);
+        this.forearmRImage = scene.physics.add.image(parts.forearmR.x, parts.forearmR.y, parts.forearmR.image).setOrigin(0.35, 0);
 
         this.upperArmLContainer.add(this.upperArmLImage);
         this.upperArmLContainer.add(this.forearmLImage);
@@ -28,12 +26,12 @@ class PurpleGuy extends Phaser.GameObjects.Container
         this.add(this.upperArmRContainer);
         
         this.legLContainer = scene.add.container(parts.legL.x, parts.legL.y);
-        this.legLImage = scene.add.image(0, 0, parts.legL.image);
-        this.legRContainer = scene.add.container(parts.legR.x, parts.upperArmR.y);
-        this.legRImage = scene.add.image(0, 0, parts.upperArmR.image);
+        this.legLImage = scene.physics.add.image(0, 0, parts.legL.image).setOrigin(.7, .1);
+        this.legRContainer = scene.add.container(parts.legR.x, parts.legR.y);
+        this.legRImage = scene.physics.add.image(0, 0, parts.legR.image).setOrigin(.3, .1);
 
-        this.ankleLImage = scene.add.image(parts.ankleL.x, parts.ankleL.y, parts.ankleL.image);
-        this.ankleRImage = scene.add.image(parts.ankleR.x, parts.ankleR.y, parts.ankleR.image);
+        this.ankleLImage = scene.physics.add.image(parts.ankleL.x, parts.ankleL.y, parts.ankleL.image).setOrigin(0.5, 0);
+        this.ankleRImage = scene.physics.add.image(parts.ankleR.x, parts.ankleR.y, parts.ankleR.image).setOrigin(0.5, 0);
 
         this.legLContainer.add(this.legLImage);
         this.legLContainer.add(this.ankleLImage);
@@ -42,6 +40,9 @@ class PurpleGuy extends Phaser.GameObjects.Container
 
         this.add(this.legLContainer);
         this.add(this.legRContainer);
+        
+        this.torsoImage = scene.physics.add.image(parts.torso.x, parts.torso.y, parts.torso.image);
+        this.add(this.torsoImage);
 
         this.depth = 3;
     }
@@ -49,15 +50,6 @@ class PurpleGuy extends Phaser.GameObjects.Container
     update(time, delta)
     {
         this.x = 100 + Math.sin(time/750) * 100;
-        this.angle += 2.5;
-        this.upperArmLContainer.angle += 2.5;
-        this.upperArmRContainer.angle += 2.5;
-        this.forearmLImage.angle += 2.5;
-        this.forearmRImage.angle += 2.5;
-        this.legLContainer.angle += 2.5;
-        this.legRContainer.angle += 2.5;
-        this.ankleLImage.angle += 2.5;
-        this.ankleRImage.angle += 2.5;
     }
 }
 
