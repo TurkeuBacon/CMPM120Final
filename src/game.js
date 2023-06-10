@@ -6,7 +6,7 @@ let config = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
     type: Phaser.WEBGL,
     pixelArt: true,
-    backgroundColor: 0x00ffff,
+    backgroundColor: 0x00000,
     physics: {
         default: 'arcade',
         arcade: { debug: true }

@@ -5,10 +5,10 @@ import Map from "./Map.js";
 //Interiors will be Maps (Will only contain PresentInterior for testing)
     
 class MapState {
-    constructor(scene, playerCamera, player, map1700, map1960, mapPresent, presentInt){
+    constructor(scene, playerCamera, player, map1700, map1960, mapPresent, initalPark, presentInt){
         this.playerCamera = playerCamera;
         this.player = player;
-        this.maps = [map1700, map1960, mapPresent, presentInt];
+        this.maps = [map1700, map1960, mapPresent, initalPark, presentInt];
         this.currentMap = this.mapPresent;
         this.scene = scene;
     }
@@ -30,13 +30,13 @@ class MapState {
         }
 
         if (typeof this.nextMap != 'undefined'){
-            if (this.nextMap.getName() == "PresentDayInt"){
-                this.currentMap.Vanish(this.nextMap, 600);
-                this.currentMap = this.nextMap;
-                this.scene.time.delayedCall(600, () => {
-                    this.player.x = destX;
-                    this.player.y = destY;
-                });
+            if(this.nextMap.getName().includes("Int") || this.nextMap.getName().includes("Park")){
+                    this.currentMap.Vanish(this.nextMap, 600);
+                    this.currentMap = this.nextMap;
+                    this.scene.time.delayedCall(600, () => {
+                        this.player.x = destX;
+                        this.player.y = destY;
+                    });
             }
             //extremely messy, but takes care of cases of being inside.
             if (this.currentMap.getName () == "PresentDayInt" || this.currentMap.getName() == "1960sInt" || this.currentMap.getName() == "1700sInt"){
@@ -48,6 +48,7 @@ class MapState {
                     });
             }
             else {
+                console.log(this.nextMap.getName());
                 this.currentMap.Vanish(this.nextMap, 2000);
                 this.currentMap = this.nextMap;
                 this.scene.time.delayedCall(2000, () => {

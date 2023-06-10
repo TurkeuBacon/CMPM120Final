@@ -7,8 +7,8 @@ import Map from '../Map.js'
 import AudioManager from '../AudioManager.js' 
 import DialogueManager from '../DialogueManager.js'
 import Npc from '../Npc.js'
-//Gabe can we switch PresentDay to a class called World instead? I think it would make more sense since we won't be having separate scenes.
-    //didn't want to change your code here because it t's associated with "Present Day" (Daniel)
+import PurpleGuy from '../PurpleGuy.js'
+
 class Town extends Phaser.Scene
 {
     constructor()
@@ -40,9 +40,24 @@ class Town extends Phaser.Scene
         this.load.image('1960sMap', '/Scene_1960s/1960s.png');
         this.load.image('PresentDayInt', '/Scene_PresentDay/Interior.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
+        this.load.image('parkStart', '/Scene_PresentDay/Park_Initial.png');
+        this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
+        this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
 
-        this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.02);
-        this.loadAudio('npcAudio', 'npcAudio.mp3', 0.1);
+        //Purple Guy Stuff
+        this.load.image('torso', '/PurpleGuy/torso.png');
+
+        this.load.image('head', '/PurpleGuy/head.png');
+
+        this.load.image('arm_left', '/PurpleGuy/arm_left.png');
+        this.load.image('arm_right', '/PurpleGuy/arm_right.png');
+        this.load.image('wrist_hand_left', '/PurpleGuy/wrist_hand_left.png');
+        this.load.image('wrist_hand_right', '/PurpleGuy/wrist_hand_right.png');
+
+        this.load.image('leg_left', '/PurpleGuy/leg_left.png');
+        this.load.image('leg_right', '/PurpleGuy/leg_right.png');
+        this.load.image('ankle_foot_left', '/PurpleGuy/ankle_foot_left.png');
+        this.load.image('ankle_foot_right', '/PurpleGuy/ankle_foot_right.png');
 
         this.loadNpc('girl', '/Npcs/npc1.json');
     }
@@ -62,6 +77,71 @@ class Town extends Phaser.Scene
 
         AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', true, true);
 
+        let purpleGuyData = 
+        {
+            torso:
+            {
+                x: 0,
+                y: 0,
+                image: 'torso'
+            },
+            head:
+            {
+                x: 0,
+                y: 0,
+                image: 'head'
+            },
+            upperArmL:
+            {
+                x: 0,
+                y: 0,
+                image: 'arm_left'
+            },
+            upperArmR:
+            {
+                x: 0,
+                y: 0,
+                image: 'arm_right'
+            },
+            forearmL:
+            {
+                x: 0,
+                y: 0,
+                image: 'wrist_hand_left'
+            },
+            forearmR:
+            {
+                x: 0,
+                y: 0,
+                image: 'wrist_hand_right'
+            },
+            legL:
+            {
+                x: 0,
+                y: 0,
+                image: 'leg_left'
+            },
+            legR:
+            {
+                x: 0,
+                y: 0,
+                image: 'leg_right'
+            },
+            ankleL:
+            {
+                x: 0,
+                y: 0,
+                image: 'ankle_foot_left'
+            },
+            ankleR:
+            {
+                x: 0,
+                y: 0,
+                image: 'ankle_foot_right'
+            }
+        };
+        this.purpleGuy = new PurpleGuy(this, 400, 500, purpleGuyData);
+
 
         this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
         this.PresentDayBG.depth = 1;
@@ -72,6 +152,9 @@ class Town extends Phaser.Scene
         this.MiddleTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1960sMap'); 
         this.MiddleTimeBG.depth = 1;
         this.MiddleTimeBG.alpha = 1;
+        this.initalParkBG = this.add.image(screenWidth/2, screenHeight/2, 'parkStart');
+        this.initalParkBG.depth = 1;
+        this.initalParkBG.alpha = 1;
         //
         this.presentDayIntBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayInt');
         this.joystick = new TouchJoystick(this, {'width': 0.33, 'height': .5}, 100, 50, 75, 0.5);
@@ -90,16 +173,18 @@ class Town extends Phaser.Scene
         this.group2 = this.add.group();
         this.group3 = this.add.group();
         this.group4 = this.add.group();
+        this.group5 = this.add.group();
         this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
         this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
         this.earlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
         this.presentDayInt = new Map (this, "PresentDayInt",  this.presentDayIntBG, this.group4);
+        this.initalPark = new Map (this, "Initial Park", this.initalParkBG, this.group5);
         //this.presentDayInt.initializeHitboxes();
-        this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.presentDayInt);
+        this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.initalPark, this.presentDayInt);
         this.mapManager.initialize();
         //used to trigger a test on mapstate transitions
         this.input.keyboard.on('keydown-X', function(event) {
-            this.mapManager.loadingZone("PresentDayInt", this.player.x, this.player.y);
+            this.mapManager.loadingZone("Initial Park", this.player.x, this.player.y);
         }, this);
 
     }
@@ -108,8 +193,8 @@ class Town extends Phaser.Scene
     {
         // this.joystick.update();
         // this.player.update();
-        console.log("x " + this.player.x);
-        console.log("y " + this.player.y);
+        //console.log("x " + this.player.x);
+        //console.log("y " + this.player.y);
 
     }
 }

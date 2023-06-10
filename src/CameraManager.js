@@ -13,7 +13,6 @@ class CameraManager
         let canvas = this.scene.sys.game.canvas;
         this.hudCamera = this.scene.cameras.add(0, 0, canvas.width, canvas.height).setScroll(this.hudContainer.x, this.hudContainer.y);
     }
-
     setPlayerCameraTarget(target)
     {
         this.playerCamera.setTarget(target);

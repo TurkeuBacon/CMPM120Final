@@ -75,11 +75,19 @@ class Map {
                 this.addHitbox(518, 174, 50, 20, "PresentDayInt", 998, 349);
                 this.addHitbox(-14, 178, 50, 20, "PresentDayInt", -84, 329);
                 this.addHitbox(997, 180, 100, 20, "PresentDayInt", 527, 244);
+                this.addHitbox(986, 790, 50, 20, "PresentDayInt", 879, 811);
+                this.addHitbox(71, 785, 50, 20, "PresentDayInt", 97, 814);
+                this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538);
                 break;
             case "PresentDayInt":
                 this.addHitbox(998, 375, 50, 20, "Present Day", 514, 203);
                 this.addHitbox(-84, 355, 50, 20, "Present Day", -16, 206);
                 this.addHitbox(525, 272, 50, 20, "Present Day", 1001, 208);
+                this.addHitbox(879, 850, 50, 20, "Present Day", 976, 816);
+                this.addHitbox(95, 842, 50, 20, "Present Day", 71, 813);
+                break;
+            case "Initial Park":
+                this.addHitbox(1150, 564, 50, 20, "Present Day", -193, 339);
                 
         }
     }

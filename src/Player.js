@@ -4,12 +4,14 @@ class Player extends Phaser.GameObjects.Sprite
     {
         super(scene, x, y, texture, frame);
         this.inventory = [];
+        this.playerSpeed = 100;
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setImmovable(true);
         this.body.onCollide = true;
         this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
         this.keys = scene.input.keyboard.addKeys('W,A,S,D');
+        this.sprintKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);  // Get key object
         this.inputDevice = inputDevice;
         let canvas = scene.sys.game.canvas;
 
@@ -84,6 +86,11 @@ class Player extends Phaser.GameObjects.Sprite
     }
     handleMovement(){
         this.body.setVelocity(0);
+        let multiplier = 1;
+        if(this.sprintKey.isDown)
+        {
+            multiplier = 4;
+        }
 
         switch(this.inputDevice.direction)
         {
@@ -94,23 +101,23 @@ class Player extends Phaser.GameObjects.Sprite
                 this.setFrame(0);
                 break;
             case "up":
-                this.verticalSpeed = -100;
+                this.verticalSpeed = -this.playerSpeed * multiplier;
                 this.horizontalSpeed = 0;
                 this.play('walk_up', true);
                 break;
             case "down":
-                this.verticalSpeed = 100;
+                this.verticalSpeed = this.playerSpeed * multiplier;
                 this.horizontalSpeed = 0;
                 this.play('walk_down', true);
                 break;
             case "left":
                 this.verticalSpeed = 0;
-                this.horizontalSpeed = -100;
+                this.horizontalSpeed = -this.playerSpeed * multiplier;
                 this.play('walk_left', true);
                 break;
             case "right":
                 this.verticalSpeed = 0;
-                this.horizontalSpeed = 100;
+                this.horizontalSpeed = this.playerSpeed * multiplier;
                 this.play('walk_right', true);
                 break;
         }
