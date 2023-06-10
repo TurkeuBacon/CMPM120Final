@@ -1,9 +1,11 @@
 class Hitbox extends Phaser.GameObjects.Rectangle {
     
-    constructor (scene, x, y, width, height, mapName, destX, destY){
+    constructor (scene, x, y, width, height, mapName, destX, destY, keepX, keepY){
         super(scene, x, y, width, height, 0x000000, 0);
         this.destX = destX;
         this.destY = destY;
+        this.keepX = keepX;
+        this.keepY = keepY;
         this.mapName = mapName;
         this.scene = scene;
         this.player = this.scene.player;
@@ -17,7 +19,7 @@ class Hitbox extends Phaser.GameObjects.Rectangle {
         this.scene.physics.add.collider(this.player, this, () => {
             if(this.waitForNextCollision) return;
             this.waitForNextCollision = true;
-            this.scene.mapManager.loadingZone(this.mapName, this.destX, this.destY);
+            this.scene.mapManager.loadingZone(this.mapName, this.destX, this.destY, this.keepX, this.keepY);
         });
     }
 

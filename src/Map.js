@@ -1,7 +1,7 @@
 //Needs to hold map data (Image, group association)
 //implement Hitbox functionality
 import Hitbox from "./Hitbox.js";
-
+import Bounds from "./Bounds.js";
 class Map {
     constructor(scene, mapName, mapImage, group){
         this.scene = scene;
@@ -20,7 +20,7 @@ class Map {
             });
         //an initial call to hitboxes if not called yet. Here to prevent reuse.
         if (this.initialized == false){
-            this.initializeHitboxes();
+            this.initializeZone();
             this.initialized = true;
         } else {
             children.forEach((child) => {
@@ -68,16 +68,20 @@ class Map {
             }
         }); 
     }
-    initializeHitboxes(){
+    initializeZone(){
         //console.log(this.mapName);
         switch (this.mapName){
             case "Present Day":
                 this.addHitbox(518, 174, 50, 20, "PresentDayInt", 998, 349);
-                this.addHitbox(-14, 178, 50, 20, "PresentDayInt", -84, 329);
-                this.addHitbox(997, 180, 100, 20, "PresentDayInt", 527, 244);
+                this.addHitbox(-16, 178, 40, 20, "PresentDayInt", -84, 329);
+                this.addHitbox(1000, 180, 70, 20, "PresentDayInt", 527, 244);
                 this.addHitbox(986, 790, 50, 20, "PresentDayInt", 879, 811);
                 this.addHitbox(71, 785, 50, 20, "PresentDayInt", 97, 814);
-                this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538);
+                this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538, false, true);
+                //Bounds Initialization
+                this.addBounds(500, 950, 1500, 50, "Present Day");
+                this.addBounds(1218, 473, 50, 1500, "Present Day");
+                this.addBounds(501, -115, 1500, 50, "Present Day");
                 break;
             case "PresentDayInt":
                 this.addHitbox(998, 375, 50, 20, "Present Day", 514, 203);
@@ -87,18 +91,20 @@ class Map {
                 this.addHitbox(95, 842, 50, 20, "Present Day", 71, 813);
                 break;
             case "Initial Park":
-                this.addHitbox(1150, 564, 50, 20, "Present Day", -193, 339);
+                this.addHitbox(1160, 364, 20, 1000, "Present Day", -193, 339, false, true);
                 
         }
     }
     //used to make our hitbox gone when needed (by associating it with group)
-    addHitbox(x,y, width, height, mapName, destX, destY){
-        let hitBox = new Hitbox(this.scene, x, y, width, height, mapName, destX, destY);
+    addHitbox(x,y, width, height, mapName, destX, destY, keepX=false, keepY=false){
+        let hitBox = new Hitbox(this.scene, x, y, width, height, mapName, destX, destY, keepX, keepY);
         this.group.add(hitBox);
-
         return hitBox;
     }
-    
+    addBounds(x, y, width, height, mapName){
+        let bound = new Bounds (this.scene, x, y, width, height, mapName);
+        this.group.add(bound); 
+    }
     getName(){
         return this.mapName;
     }

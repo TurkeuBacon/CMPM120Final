@@ -7,7 +7,7 @@ class Player extends Phaser.GameObjects.Sprite
         this.playerSpeed = 100;
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setImmovable(true);
+        this.body.setImmovable(false);
         this.body.onCollide = true;
         this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
         this.keys = scene.input.keyboard.addKeys('W,A,S,D');

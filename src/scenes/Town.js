@@ -152,7 +152,7 @@ class Town extends Phaser.Scene
         this.MiddleTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1960sMap'); 
         this.MiddleTimeBG.depth = 1;
         this.MiddleTimeBG.alpha = 1;
-        this.initalParkBG = this.add.image(screenWidth/2, screenHeight/2, 'parkStart');
+        this.initalParkBG = this.add.image(screenWidth/2, screenHeight/2-200, 'parkStart');
         this.initalParkBG.depth = 1;
         this.initalParkBG.alpha = 1;
         //
@@ -193,8 +193,8 @@ class Town extends Phaser.Scene
     {
         // this.joystick.update();
         // this.player.update();
-        //console.log("x " + this.player.x);
-        //console.log("y " + this.player.y);
+        console.log("x " + this.player.x);
+        console.log("y " + this.player.y);
 
     }
 }

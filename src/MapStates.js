@@ -20,7 +20,7 @@ class MapState {
         this.currentMap = this.maps[2];
     }
     //Function to take care of Loading Zones (Time Switches, Interior buildings, etc.)
-    loadingZone(MapName, destX, destY){
+    loadingZone(MapName, destX, destY, keepX, keepY){
         this.nextMap;
         for (let i = 0; i < this.maps.length;   i++){
             if (this.maps[i].getName() === MapName){
@@ -34,17 +34,17 @@ class MapState {
                     this.currentMap.Vanish(this.nextMap, 600);
                     this.currentMap = this.nextMap;
                     this.scene.time.delayedCall(600, () => {
-                        this.player.x = destX;
-                        this.player.y = destY;
+                        if(!keepX) this.player.x = destX;
+                        if(!keepY) this.player.y = destY;
                     });
             }
             //extremely messy, but takes care of cases of being inside.
-            if (this.currentMap.getName () == "PresentDayInt" || this.currentMap.getName() == "1960sInt" || this.currentMap.getName() == "1700sInt"){
+            if (this.currentMap.getName().includes("Int") || this.currentMap.getName().includes("Park")){
                     this.currentMap.Vanish(this.nextMap, 600);
                     this.currentMap = this.nextMap;
                     this.scene.time.delayedCall(600, () => {
-                        this.player.x = destX;
-                        this.player.y = destY;
+                        if(!keepX) this.player.x = destX;
+                        if(!keepY) this.player.y = destY;
                     });
             }
             else {
@@ -52,8 +52,8 @@ class MapState {
                 this.currentMap.Vanish(this.nextMap, 2000);
                 this.currentMap = this.nextMap;
                 this.scene.time.delayedCall(2000, () => {
-                    this.player.x = destX;
-                    this.player.y = destY;
+                    if(!keepX) this.player.x = destX;
+                    if(!keepY) this.player.y = destY;
                 });
             }
             
