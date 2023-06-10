@@ -43,11 +43,14 @@ class Town extends Phaser.Scene
     {
         this.load.path = '../assets/';
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
-        this.load.image('PresentDayMap', '/Scene_PresentDay/PresentDay.png');
-        this.load.image('1700sMap', '/Scene_1700s/1700s.png');
-        this.load.image('1960sMap', '/Scene_1960s/1960s.png');
+        this.load.image('presentDayFloor', '/Scene_PresentDay/PresentDay.png');
+        this.load.image('trees', '/Scene_PresentDay/trees.png');
+        this.load.image('presentDayHousing', '/Scene_PresentDay/buildings_all.png');
+        this.load.image('1700sFloor', '/Scene_1700s/1700s.png');
+        this.load.image('1960sFloor', '/Scene_1960s/1960s.png');
         this.load.image('PresentDayInt', '/Scene_PresentDay/Interior.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
+        
         this.load.image('parkStart', '/Scene_PresentDay/Park_Initial.png');
         this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
@@ -152,14 +155,19 @@ class Town extends Phaser.Scene
         };
         this.purpleGuy = new PurpleGuy(this, 400, 500, purpleGuyData);
 
-
-        this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayMap');
+        this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
+        this.trees.depth = 3;
+        this.trees.alpha = 1;
+        this.buildingPresent = this.add.image(screenWidth/2, screenHeight/2, 'presentDayHousing');
+        this.buildingPresent.depth = 4;
+        this.buildingPresent.alpha = 1;
+        this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'presentDayFloor');
         this.PresentDayBG.depth = 1;
         this.PresentDayBG.alpha = 1;
-        this.BeginningTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1700sMap');
+        this.BeginningTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1700sFloor');
         this.BeginningTimeBG.depth = 1;
         this.BeginningTimeBG.alpha = 1;
-        this.MiddleTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1960sMap'); 
+        this.MiddleTimeBG = this.add.image(screenWidth/2, screenHeight/2, '1960sFloor'); 
         this.MiddleTimeBG.depth = 1;
         this.MiddleTimeBG.alpha = 1;
         this.initalParkBG = this.add.image(screenWidth/2, screenHeight/2-200, 'parkStart');
@@ -186,12 +194,15 @@ class Town extends Phaser.Scene
         this.group3 = this.add.group();
         this.group4 = this.add.group();
         this.group5 = this.add.group();
+        //Adding for groups
+        this.group1.add(this.trees);
+        this.group1.add(this.buildingPresent);
+        //
         this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
         this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
         this.earlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
         this.presentDayInt = new Map (this, "PresentDayInt",  this.presentDayIntBG, this.group4);
         this.initalPark = new Map (this, "Initial Park", this.initalParkBG, this.group5);
-        //this.presentDayInt.initializeHitboxes();
         this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.initalPark, this.presentDayInt);
         this.mapManager.initialize();
         //used to trigger a test on mapstate transitions
@@ -205,8 +216,8 @@ class Town extends Phaser.Scene
     {
         // this.joystick.update();
         // this.player.update();
-        console.log("x " + this.player.x);
-        console.log("y " + this.player.y);
+        //console.log("x " + this.player.x);
+        //console.log("y " + this.player.y);
 
     }
 }
