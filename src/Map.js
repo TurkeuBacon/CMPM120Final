@@ -125,13 +125,17 @@ class Map {
                 //library
                 this.addHitbox(-16, 178, 40, 20, "1700sInt", -26, 331);
                 //this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
-                this.addHitbox(986, 795, 50, 20, "1700sInt", 879, 811);
-                this.addHitbox(71, 790, 50, 20, "1700sInt", 97, 814);
+                //House Bottom Right
+                this.addHitbox(986, 795, 50, 20, "1700sInt", 923, 801);
+                //House Bottom Left
+                this.addHitbox(71, 790, 50, 20, "1700sInt", 205, 818);
                 this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538, false, true);
                 break;
             case "1700sInt":
                 this.addHitbox(785, 287, 50, 20, "1700s", 518, 240);
                 this.addHitbox(-29, 359, 50, 20, "1700s", -20, 210);
+                this.addHitbox(200, 850, 50, 20,"1700s", 71, 820);
+                this.addHitbox(920, 839, 50, 20, "1700s", 986, 805);
         }
     }
     addHitbox(x,y, width, height, mapName, destX, destY, keepX=false, keepY=false){
