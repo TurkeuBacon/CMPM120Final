@@ -44,14 +44,24 @@ class Town extends Phaser.Scene
         this.load.path = '../assets/';
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
         this.load.image('presentDayFloor', '/Scene_PresentDay/PresentDay.png');
+        //Trees
         this.load.image('trees', '/Scene_PresentDay/trees.png');
+        this.load.image ('trees1700s', '/Scene_1700s/trees1700.png');
+        this.load.image('treeRight', '/Scene_PresentDay/tree_right.png');
+        //Housing
         this.load.image('presentDayHousing', '/Scene_PresentDay/buildings_all.png');
+        this.load.image('buildings1700', '/Scene_1700s/buildings1700.png');
+        //Floors
         this.load.image('1700sFloor', '/Scene_1700s/1700s.png');
         this.load.image('1960sFloor', '/Scene_1960s/1960s.png');
+        //Interior
         this.load.image('PresentDayInt', '/Scene_PresentDay/Interior.png');
+        this.load.image('1700sInt', '/Scene_1700s/Interior1700s.png');
+        //Dialogue
         this.load.image('dialogueBox', '/HUD/text_box.png');
-        this.load.image('treeRight', '/Scene_PresentDay/tree_right.png');
+        //Park
         this.load.image('parkStart', '/Scene_PresentDay/Park_Initial.png');
+        //Music
         this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
 
@@ -154,16 +164,23 @@ class Town extends Phaser.Scene
             }
         };
         this.purpleGuy = new PurpleGuy(this, 400, 500, purpleGuyData);
-
+        //trees
         this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
         this.trees.depth = 3;
         this.trees.alpha = 1;
         this.treesRight = this.add.image(screenWidth/2-65, screenHeight/2-150, 'treeRight');
         this.treesRight.depth = 3;
         this.treesRight.alpha = 1;
+        this.trees1700s = this.add.image(screenWidth/2, screenHeight/2, 'trees1700s');
+        this.trees1700s.depth = 3;
+        this.trees1700s.alpha = 1;
+        //Buildings
         this.buildingPresent = this.add.image(screenWidth/2, screenHeight/2, 'presentDayHousing');
         this.buildingPresent.depth = 4;
         this.buildingPresent.alpha = 1;
+        this.building1700s = this.add.image(screenWidth/2, screenHeight/2, 'buildings1700');
+        this.building1700s.depth = 4;
+        this.building1700s.alpha = 1;
         this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'presentDayFloor');
         this.PresentDayBG.depth = 1;
         this.PresentDayBG.alpha = 1;
@@ -176,8 +193,9 @@ class Town extends Phaser.Scene
         this.initalParkBG = this.add.image(screenWidth/2, screenHeight/2-200, 'parkStart');
         this.initalParkBG.depth = 1;
         this.initalParkBG.alpha = 1;
-        //
+        //Interior
         this.presentDayIntBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayInt');
+        this.earlyIntBG = this.add.image(screenWidth/2, screenHeight/2, '1700sInt');
         this.joystick = new TouchJoystick(this, {'width': 0.33, 'height': .5}, 100, 50, 75, 0.5);
         this.player = new Player(this, 500, 500, 'player', 1, this.joystick);
         this.player.depth = 2;
@@ -197,25 +215,30 @@ class Town extends Phaser.Scene
         this.group3 = this.add.group();
         this.group4 = this.add.group();
         this.group5 = this.add.group();
-        //Adding for groups
+        this.group6 = this.add.group();
+        //Present Day Group
         this.group1.add(this.trees);
         this.group1.add(this.buildingPresent);
         this.group1.add(this.testNpc);
         this.group1.add(this.npc2);
         this.group1.add(this.purpleGuy);
-        //
+        //Present Day Park Group
         this.group5.add(this.treesRight);
+        //1700s group
+        this.group3.add(this.trees1700s);
+        this.group3.add(this.building1700s);
         //
         this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
         this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
         this.earlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
         this.presentDayInt = new Map (this, "PresentDayInt",  this.presentDayIntBG, this.group4);
+        this.earlyInt = new Map (this, "1700sInt", this.earlyIntBG, this.group6);
         this.initalPark = new Map (this, "Initial Park", this.initalParkBG, this.group5);
-        this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.initalPark, this.presentDayInt);
+        this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.initalPark, this.presentDayInt, this.earlyInt);
         this.mapManager.initialize();
         //used to trigger a test on mapstate transitions
         this.input.keyboard.on('keydown-X', function(event) {
-            this.mapManager.loadingZone("Initial Park", this.player.x, this.player.y);
+            this.mapManager.loadingZone("1700s", this.player.x, this.player.y);
         }, this);
 
     }

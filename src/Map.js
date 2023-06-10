@@ -17,6 +17,8 @@ class Map {
         let children = this.group.getChildren();
         //WEIRD
             children.forEach((child) => { 
+                console.log(child);
+                console.log("being enabled");
                 this.scene.physics.world.enable(child);
             });
         //an initial call to hitboxes if not called yet. Here to prevent reuse.
@@ -26,7 +28,7 @@ class Map {
             this.initialized = true;
         } else {
             children.forEach((child) => {
-                //console.log("being enabled");
+                console.log("being enabled");
                 this.scene.physics.world.enable(child);
             });
         }
@@ -63,7 +65,7 @@ class Map {
                 let children = this.group.getChildren();
                 children.forEach((child) => { 
                     i++;
-                    //console.log(this.mapName + i);
+                    console.log(this.mapName + i);
                     this.scene.physics.world.disable(child);
                 });
                 this.mapImage.setVisible(false);
@@ -83,21 +85,21 @@ class Map {
                 this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
                 this.addHitbox(986, 795, 50, 20, "PresentDayInt", 879, 811);
                 this.addHitbox(71, 790, 50, 20, "PresentDayInt", 97, 814);
-                this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538, false, true);
+                this.addHitbox(-220, 400, 30, 1000, "Initial Park", 1122, 538, false, true);
                 //Bounds Initialization
                 this.addBounds(500, 950, 1500, 50, "Present Day");
                 this.addBounds(1218, 473, 50, 1500, "Present Day");
                 this.addBounds(501, -48, 1500, 50, "Present Day");
                 this.addBounds(-175, 690, 50, 500, "Present Day");
-                //Library
+                    //Library
                 this.addBounds(44, 139, 266, 100,"Present Day");
-                //house
+                    //house
                 this.addBounds(47, 755, 295, 90,"Present Day");
-                //Home Repo
+                    //Home Repo
                 this.addBounds(1002, 135, 355, 115, "Present Day");
-                //Town Hall
+                    //Town Hall
                 this.addBounds(520, 170, 350, 90, "Present Day");
-                //House
+                    //House
                 this.addBounds(956, 760, 295, 90, "Present Day");
 
                 
@@ -108,18 +110,28 @@ class Map {
                 this.addHitbox(525, 272, 50, 20, "Present Day", 1001, 212);
                 this.addHitbox(879, 850, 50, 20, "Present Day", 976, 825);
                 this.addHitbox(97, 843, 50, 20, "Present Day", 71, 816);
-                //this.addBounds(1140, -40, )
-                //this.addHitbox(95, 842, 50, 20, "Present Day", 71, 810);
                 break;
             case "Initial Park":
                 this.addHitbox(1160, 364, 20, 1000, "Present Day", -193, 339, false, true);
                 //BOUNDS
                 this.addBounds(443, 665, 2000, 20, "Initial Park");
-                this.addBounds(1140, -340, 50, 1000, "Initial Park");
+                this.addBounds(1140, -520, 50, 1000, "Initial Park");
                 this.addBounds(530, -340, 2000, 50, "Initial Park");
                 this.addBounds(-100, 75, 50, 2000, "Initial Park");
-             
-                
+                break;
+            case "1700s":
+                //Town
+                this.addHitbox(518, 210, 50, 20, "1700sInt", 786, 255);
+                //library
+                this.addHitbox(-16, 178, 40, 20, "1700sInt", -26, 331);
+                //this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
+                this.addHitbox(986, 795, 50, 20, "1700sInt", 879, 811);
+                this.addHitbox(71, 790, 50, 20, "1700sInt", 97, 814);
+                this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538, false, true);
+                break;
+            case "1700sInt":
+                this.addHitbox(785, 287, 50, 20, "1700s", 518, 240);
+                this.addHitbox(-29, 359, 50, 20, "1700s", -20, 210);
         }
     }
     addHitbox(x,y, width, height, mapName, destX, destY, keepX=false, keepY=false){

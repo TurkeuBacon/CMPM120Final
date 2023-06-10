@@ -5,10 +5,10 @@ import Map from "./Map.js";
 //Interiors will be Maps (Will only contain PresentInterior for testing)
     
 class MapState {
-    constructor(scene, playerCamera, player, map1700, map1960, mapPresent, initalPark, presentInt){
+    constructor(scene, playerCamera, player, map1700, map1960, mapPresent, initalPark, presentInt, earlyInt){
         this.playerCamera = playerCamera;
         this.player = player;
-        this.maps = [map1700, map1960, mapPresent, initalPark, presentInt];
+        this.maps = [map1700, map1960, mapPresent, initalPark, presentInt, earlyInt];
         this.currentMap = this.mapPresent;
         this.scene = scene;
     }
@@ -21,13 +21,15 @@ class MapState {
     }
     //Function to take care of Loading Zones (Time Switches, Interior buildings, etc.)
     loadingZone(MapName, destX, destY, keepX, keepY){
-        this.nextMap;
+        //this.nextMap;
+        console.log(MapName)
         for (let i = 0; i < this.maps.length;   i++){
             if (this.maps[i].getName() === MapName){
                 this.nextMap = this.maps[i];
                 break;
             }
         }
+        console.log(this.nextMap.getName());
 
         if (typeof this.nextMap != 'undefined' && this.currentMap.getName() != this.nextMap.getName()){
             console.log("Next Map " + this.nextMap.mapName);
