@@ -55,6 +55,9 @@ class Cinematic extends Phaser.Scene{
                     duration:15000,
                     repeat:0,
         });
+        this.input.on('pointerdown',()=>{
+            this.scene.start('poop');
+        });
     }
     
 }
