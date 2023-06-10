@@ -79,8 +79,10 @@ class Town extends Phaser.Scene
         this.load.image('leg_right', '/PurpleGuy/leg_right.png');
         this.load.image('ankle_foot_left', '/PurpleGuy/ankle_foot_left.png');
         this.load.image('ankle_foot_right', '/PurpleGuy/ankle_foot_right.png');
+        this.load.image('fsbutton','/HUD/fullscreen_button.png');
 
         this.loadItem('testItem', '/Items/itemTest.json');
+
 
         this.loadNpc('girl', '/Npcs/npc1.json');
     }
@@ -240,6 +242,15 @@ class Town extends Phaser.Scene
         this.input.keyboard.on('keydown-X', function(event) {
             this.mapManager.loadingZone("1700s", this.player.x, this.player.y);
         }, this);
+        this.fsbutton = this.add.sprite(100,100,'fsbutton').setInteractive().on('pointerdown', () => 
+        {
+            if(this.scale.isFullscreen){
+                this.scale.stopFullscreen();
+            }else{
+                this.scale.startFullscreen();
+            }
+        });
+        this.cameraManager.addUI(this.fsbutton);
 
     }
 
