@@ -13,13 +13,29 @@ class C2 extends Phaser.Scene{
     constructor(){
         super('poop');
     }
+    
+
     preload(){
         this.load.path = '../assets/';
         this.load.audio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.load.audio('npcAudio', 'npcAudio.mp3', 1);
+        this.load.audio('leanguy','/Music/Wacky man.mp3',0,2);
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
+
+        
         this.load.image('torso', '/PurpleGuy/torso.png');
         this.load.image('head', '/PurpleGuy/head.png');
+
+        this.load.image('arm_left', '/PurpleGuy/arm_left.png');
+        this.load.image('arm_right', '/PurpleGuy/arm_right.png');
+        this.load.image('wrist_hand_left', '/PurpleGuy/wrist_hand_left.png');
+        this.load.image('wrist_hand_right', '/PurpleGuy/wrist_hand_right.png');
+
+        this.load.image('leg_left', '/PurpleGuy/leg_left.png');
+        this.load.image('leg_right', '/PurpleGuy/leg_right.png');
+        this.load.image('ankle_foot_left', '/PurpleGuy/ankle_foot_left.png');
+        this.load.image('ankle_foot_right', '/PurpleGuy/ankle_foot_right.png');
+
         this.load.image('presentDayFloor', '/Scene_PresentDay/PresentDay.png');
         this.load.image('presentDayHousing', '/Scene_PresentDay/buildings_all.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
@@ -30,8 +46,10 @@ class C2 extends Phaser.Scene{
 
         
         this.cameraManager = new CameraManager(this);
-        this.intro2 = this.sound.add('overworldBGM');
-        this.intro2.play();
+        const intro2 = this.sound.add('overworldBGM');
+        const burplenurple = this.sound.add('leanguy');
+        intro2.play();
+        
         this.PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'presentDayFloor');
         this.PresentDayBG.depth = 1;
         this.PresentDayBG.alpha = 1;
@@ -40,8 +58,77 @@ class C2 extends Phaser.Scene{
         this.buildingPresent.depth = 4;
         this.buildingPresent.alpha = 1;
 
-        this.player = this.add.sprite(0,345,'player');
-        this.player.depth = 2;
+        let player = this.add.sprite(0,345,'player');
+      //  let purplehead = this.add.sprite(800,325,'head');
+        //let purpletorso = this.add.sprite(800,355,'torso');
+        player.depth = 2;
+      //  purplehead.depth = 2;
+        //purpletorso.depth = 2;
+        let purpleGuyData = 
+        {
+            torso:
+            {
+                x: 0,
+                y: 0,
+                image: 'torso'
+            },
+            head:
+            {
+                x: 0,
+                y: -13,
+                image: 'head'
+            },
+            upperArmL:
+            {
+                x: -6,
+                y: -13,
+                image: 'arm_left'
+            },
+            upperArmR:
+            {
+                x: 6.5,
+                y: -12,
+                image: 'arm_right'
+            },
+            forearmL:
+            {
+                x: -8,
+                y: 12,
+                image: 'wrist_hand_left'
+            },
+            forearmR:
+            {
+                x: 8,
+                y: 12,
+                image: 'wrist_hand_right'
+            },
+            legL:
+            {
+                x: -3,
+                y: 16,
+                image: 'leg_left'
+            },
+            legR:
+            {
+                x: 3,
+                y: 16,
+                image: 'leg_right'
+            },
+            ankleL:
+            {
+                x: -4,
+                y: 20,
+                image: 'ankle_foot_left'
+            },
+            ankleR:
+            {
+                x: 4,
+                y: 20,
+                image: 'ankle_foot_right'
+            }
+        };
+        this.purpleGuy = new PurpleGuy(this, 825, 345, purpleGuyData);
+
 
         this.anims.create(
             {
@@ -72,22 +159,34 @@ class C2 extends Phaser.Scene{
                 repeat: -1
             });
 
-            this.player.play('walk_right');
+            player.play('walk_right');
         this.tweens.add({
-            targets:this.player,
+            targets:player,
             x:500,
             duration:6000,
-            
+            onComplete: function(){
+                stopAnim();
+            }
         });
-        /*this.time.addEvent({
-            delay:6000,
-            callback:stopAnim(this.player),
-            callbackScope:this
-        });*/
-        function stopAnim(sprite){
-            sprite.anims.stop();
-            sprite.setFrame(0);
+        this.tweens.add({
+            targets:this.purpleGuy,
+            delay:10000,
+            x:550,
+            duration:8000,
+            //onComplete: this.burplenurple.play(),
+            onComplete: function () {
+                console.log("Tween completed");
+                onEvent();
+            }
+        });
+       function onEvent(){
+        burplenurple.play();
+        intro2.stop();
+    }
+        function stopAnim(){
+            player.anims.stop();
         }
+        
         
     }
 }
