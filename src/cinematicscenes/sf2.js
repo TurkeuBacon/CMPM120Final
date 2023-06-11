@@ -64,11 +64,21 @@ class sfMeat extends Phaser.Scene{
         const screenHeight = this.sys.game.config.height;
         let PresentDayBG = this.add.image(screenWidth/2, screenHeight/2, 'presentDayFloor');
         PresentDayBG.depth = 1;
-        PresentDayBG.alpha = 1;
+        PresentDayBG.alpha = 0;
+        this.tweens.add({
+            targets:PresentDayBG,
+            alpha:1,
+            duration:5000,
+        });
 
         let buildingPresent = this.add.image(screenWidth/2, screenHeight/2, 'presentDayHousing');
         buildingPresent.depth = 4;
-        buildingPresent.alpha = 1;
+        buildingPresent.alpha = 0;
+        this.tweens.add({
+            targets:buildingPresent,
+            alpha:1,
+            duration:5000,
+        });
 
         this.cameraManager = new CameraManager(this);
         this.dialogueManager = new DialogueManager(this, 'dialogueBox');
@@ -78,8 +88,26 @@ class sfMeat extends Phaser.Scene{
         {
             this.npc2.playDialogue();
         });
+        this.npc2.alpha = 0;
+        this.tweens.add({
+            targets:this.npc2,
+            alpha:1,
+            duration:5000,
+        });
         this.npc3 = new Npc(this,'bacon').setPosition(300,400);
+        this.npc3.alpha = 0;
+        this.tweens.add({
+            targets:this.npc3,
+            alpha:1,
+            duration:5000,
+        });
         this.npc4 = new Npc(this,'girl2').setPosition(600,500);
+        this.npc4.alpha = 0;
+        this.tweens.add({
+            targets:this.npc4,
+            alpha:1,
+            duration:5000,
+        });
         this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 'JoystickBack', 'JoystickHandle',  150, 75, 125, 0.42);
         //0,350
         this.player = new Player(this, 0, 350, 'player', 1, this.joystick, 'Button');
@@ -95,6 +123,13 @@ class sfMeat extends Phaser.Scene{
             this.scene.start('parkington');
         });
         parkText.depth = 2;
+
+        let endText = this.add.text(600-25,300+40,'Click for Bad End').setScale(1)
+        .setInteractive()
+        .on('pointerdown',()=>{
+            this.scene.start('baddie');
+        });
+        endText.depth = 2;
     }
 }
 export default sfMeat
