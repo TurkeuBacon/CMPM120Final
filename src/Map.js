@@ -253,6 +253,8 @@ class Map {
                 this.addBounds(520, 170, 350, 90, "1700s");
                     //House
                 this.addBounds(956, 760, 295, 90, "1700s");
+                this.addNPC('FetchFirst1700s');
+                this.addNPC('FetchSecond1700s');
                 break;
             case "1700sInt":
                 this.addHitbox(805, 295, 50, 20, "1700s", 518, 240);
@@ -415,6 +417,7 @@ class Map {
     }
     addItem(name){
         let item = new Item(this.scene, name);
+        item.group = this.group;
         this.group.add(item);
     }
     getName(){

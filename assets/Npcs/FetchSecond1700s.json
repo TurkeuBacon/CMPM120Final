@@ -1,0 +1,17 @@
+{
+    "x": 664,
+    "y": 676,
+
+    "scale": 1,
+
+    "texture": "npc2.png",
+    
+    "lines": [
+        {
+            "text": "Hmmmmmm..... HMMMMMMMMMMMMMMMMMMMMMMM. A seed? I would maybe check the library?\n They got some good books!",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        }
+    ]
+}

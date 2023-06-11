@@ -8,24 +8,20 @@
     
     "lines": [
         {
-            "text": "Hello! I love reading books.",
+            "text": "Hello! Are you an avid book reader? Because I am!",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "There's a library on the left side of the Town Hall.",
-            "delays": [
-                {"charI": 14, "delay": 500}
-            ],
+            "text": "There's a library on the left side of the Town Hall, and they have lots of reallly good books!",
+            "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "I borrow all of my books from there!",
-            "delays": [
-                {"charI": 14, "delay": 500}
-            ],
+            "text": "I've heard that they've stocked up on this new book all about trees!",
+            "delays": [],
             "repeat": true,
             "item": null
         }

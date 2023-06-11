@@ -5,8 +5,12 @@
     "canPickup": true,
     "metaphysical": true,
     "task": {
-        "itemKey": "treeResearchCompleted",
-        "text": "Research the extinct tree.\n\nThere could be some info at the Library",
-        "nextTask": null
+        "itemKey": "Tree Book",
+        "text": "  Research the extinct   tree.\n\n Try talking to people    around the town!",
+        "nextTask": {
+            "itemKey": "Tree Seed",
+            "text": "Go back in time and get the ancient seed!\n\n(Hint: Maybe its near the Town Center)",
+            "nextTask": null
+        }
     }
 }

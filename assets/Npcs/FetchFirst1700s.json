@@ -1,0 +1,17 @@
+{
+    "x": 163,
+    "y": 433,
+
+    "scale": 1,
+
+    "texture": "npc8.png",
+    
+    "lines": [
+        {
+            "text": "A seed? I don't think I've seen one around. What if you tried going to the park?\nSomeone there might know!",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        }
+    ]
+}

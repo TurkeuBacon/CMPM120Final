@@ -112,9 +112,11 @@ class Player extends Phaser.GameObjects.Sprite
     {
         console.log("Aquired: " + item.itemKey);
         this.inventory.push(item);
-        item.setVisible(false);
+        item.setVisible(!item.metaphysical);
         item.setActive(false);
+        this.scene.cameraManager.addUI(item);
         this.scene.physics.world.disable(item);
+        this.placeItems();
         if(this.task != null && this.task.itemKey == item.itemKey)
         {
             console.log("next task");
@@ -125,6 +127,27 @@ class Player extends Phaser.GameObjects.Sprite
         {
             this.setTask(item.task);
         }
+    }
+
+    placeItems()
+    {
+        let itemSize = 48;
+        let itemCount = 0;
+        let nextXOffset = 0;
+        let nextYOffset = 10;
+        this.inventory.forEach(element => {
+            if(!element.metaphysical)
+            {
+                element.setOrigin(0, 0).setPosition(this.taskBox.x + nextXOffset, this.taskBox.displayHeight + nextYOffset).setDisplaySize(itemSize, itemSize);
+                nextXOffset += (10 + itemSize);
+                if(nextXOffset > (this.taskBox.displayWidth - itemSize - 10))
+                {
+                    nextXOffset = 0;
+                    nextYOffset += itemSize + 10;
+                }
+                itemCount++;
+            }
+        });
     }
     
     update(){
@@ -141,10 +164,10 @@ class Player extends Phaser.GameObjects.Sprite
         switch(this.inputDevice.direction)
         {
             case "neutral":
+                this.verticalSpeed = 0;
+                this.horizontalSpeed = 0;
                 if(!this.disableInput)
                 {
-                    this.verticalSpeed = 0;
-                    this.horizontalSpeed = 0;
                     this.stop();
                     this.setFrame(0);
                 }

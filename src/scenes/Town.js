@@ -90,6 +90,7 @@ class Town extends Phaser.Scene
         this.load.image('fsbutton','/HUD/fullscreen_button.png');
 
         this.loadItem('Water Can', '/Items/waterCan.json');
+        this.loadItem('Tree Book', '/Items/TreeBook.json');
 
         
         this.loadNpc('Susan','/Npcs/Susan.json');
@@ -105,6 +106,8 @@ class Town extends Phaser.Scene
         this.loadNpc('Oscar1960s', '/Npcs/Oscar1960s.json');
         this.loadNpc('Mayor1960s', '/Npcs/Mayor1960s.json');
         this.loadNpc('Lovely1960s', '/Npcs/Lovely1960s.json');
+        this.loadNpc('FetchFirst1700s', '/Npcs/FetchFirst1700s.json')
+        this.loadNpc('FetchSecond1700s', '/Npcs/FetchSecond1700s.json')
     }
     
     create()

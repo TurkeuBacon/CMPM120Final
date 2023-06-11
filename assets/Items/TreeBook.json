@@ -1,0 +1,7 @@
+{
+    "x": 53,
+    "y": 255,
+    "texture": "TreeBook.png",
+    "canPickup": true,
+    "extraText": "Despite its thickness, it only contains one line of text.\nTree seed is in the 1700s.\n\nOnwards, young traveler!"
+}
