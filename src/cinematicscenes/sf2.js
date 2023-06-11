@@ -12,6 +12,13 @@ class sfMeat extends Phaser.Scene{
     constructor(){
         super('sfcommence');
     }
+    loadItem(itemKey, itemPath)
+    {
+        this.load.json(itemKey, itemPath);
+        this.load.on("filecomplete-json-" + itemKey, function (key, type, data) {
+            this.load.image(key + 'Texture', '/Items/ItemTextures/' + data.texture);
+        }, this);
+    }
     loadNpc(npcKey, npcPath)
     {
         this.load.json(npcKey, npcPath);
@@ -58,6 +65,8 @@ class sfMeat extends Phaser.Scene{
         this.load.image('JoystickBack', '/HUD/Jbase.png');
         this.load.image('JoystickHandle', '/HUD/Jhandle.png');
         this.load.spritesheet('Button', '/HUD/A_Button.png', { frameWidth: 68, frameHeight: 70});
+
+        this.loadItem('Water Can', '/Items/waterCan.json');
     }
     create(){
         const screenWidth = this.sys.game.config.width;
