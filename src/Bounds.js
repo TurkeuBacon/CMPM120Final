@@ -8,7 +8,7 @@ class Bounds extends Phaser.GameObjects.Rectangle {
         this.scene.physics.add.existing(this);
         this.body.setImmovable(true);
         this.scene.physics.add.collider(this.player, this, () => {
-             // Calculate the player's previous position
+             
             
             
         });
