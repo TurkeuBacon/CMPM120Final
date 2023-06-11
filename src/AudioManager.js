@@ -16,11 +16,14 @@ class AudioManager{
     constructor(scene){
         this.scene = scene;
         this.audioList = {};
+        this.bgmVolume = 1;
         this.backgroundMusic = null;
         this.sfxs = [];
+        this.sfxVolumes = [];
+        this.muted = false;
     }
 
-    addAudio(key, volume)
+    addAudio(key)
     {
         if(key in this.audioList)
         {
@@ -28,10 +31,10 @@ class AudioManager{
             return;
         }
         console.log("Adding " + key + " to audioList");
-        this.audioList[key] = this.scene.sound.add(key, {volume: volume});
+        this.audioList[key] = this.scene.sound.add(key);
     }
 
-    addBackgroundMusic(audioKey, loop=true, priority=false)
+    addBackgroundMusic(audioKey, volume, loop=true, priority=false)
     {
         if(!(audioKey in this.audioList))
         {
@@ -46,14 +49,18 @@ class AudioManager{
                 this.backgroundMusic.stop();
             }
             audio.loop = loop;
+            audio.volume = volume;
             audio.play();
+            console.log("Getting Volume: " + audio.volume);
+            this.bgmVolume = volume;
             this.backgroundMusic = audio;
+            if(this.muted) this.backgroundMusic.volume = 0;
             return true;
         }
         return false;
     }
 
-    addSfx(audioKey, loop=true, rate=1, alone=false, priority=false)
+    addSfx(audioKey, volume, loop=true, rate=1, alone=false, priority=false)
     {
         if(!(audioKey in this.audioList))
         {
@@ -71,8 +78,11 @@ class AudioManager{
                 }
                 audio.loop = loop;
                 audio.setRate(rate);
+                audio.volume = volume;
                 audio.play();
                 this.sfxs = [audio];
+                this.sfxVolumes = [volume];
+                //if(this.muted) this.sfxs[0].volume = 0;
                 return true;
             }
             return false;
@@ -81,8 +91,11 @@ class AudioManager{
         {
             audio.loop = loop;
             audio.setRate(rate);
+            audio.volume = volume;
             audio.play();
+            this.sfxVolumes.push(volume);
             this.sfxs.push(audio);
+            //if(this.muted) audio.volume = 0;
             return true;
         }
     }
@@ -94,6 +107,7 @@ class AudioManager{
             if(this.sfxs[i].key == audioKey)
             {
                 this.sfxs[i].loop = false;
+                this.sfxVolumes = this.sfxVolumes.splice(i, i);
                 this.sfxs = this.sfxs.splice(i, i);
                 break;
             }
@@ -102,7 +116,42 @@ class AudioManager{
 
     endAllSound()
     {
-        
+        if(this.backgroundMusic != null)
+            this.backgroundMusic.stop();
+        this.backgroundMusic = null;
+        this.sfxs.forEach(sfx => {
+            sfx.stop();
+        });
+        sfxs = [];
+        this.sfxVolumes = [];
+    }
+
+    setMute(mute)
+    {
+        if(!mute)
+        {
+            console.log("BGM Volume: " + this.bgmVolume);
+            this.backgroundMusic.volume = this.bgmVolume;
+            // for(let i = 0; i < this.sfxs.length; i++)
+            // {
+            //     console.log("SFX " + i + " Volume: " + this.sfxVolumes[i]);
+            //     this.sfxs[i].volume = this.sfxVolumes[i];
+            // }
+        }
+        else
+        {
+            this.backgroundMusic.volume = 0;
+            // for(let i = 0; i < this.sfxs.length; i++)
+            // {
+            //     this.sfxs[i].volume = 0;
+            // }
+        }
+        this.muted = mute;
+    }
+
+    toggleMute()
+    {
+        this.setMute(!this.muted);
     }
 }
 

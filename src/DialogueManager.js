@@ -111,7 +111,7 @@ class DialogueManager
             text = this.preprocessText(text);
         }
         let textProgress = "";
-        AudioManager.getInstance(this.scene).addSfx('npcAudio', true, 1.5);
+        AudioManager.getInstance(this.scene).addSfx('npcAudio', 1, true, 1.5);
         for (let i = 0; i < text.length; i++){
             if(currDelay < delays.length && i+1 == delays[currDelay].charI)
             {
@@ -126,7 +126,7 @@ class DialogueManager
                 {
                     AudioManager.getInstance(this.scene).stopSfx('npcAudio');
                     while(!this.click || this.waitNextClick) await this.wait(1);
-                    AudioManager.getInstance(this.scene).addSfx('npcAudio', true, 1.5);
+                    AudioManager.getInstance(this.scene).addSfx('npcAudio', 1, true, 1.5);
                     textProgress = "";
                 }
             }
