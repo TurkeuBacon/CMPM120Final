@@ -8,13 +8,13 @@
     
     "lines": [
         {
-            "text": "It's a beautiful day today.",
+            "text": "Welcome to Home Repot!",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "Have you checked out Home Repot?",
+            "text": "We sell many appliances here. \n\n\n Something for any occasion!",
             "delays": [
                 {"charI": 14, "delay": 500}
             ],
@@ -22,16 +22,11 @@
             "item": null
         },
         {
-            "text": "They sell some pretty useful things there!",
-            "delays": [],
-            "repeat": false,
-            "item": null
-        },
-        {
-            "text": "I bought a watering can there yesterday. \n\n\n There's still a bunch left!",
+            "text": "We just got a new shipment of watering cans! \n\n\n They're state of the art.",
             "delays": [],
             "repeat": true,
             "item": null
         }
+        
     ]
 }

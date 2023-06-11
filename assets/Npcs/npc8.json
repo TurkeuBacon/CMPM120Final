@@ -1,0 +1,26 @@
+{
+    "x": 700,
+    "y": 900,
+
+    "scale": 1,
+
+    "texture": "npc7.png",
+    
+    "lines": [
+        {
+            "text": "Salutations! I love this park. Its so peaceful!",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "I usually come here to play Pokemon Go. \n\n\n It's my favorite game :).",
+            "delays": [
+                {"charI": 14, "delay": 500}
+            ],
+            "repeat": true,
+            "item": null
+        }
+        
+    ]
+}
