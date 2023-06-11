@@ -46,6 +46,7 @@ class IntroCutscene extends Phaser.Scene
         this.load.image('purpleBox', '/HUD/text_box_wacky_guy.png');
         this.loadAudio('purpleDAudio', 'purpleGuyTextAudio.mp3', 1);
         //this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
+        this.load.image('taskHub', '/HUD/task_hub.png');
 
         this.loadItem('researchTreeAssigned', '/Items/Metaphysical/researchTreeAssigned.json');
         this.load.image('JoystickBack', '/HUD/Jbase.png');

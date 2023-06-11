@@ -80,6 +80,8 @@ class Town extends Phaser.Scene
         this.load.spritesheet('musicOnOff', '/General/music_on_off.png', { frameWidth: 130, frameHeight: 128 });
         //CC On/Off
         this.load.spritesheet('CCOnOff', '/General/cc_on_off.png', { frameWidth: 130, frameHeight: 128 });
+        
+        this.load.image('taskHub', '/HUD/task_hub.png');
 
         //Purple Guy Stuff
         PurpleGuy.loadPurpleGuyData(this);
@@ -116,6 +118,29 @@ class Town extends Phaser.Scene
         AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', 0.2, true, true);
         
         this.purpleGuy = new PurpleGuy(this, 400, 500, this.cache.json.get('purpleGuyData'));
+        this.purpleGuy.playAnimation("wackadoodle");
+        this.add.tween({
+            targets: this.purpleGuy,
+            duration: 1000,
+            x: 300,
+            ease: "Circ.easeIn",
+            yoyo: true,
+            repeat: -1
+        });
+        this.add.tween({
+            targets: this.purpleGuy,
+            duration: 1000,
+            y: 400,
+            ease: "Circ.easeOut",
+            yoyo: true,
+            repeat: -1
+        });
+        this.add.tween({
+            targets: this.purpleGuy,
+            duration: 1200,
+            angle: 360,
+            repeat: -1
+        });
         //this.Jback = this.add.image(screenWidth/2, screenHeight/2, 'JoystickBack');
         //this.Jfront = this.add.image(screenWidth/2, screenHeight/2, 'JoystickHandle');
         //this.signImg = this.add.image(screenWidth/2, screenHeight/2, 'Sign');
