@@ -1,0 +1,7 @@
+{
+    "x": 193,
+    "y": 96,
+    "texture": "placetoplanttree.png",
+    "canPickup": true,
+    "extraText": "Planting the Tree!"
+}

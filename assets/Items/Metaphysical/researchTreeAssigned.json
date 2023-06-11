@@ -10,7 +10,11 @@
         "nextTask": {
             "itemKey": "Tree Seed",
             "text": "Go back in time and get the ancient seed!\n\n(Hint: Maybe its near the Town Center?...)",
-            "nextTask": null
+            "nextTask": {
+                "itemKey": "Plant Tree",
+                "text": "",
+                "nextTask": null
+            }
         }
     }
 }
