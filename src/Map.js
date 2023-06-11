@@ -2,8 +2,11 @@
 //implement Hitbox functionality
 import Hitbox from "./Hitbox.js";
 import Bounds from "./Bounds.js";
+import Sign from "./Sign.js";
+import Npc from "./Npc.js";
 class Map {
     constructor(scene, mapName, mapImage, group){
+        this.Sign = Sign;
         this.scene = scene;
         this.mapName = mapName;
         this.group = group;
@@ -11,6 +14,7 @@ class Map {
         this.visible = false;
         this.initialized = false;
         this.cm = this.scene.cameraManager;
+        
     }
     showMap(camX, camY){
         this.group.setVisible(true);
@@ -116,6 +120,12 @@ class Map {
                 this.addBounds(520, 170, 350, 90, "Present Day");
                     //House
                 this.addBounds(956, 760, 295, 90, "Present Day");
+                //NPC
+                this.addNPC('Susan');
+                this.addNPC('Janet');
+                this.addNPC('Gabe');
+                this.addNPC('Lovely');
+                //this.addNPC(1000, 750, 'girl5');
 
                 
                 break;
@@ -179,7 +189,7 @@ class Map {
                 this.addBounds(170,825,8,37,"Present Day");//Left House Couch Back
             //Bottom Right House present day interior
             //-25
-            this.addBounds(620,645,29,420,"Present Day");//Left House Left Bound
+                this.addBounds(620,645,29,420,"Present Day");//Left House Left Bound
                 this.addBounds(1085-15,645,29,420,"Present Day");//Left House Right Bound
                 this.addBounds(905-15,675,490,20,"Present Day");//Left House Upper Bound
                 this.addBounds(895-15,863,490,20,"Present Day");//Left House Lower Bound
@@ -189,7 +199,10 @@ class Map {
                 this.addBounds(795-15,850,30,30,"Present Day"); //Left House Flower Table / Middle wall lower section
                 this.addBounds(705-15,740,80,10,"Present Day");//Left House Bed
                 this.addBounds(970-15,825,8,37,"Present Day");//Left House Couch Back
-
+            //NPCS
+                this.addNPC('Oscar');
+                this.addNPC('Ron');
+                this.addNPC('Mayor');
 
 
 
@@ -201,6 +214,8 @@ class Map {
                 this.addBounds(1140, -520, 50, 1000, "Initial Park");
                 this.addBounds(530, -340, 2000, 50, "Initial Park");
                 this.addBounds(-100, 75, 50, 2000, "Initial Park");
+                //NPC
+                this.addNPC('Ryan');
                 break;
             case "1700s Park":
                 this.addHitbox(1160, 364, 20, 1000, "1700s", -193, 339, 0, 0, false, true);
@@ -367,10 +382,10 @@ class Map {
                  this.addBounds(970-15,825,8,37,"SixtiesInt");//Left House Couch Back
                 break;
             case "Sixties Park":
-                this.addBounds(443, 665, 2000, 20, "Initial Park");
-                this.addBounds(1140, -520, 50, 1000, "Initial Park");
-                this.addBounds(530, -340, 2000, 50, "Initial Park");
-                this.addBounds(-100, 75, 50, 2000, "Initial Park");
+                this.addBounds(443, 665, 2000, 20, "Sixties Park");
+                this.addBounds(1140, -520, 50, 1000, "Sixties Park");
+                this.addBounds(530, -340, 2000, 50, "Sixties Park");
+                this.addBounds(-100, 75, 50, 2000, "Sixties Park");
                 this.addHitbox(1160, 364, 20, 1000, "1960s", -193, 339, 0, 0, false, true);
                 break;
         }
@@ -383,6 +398,10 @@ class Map {
     addBounds(x, y, width, height, mapName){
         let bound = new Bounds (this.scene, x, y, width, height, mapName);
         this.group.add(bound); 
+    }
+    addNPC(name){
+        let npc = new Npc(this.scene, name);
+        this.group.add(npc);
     }
     getName(){
         return this.mapName;

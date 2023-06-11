@@ -13,6 +13,12 @@ class Item extends Phaser.GameObjects.Sprite
             if(this.canPickup && this.scene.physics.collide(this, this.scene.player))
             {
                 this.scene.player.addItem(this);
+                this.scene.dialogueManager.playDialogue({
+                    text: "You got the " + this.itemKey +"!",
+                    delay:[],
+                    repeat: false,
+                    item: null
+                });
             }
         });
 

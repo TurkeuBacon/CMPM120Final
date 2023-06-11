@@ -41,7 +41,7 @@ property (The direction the stick is pointing, represented as a string: "neutral
 */
 class TouchJoystick extends DirectionalInputDevice
 {
-    constructor(scene, touchArea, backRadius, stickRadius, stickMoveRadius, minForDirection)
+    constructor(scene, touchArea, backImg, stickImg, backRadius, stickRadius, stickMoveRadius, minForDirection)
     {
         super(scene);
         this.touchArea = touchArea; // The percentage of width and height that will trigger the joystick. (The joystick will always be triggered in the bottom left)
@@ -65,19 +65,15 @@ class TouchJoystick extends DirectionalInputDevice
         this.joystickElements =
                 {
                     "background":
-                        this.cm.addUI(this.scene.add.circle(
+                        this.cm.addUI(this.scene.add.image(
                             0,
                             0,
-                            backRadius,
-                            0x888888,
-                            .75)),
+                            backImg).setAlpha(0.75).setDisplaySize(backRadius*2, backRadius*2)),
                     "stick":
-                        this.cm.addUI(this.scene.add.circle(
+                        this.cm.addUI(this.scene.add.image(
                             0,
                             0,
-                            stickRadius,
-                            0xaaffaa,
-                            .5))
+                            stickImg).setAlpha(0.5).setDisplaySize(stickRadius*2, stickRadius*2)),
                 };
     }
 

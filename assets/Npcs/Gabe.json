@@ -1,20 +1,20 @@
 {
-    "x": 700,
-    "y": 900,
+    "x": 0,
+    "y": 500,
 
     "scale": 1,
 
-    "texture": "npc2.png",
+    "texture": "npc10.png",
     
     "lines": [
         {
-            "text": "I'm the mayor of this town.",
+            "text": "I ate too many cookies...",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "I do mayor things. \n\n\n What kind of mayor things?",
+            "text": "Why did I eat so many cookies...",
             "delays": [
                 {"charI": 14, "delay": 500}
             ],
@@ -22,17 +22,16 @@
             "item": null
         },
         {
-            "text": "I'll have you know my duties are very important. \n\n\n I manage things such as",
+            "text": "I feel sick...",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "blah blah blah blah blah \n\n\n blah blah blah",
+            "text": "But I love cookies so much... \n\n\n another would hurt...",
             "delays": [],
             "repeat": true,
             "item": null
         }
-        
     ]
 }

@@ -2,7 +2,7 @@ import Task from "./Task.js"
 
 class Player extends Phaser.GameObjects.Sprite
 {
-    constructor(scene, x, y, texture, frame, inputDevice)
+    constructor(scene, x, y, texture, frame, inputDevice, aKey)
     {
         super(scene, x, y, texture, frame);
         this.inventory = [];
@@ -16,22 +16,27 @@ class Player extends Phaser.GameObjects.Sprite
         this.sprintKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);  // Get key object
         this.inputDevice = inputDevice;
         let canvas = scene.sys.game.canvas;
-
-        this.interractionButton = this.scene.add.circle(canvas.width-200, canvas.height-200, 100, 0x0000ff, 1).setAlpha(0.5);
+        //we want to add a circle here
+        this.interractionButton = this.scene.add.sprite(canvas.width-200, canvas.height-170, aKey).setAlpha(1).setDisplaySize(200, 200);
         this.interractionButton.setInteractive();
         this.interractionButton.on('pointerdown', (pointer, gameObject) =>
         {
+            this.interractionButton.setFrame(1);
             this.scene.events.emit('playerInterractDown');
         });
         this.disableInput = false;
         this.scene.events.on('freezeInput', (freeze) => {
             this.disableInput = freeze;
-            this.interractionButton.setVisible(!freeze).setActive(!freeze);
+            this.interractionButton.setVisible(!freeze).setActive(!freeze).setFrame(0);
         });
-        // this.interractionButton.on('pointerup', (pointer, gameObject) =>
-        // {
-        //     this.scene.events.emit('playerInterractUp');
-        // });
+        this.interractionButton.on('pointerup', (pointer, gameObject) =>
+        {
+            this.interractionButton.setFrame(0);
+            this.scene.events.emit('playerInterractUp');
+        });
+        this.scene.input.on('pointerup', () => {
+            this.interractionButton.setFrame(0);
+        });
         this.scene.cameraManager.addUI(this.interractionButton);
 
         let taskBoxSize = {w: 400, h: 200}
@@ -43,7 +48,7 @@ class Player extends Phaser.GameObjects.Sprite
         scene.cameraManager.addUI(this.taskBox);
         scene.cameraManager.addUI(this.taskText);
 
-        this.setTask(new Task('testItem', "Find The Gun", null));
+        //this.setTask(new Task('testItem', "Find The Gun", null));
 
         this.anims.create(
             {
@@ -123,6 +128,7 @@ class Player extends Phaser.GameObjects.Sprite
                 this.verticalSpeed = 0;
                 this.horizontalSpeed = 0;
                 this.stop();
+                //this.stopOnFrame(this.anims.get(this.anims.getCurrentKey()).getFrameByProgress(0));
                 this.setFrame(0);
                 break;
             case "up":

@@ -67,6 +67,9 @@ class MapState {
             
         }
     }
+    getCurrentMapName(){
+        return this.currentMap.getName();
+    }
 
 }
 

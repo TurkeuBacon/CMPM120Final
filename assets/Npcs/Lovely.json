@@ -1,0 +1,18 @@
+{
+    "x": 625,
+    "y": 725,
+
+    "scale": 1,
+
+    "texture": "npc9.png",
+    
+    "lines": [
+        {
+            "text": "Huh? Why am I here?...\nWhy are you here?\n Oh! I know!.....\nWait... You don't look so good...",
+            "delays": [{"charI": 23, "delay": 1000}, {"charI": 42, "delay": 500}, {"charI": 55, "delay": 500}],
+            "repeat": true,
+            "item": null
+        }
+        
+    ]
+}

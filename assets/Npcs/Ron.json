@@ -1,20 +1,20 @@
 {
-    "x": 700,
-    "y": 900,
+    "x": 527,
+    "y": 119,
 
     "scale": 1,
 
-    "texture": "npc9.png",
+    "texture": "npc8.png",
     
     "lines": [
         {
-            "text": "Hello! I love reading books.",
+            "text": "Welcome to Home Repot!",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "There's a library on the left side of the Town Hall.",
+            "text": "We sell many appliances here. \n\n\n Something for any occasion!",
             "delays": [
                 {"charI": 14, "delay": 500}
             ],
@@ -22,10 +22,8 @@
             "item": null
         },
         {
-            "text": "I borrow all of my books from there!",
-            "delays": [
-                {"charI": 14, "delay": 500}
-            ],
+            "text": "We just got a new shipment of watering cans! \n\n\n They're state of the art.",
+            "delays": [],
             "repeat": true,
             "item": null
         }
