@@ -2,6 +2,8 @@ import MainMenu from "./scenes/MainMenu.js";
 import Town from "./scenes/Town.js";
 
 let config = {
+    width: 800,
+    height: 450,
     scale:{mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     },
