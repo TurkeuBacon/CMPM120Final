@@ -10,6 +10,9 @@ import Npc from '../Npc.js'
 import PurpleGuy from '../PurpleGuy.js'
 
 class Cinematic extends Phaser.Scene{
+    constructor(){
+        super('cinetitle');
+    }
     preload(){
         this.load.path = '../assets/';
         this.load.image('TitleArt', 'Scene_MainMenu/TitleArtPlaceholder.png');
@@ -55,9 +58,7 @@ class Cinematic extends Phaser.Scene{
                     duration:15000,
                     repeat:0,
         });
-        this.input.on('pointerdown',()=>{
-            this.scene.start('poop');
-        });
+        
     }
     
 }
