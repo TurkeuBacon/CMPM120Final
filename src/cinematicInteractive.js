@@ -1,8 +1,8 @@
 import MainMenu from "./scenes/MainMenu.js";
 import Town from "./scenes/Town.js";
 import Cinematic from "./cinematicscenes/CinematicScene.js";
-import C2 from "./cinematicscenes/CinematicScene2.js";
 import interactiveCinematic from "./cinematicscenes/iCinematic.js";
+import CinematicInteractive from "./cinematicscenes/iCinematicScene.js";
 
 let config = {
     mode: Phaser.Scale.FIT,
@@ -14,7 +14,7 @@ let config = {
         default: 'arcade',
         arcade: { debug: true }
     },
-    scene: [Cinematic,C2,interactiveCinematic],
+    scene: [CinematicInteractive,interactiveCinematic],
 }
 
 let game = new Phaser.Game(config);
