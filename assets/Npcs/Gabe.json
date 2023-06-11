@@ -1,6 +1,6 @@
 {
-    "x": 700,
-    "y": 900,
+    "x": 0,
+    "y": 500,
 
     "scale": 1,
 
@@ -25,7 +25,7 @@
             "text": "I feel sick...",
             "delays": [],
             "repeat": false,
-            "item": "testItem"
+            "item": null
         },
         {
             "text": "But I love cookies so much... \n\n\n another would hurt...",

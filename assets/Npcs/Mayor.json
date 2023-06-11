@@ -1,10 +1,10 @@
 {
-    "x": 700,
-    "y": 900,
+    "x": 1007,
+    "y": 225,
 
     "scale": 1,
 
-    "texture": "npc10.png",
+    "texture": "npc2.png",
     
     "lines": [
         {

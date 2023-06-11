@@ -1,0 +1,6 @@
+{
+    "x": 500,
+    "y": 550,
+    "texture": "water_pale.png",
+    "canPickup": true
+}

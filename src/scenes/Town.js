@@ -47,6 +47,9 @@ class Town extends Phaser.Scene
         this.load.image('presentDayFloor', '/Scene_PresentDay/PresentDay.png');
         this.load.image('Sign', '/General/TT_Sign.png');
         this.load.image('Phone','/General/phone.png');
+        this.load.image('JoystickBack', '/HUD/Jbase.png');
+        this.load.image('JoystickHandle', '/HUD/Jhandle.png');
+        this.load.spritesheet('Button', '/HUD/A_Button.png', { frameWidth: 68, frameHeight: 70});
         //Trees
         this.load.image('trees', '/Scene_PresentDay/trees.png');
         this.load.image ('trees1700s', '/Scene_1700s/trees1700.png');
@@ -86,14 +89,14 @@ class Town extends Phaser.Scene
         this.loadItem('testItem', '/Items/itemTest.json');
 
         
-        this.loadNpc('girl', '/Npcs/npc1.json');
-        this.loadNpc('girl2','/Npcs/npc2.json');
-        this.loadNpc('girl3','/Npcs/npc3.json');
-        this.loadNpc('girl4','/Npcs/npc4.json');
-        this.loadNpc('girl5','/Npcs/npc5.json');
-        this.loadNpc('girl6','/Npcs/npc6.json');
-        this.loadNpc('girl7','/Npcs/npc7.json');
-        this.loadNpc('girl8','/Npcs/npc8.json');
+        this.loadNpc('Susan','/Npcs/Susan.json');
+        this.loadNpc('Janet','/Npcs/Janet.json');
+        this.loadNpc('Gabe','/Npcs/Gabe.json');
+        this.loadNpc('Oscar','/Npcs/Oscar.json');
+        this.loadNpc('Ron','/Npcs/Ron.json');
+        this.loadNpc('Mayor','/Npcs/Mayor.json');
+        this.loadNpc('Ryan','/Npcs/Ryan.json');
+        this.loadNpc('Lovely','/Npcs/Lovely.json');
     }
     
     create()
@@ -112,11 +115,12 @@ class Town extends Phaser.Scene
         AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', 0.2, true, true);
         
         this.purpleGuy = new PurpleGuy(this, 400, 500, this.cache.json.get('purpleGuyData'));
-        //trees
-        this.signImg = this.add.image(screenWidth/2, screenHeight/2, 'Sign');
-        this.signImg.depth = 3;
-        //this.phoneImg = this.add.image(screenWidth/2, screenHeight/2, 'Phone');
-        //this.phoneImg.depth = 3;
+        //this.Jback = this.add.image(screenWidth/2, screenHeight/2, 'JoystickBack');
+        //this.Jfront = this.add.image(screenWidth/2, screenHeight/2, 'JoystickHandle');
+        //this.signImg = this.add.image(screenWidth/2, screenHeight/2, 'Sign');
+        //this.signImg.depth = 3;
+        this.phoneImg = this.add.image(screenWidth/2, screenHeight + 500, 'Phone');
+        this.phoneImg.depth = 3;
         this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
         this.trees.depth = 3;
         this.trees.alpha = 1;
@@ -154,26 +158,19 @@ class Town extends Phaser.Scene
         //Interior
         this.presentDayIntBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayInt');
         this.earlyIntBG = this.add.image(screenWidth/2, screenHeight/2, '1700sInt');
-        this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 150, 75, 125, 0.42);
-        this.player = new Player(this, 500, 500, 'player', 1, this.joystick);
+        this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 'JoystickBack', 'JoystickHandle',  150, 75, 125, 0.42);
+        this.player = new Player(this, 1014, 351, 'player', 1, this.joystick, 'Button');
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
-        this.phone = new Phone (this, this.phoneImg, this.cameraManager);
-        this.Sign = new Sign (this, 1090, 324, this.signImg, this.phone);
-        this.testNpc = new Npc(this, 'girl');
-        this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
-        this.testNpc2 = new Npc(this, 'girl2').setPosition(1050,300);
-        this.testNpc3 = new Npc(this,'girl3').setPosition(700,200);
-        this.testNpc4 = new Npc(this,'girl4').setPosition(0,500);
-        this.testNpc5 = new Npc(this,'girl5').setPosition(1000,750); //this one is inside the right house
-        this.testNpc6 = new Npc(this,'girl6').setPosition(550,150); //Home Repot clerk
-        this.testNpc7 = new Npc(this,'girl7').setPosition(1007,225);//present day mayor
-        this.testNpc8 = new Npc(this, 'girl8').setPosition(300,300);//pokemon go-er
-
-
-
-
-        this.testItem = new Item(this, 'testItem');
+        //this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
+        //this.testNpc2 = new Npc(this, 'girl2').setPosition(1050,300);
+        //this.testNpc3 = new Npc(this,'girl3').setPosition(700,200);
+        //this.testNpc4 = new Npc(this,'girl4').setPosition(0,500);
+        //this.testNpc5 = new Npc(this,'girl5').setPosition(1000,750); //this one is inside the right house
+        //this.testNpc6 = new Npc(this,'girl6').setPosition(550,125); //Home Repot clerk
+        //this.testNpc7 = new Npc(this,'girl7').setPosition(1007,225);//present day mayor
+        //this.testNpc8 = new Npc(this, 'girl8').setPosition(300,300);//pokemon go-er
+        //this.testItem = new Item(this, 'testItem');
         //this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
         //this.testNpc.depth = 2;
         //this.testNpc.playDialogue();
@@ -191,19 +188,11 @@ class Town extends Phaser.Scene
         //Present Day Group
         this.group1.add(this.trees);
         this.group1.add(this.buildingPresent);
-        this.group1.add(this.testNpc);
-        this.group1.add(this.npc2);
-        this.group1.add(this.testNpc2);
-        this.group1.add(this.testNpc3);
-        this.group1.add(this.testNpc4);
         this.group1.add(this.purpleGuy);
         //Present Day interior Group
-        this.group4.add(this.testNpc5);
-        this.group4.add(this.testNpc6);
-        this.group4.add(this.testNpc7);
         //Present Day Park Group
         this.group5.add(this.treesRight);
-        this.group5.add(this.testNpc8);
+        //this.group5.add(this.testNpc8);
         //1700s group
         this.group3.add(this.trees1700s);
         this.group3.add(this.building1700s);
@@ -221,6 +210,11 @@ class Town extends Phaser.Scene
         this.sixtiesPark = new Map (this, "Sixties Park", this.initalParkBG, this.group9)
         this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.earlyPark, this.initialPark, this.sixtiesPark, this.presentDayInt, this.earlyInt, this.sixtiesInt);
         this.mapManager.initialize();
+        this.phone = new Phone (this, this.phoneImg, this.cameraManager, screenHeight/2);
+        this.Sign = new Sign (this, 1090, 400, 'Sign', this.phone);
+        this.group1.add(this.Sign);
+        this.group2.add(this.Sign);
+        this.group3.add(this.Sign);
         //this.cameraManager.playerCamera.setBounds(this.PresentDayBG.x - this.PresentDayBG.width/2, this.PresentDayBG.y - this.PresentDayBG.height/2, this.PresentDayBG.width, this.PresentDayBG.height);
         //used to trigger a test on mapstate transitions
         this.input.keyboard.on('keydown-X', function(event) {
@@ -255,11 +249,14 @@ class Town extends Phaser.Scene
 
     update(time, delta)
     {
+        
         // this.joystick.update();
         // this.player.update();
         //console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
-        //console.log("x" + this.player.x);
-        //console.log("y" + this.player.y);
+        console.log("x" + this.player.x);
+        console.log("y" + this.player.y);
+        //console.log(pointer.worldX);
+        //console.log(pointer.worldY);
     }
 }
 

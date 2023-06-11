@@ -1,26 +1,39 @@
-class Sign {
-    constructor(scene, x, y, signImage, phone){
+import Phone from "./Phone.js";
+class Sign extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, signkey, phone){
+        super(scene, x, y, signkey, 0);
         this.scene = scene;
         this.phone = phone;
-        this.sign = signImage;
-        this.scene.physics.add.existing(this.sign);
-        this.sign.body.setImmovable(true);
-        this.sign.x = x;
-        this.sign.y = y;
+        this.sign = signkey;
+        this.scene.add.existing(this);
+        this.alpha = 1;
+        this.depth = 3;
+        this.scene.physics.add.existing(this);
+        this.body.setImmovable(true);
         this.player = this.scene.player;
-        this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
+        //this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
+        if(this.scene.physics.overlap(this.player, this)){
+            console.log('hi');
+        }
         this.scene.events.on('playerInterractDown', () => {
-            if(this.scene.physics.overlap(this.player, this.sign)){
-
+            if(this.scene.physics.overlap(this.player, this)){
+                this.phone.displayPhone();
+                this.scene.events.emit('freezeInput', true);
             }
         })
         
     }
+    disappear(){
+        this.scene.physics.world.disable(this.sign);
+        this.sign.alpha = 0;
+    }
+    appear(){
+        this.scene.physics.world.enable(this.sign);
+        this.sign.alpha = 1;
+    }
     update (time, delta)
     {
-        if(this.scene.physics.overlap(this.player, this.sign)){
-            
-        }
+        
         
     }
 
