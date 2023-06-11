@@ -17,7 +17,7 @@ class Player extends Phaser.GameObjects.Sprite
         this.inputDevice = inputDevice;
         let canvas = scene.sys.game.canvas;
         //we want to add a circle here
-        this.interractionButton = this.scene.add.sprite(canvas.width-200, canvas.height-170, aKey).setAlpha(1).setDisplaySize(200, 200);
+        this.interractionButton = this.scene.add.sprite(canvas.width-200, canvas.height-170, aKey).setAlpha(1).setDisplaySize(175, 175);
         this.interractionButton.setInteractive();
         this.interractionButton.on('pointerdown', (pointer, gameObject) =>
         {
@@ -39,16 +39,19 @@ class Player extends Phaser.GameObjects.Sprite
         });
         this.scene.cameraManager.addUI(this.interractionButton);
 
-        let taskBoxSize = {w: 400, h: 200}
-        this.taskBox = scene.add.rectangle(canvas.width-taskBoxSize.w, 0, taskBoxSize.w, taskBoxSize.h, 0x00aaff, 0.5).setOrigin(0, 0);
-        this.taskText = scene.add.text(canvas.width - this.taskBox.width/2, this.taskBox.height/2, "No Task",{
-            fontSize: '30px',
-            wordWrap: {width: this.taskBox.width-10}
+        this.taskBox = scene.add.image(0, 0, 'taskHub', 1);
+        this.taskBox.setPosition(canvas.width-this.taskBox.displayWidth, 0).setOrigin(0, 0);
+        //this.taskBox = scene.add.rectangle(canvas.width-taskBoxSize.w, 0, taskBoxSize.w, taskBoxSize.h, 0x00aaff, 0.5).setOrigin(0, 0);
+        this.taskText = scene.add.text(canvas.width - this.taskBox.displayWidth/2, this.taskBox.displayHeight/2, "No Task",{
+            fontSize: '25px',
+            wordWrap: {width: this.taskBox.displayWidth-10}
         }).setOrigin(.5, .5);
-        scene.cameraManager.addUI(this.taskBox);
-        scene.cameraManager.addUI(this.taskText);
+        this.taskText.alpha = 0;
+        this.taskBox.alpha = 0;
+        this.scene.cameraManager.addUI(this.taskBox);
+        this.scene.cameraManager.addUI(this.taskText);
 
-        this.setTask(new Task('TreeBook', "Research the extinct tree.\n\nThere could be some info at the Library", null));
+        //this.setTask(new Task('TreeBook', "Research the extinct tree.\n\nThere could be some info at the Library", null));
 
         this.anims.create(
             {
@@ -86,10 +89,19 @@ class Player extends Phaser.GameObjects.Sprite
     setTask(task) {
         if(task == null || task == undefined)
         {
-            this.taskText.setText("No Task");
+            this.scene.add.tween({
+                targets: [this.taskBox, this.taskText],
+                duration: 1000,
+                alpha: 0
+            });
         }
         else
         {
+            this.scene.add.tween({
+                targets: [this.taskBox, this.taskText],
+                duration: 1000,
+                alpha: 1
+            });
             console.log("Setting Task: " + task.text);
             this.taskText.setText(task.text);
             this.task = task;
@@ -102,13 +114,20 @@ class Player extends Phaser.GameObjects.Sprite
         this.inventory.push(item);
         item.setVisible(false);
         item.setActive(false);
+        this.scene.cameraManager.addUI(item);
         this.scene.physics.world.disable(item);
-        if(this.task.itemKey == item.itemKey)
+        if(this.task != null && this.task.itemKey == item.itemKey)
         {
             console.log("next task");
             //Todo: task completed stuff
             this.setTask(this.task.nextTask);
         }
+        else if(item.task != null && item.task != undefined)
+        {
+            console.log("PLEASE");
+            this.setTask(Task.loadTask(item.task));
+        }
+        this.placeItems();
     }
     
     placeItems()
