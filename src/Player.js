@@ -17,7 +17,7 @@ class Player extends Phaser.GameObjects.Sprite
         this.inputDevice = inputDevice;
         let canvas = scene.sys.game.canvas;
         //we want to add a circle here
-        this.interractionButton = this.scene.add.sprite(canvas.width-200, canvas.height-170, aKey).setAlpha(1).setDisplaySize(175, 175);
+        this.interractionButton = this.scene.add.sprite(canvas.width-200, canvas.height-170, aKey).setAlpha(1).setDisplaySize(200, 200);
         this.interractionButton.setInteractive();
         this.interractionButton.on('pointerdown', (pointer, gameObject) =>
         {
@@ -47,7 +47,7 @@ class Player extends Phaser.GameObjects.Sprite
             fontSize: '25px',
             wordWrap: {width: this.taskBox.displayWidth-10}
         }).setOrigin(.5, .5);
-        this.taskText.alpha = 0;
+        this.task.alpha = 0;
         scene.cameraManager.addUI(this.taskBox);
         scene.cameraManager.addUI(this.taskText);
 
@@ -112,11 +112,9 @@ class Player extends Phaser.GameObjects.Sprite
     {
         console.log("Aquired: " + item.itemKey);
         this.inventory.push(item);
-        item.setVisible(!item.metaphysical);
+        item.setVisible(false);
         item.setActive(false);
-        this.scene.cameraManager.addUI(item);
         this.scene.physics.world.disable(item);
-        this.placeItems();
         if(this.task != null && this.task.itemKey == item.itemKey)
         {
             console.log("next task");
@@ -127,68 +125,6 @@ class Player extends Phaser.GameObjects.Sprite
         {
             this.setTask(item.task);
         }
-    }
-
-    placeItems()
-    {
-        let itemSize = 48;
-        let itemCount = 0;
-        let nextXOffset = 0;
-        let nextYOffset = 10;
-        this.inventory.forEach(element => {
-            if(!element.metaphysical)
-            {
-                element.setVisible(true);
-                element.setOrigin(0, 0).setPosition(this.taskBox.x + nextXOffset, this.taskBox.displayHeight + nextYOffset).setDisplaySize(itemSize, itemSize).setDepth(1);
-                nextXOffset += (10 + itemSize);
-                if(nextXOffset > (this.taskBox.displayWidth - itemSize - 10))
-                {
-                    nextXOffset = 0;
-                    nextYOffset += itemSize + 10;
-                }
-                itemCount++;
-            }
-        });
-    }
-
-    hideInventory()
-    {
-        this.inventory.forEach(element => {
-        if(!element.metaphysical)
-        {
-            element.setVisible(false);
-        }
-    });
-    }
-
-    hasItem(itemKey)
-    {
-        let returnVal = false;
-        this.inventory.forEach(element => {
-            console.log("Item: " + element.itemKey + " | " + itemKey + ": " + (element.itemKey == itemKey));
-            if(element.itemKey == itemKey)
-            {
-                console.log("returning true");
-                returnVal = true;
-                return true;
-            }
-        });
-        return returnVal;
-    }
-
-    removeItem(itemKey)
-    {
-        for(let i = 0; i < this.inventory.length; i++)
-        {
-            if(this.inventory[i].itemKey == itemKey)
-            {
-                let item = this.inventory[i];
-                this.inventory = this.inventory.splice(i, i);
-                item.destroy();
-                break;
-            }
-        }
-        this.placeItems();
     }
     
     update(){
@@ -202,16 +138,15 @@ class Player extends Phaser.GameObjects.Sprite
             multiplier = 4;
         }
 
-        console.log();
         switch(this.inputDevice.direction)
         {
             case "neutral":
-                this.verticalSpeed = 0;
-                this.horizontalSpeed = 0;
                 if(!this.disableInput)
                 {
-                    if(this.anims.currentAnim != null) this.anims.setCurrentFrame(this.anims.currentAnim.getFrameByProgress(1));
-                    this.anims.stop();
+                    this.verticalSpeed = 0;
+                    this.horizontalSpeed = 0;
+                    this.stop();
+                    this.setFrame(0);
                 }
                 break;
             case "up":

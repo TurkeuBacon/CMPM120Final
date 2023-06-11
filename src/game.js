@@ -1,7 +1,8 @@
 import MainMenu from "./scenes/MainMenu.js";
 import Town from "./scenes/Town.js";
 import IntroCutscene from "./scenes/IntroCutscene.js";
-import Credits from "./scenes/Credits.js";
+import Credits from './scenes/Credits.js';
+
 let config = {
 //     width: 1280,
 //     height: 720,
