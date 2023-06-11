@@ -4,7 +4,7 @@ class Phone {
         this.phone = phoneImage;
         //this.phone.alpha = 0;
         this.cm = cameraManager;
-        this.cm.addUI(this.phone);
+        //this.cm.addUI(this.phone);
     }
 }
 
