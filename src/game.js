@@ -15,7 +15,7 @@ let config = {
         default: 'arcade',
         //arcade: { debug: true }
     },
-    scene: [MainMenu, IntroCutscene, Town],
+    scene: [MainMenu, IntroCutscene, Town, credits],
 }
 
 let game = new Phaser.Game(config);

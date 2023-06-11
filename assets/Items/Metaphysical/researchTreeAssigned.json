@@ -9,7 +9,7 @@
         "text": "  Research the extinct   tree.\n\n Try talking to people    around the town!",
         "nextTask": {
             "itemKey": "Tree Seed",
-            "text": "Go back in time and get the ancient seed!\n\n(Hint: Maybe its near the Town Center)",
+            "text": "Go back in time and get the ancient seed!\n\n(Hint: Maybe its near the Town Center?...)",
             "nextTask": null
         }
     }

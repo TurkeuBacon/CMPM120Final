@@ -5,7 +5,7 @@
     "scale": 1,
 
     "texture": "npc2.png",
-    
+    "jumpItem": {"itemKey": "Tree Book", "lineNumber": 4},
     "lines": [
         {
             "text": "I'm the mayor of this town.",
@@ -27,6 +27,12 @@
         },
         {
             "text": "blah blah blah blah blah \n\n\n blah blah blah",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        },
+        {
+            "text": "Ohohoh, you have the book!",
             "delays": [],
             "repeat": true,
             "item": null

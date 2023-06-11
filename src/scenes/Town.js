@@ -91,6 +91,7 @@ class Town extends Phaser.Scene
 
         this.loadItem('Water Can', '/Items/waterCan.json');
         this.loadItem('Tree Book', '/Items/TreeBook.json');
+        this.loadItem('Tree Seed', '/Items/Seed.json');
 
         
         this.loadNpc('Susan','/Npcs/Susan.json');
@@ -289,8 +290,8 @@ class Town extends Phaser.Scene
         // this.joystick.update();
         // this.player.update();
         //console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
-        //console.log("x" + this.player.x);
-        //console.log("y" + this.player.y);
+        console.log("Player: (" + this.player.x + ", " + this.player.y + ")");
+        // console.log("y" + this.player.y);
         //console.log(pointer.worldX);
         //console.log(pointer.worldY);
     }

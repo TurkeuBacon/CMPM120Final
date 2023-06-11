@@ -9,6 +9,7 @@ class Npc extends Phaser.GameObjects.Sprite
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setImmovable(true);
+        this.jumpItem = json.jumpItem;
         scene.events.on('playerInterractDown', ()=>{
             if(this.scene.physics.collide(this, this.scene.player))
             {
@@ -35,6 +36,12 @@ class Npc extends Phaser.GameObjects.Sprite
 
     playDialogue()
     {
+        console.log(this.scene.player.hasItem(this.jumpItem.itemKey));
+        if(this.jumpItem != undefined && this.scene.player.hasItem(this.jumpItem.itemKey))
+        {
+            console.log("Has Item");
+            this.currentLine = this.jumpItem.lineNumber;
+        }
         if(this.dialogueLines.length < 1)
         {
             console.error("Empty Dialogue List");
@@ -45,6 +52,7 @@ class Npc extends Phaser.GameObjects.Sprite
             console.error("No Dialogue Lines Left");
             return false;
         }
+
         let success = this.scene.dialogueManager.playDialogue(this.dialogueLines[this.currentLine]);
         if(success && !this.dialogueLines[this.currentLine].repeat)
         {

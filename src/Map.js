@@ -256,6 +256,7 @@ class Map {
                 this.addBounds(956, 760, 295, 90, "1700s");
                 this.addNPC('FetchFirst1700s');
                 this.addNPC('FetchSecond1700s');
+                this.addItem('Tree Seed');
                 break;
             case "1700sInt":
                 this.addHitbox(805, 295, 50, 20, "1700s", 518, 240);

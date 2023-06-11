@@ -40,20 +40,11 @@ class DialogueManager
         this.dialogueBoxContainer.alpha = 1;
         this.purpleDialogueBox.alpha = purple;
         this.dialogueBox.alpha = !purple;
-        if(dialogue.requiredItem != undefined && dialogue.requiredItem != null && !this.scene.player.hasItem(dialogue.requiredItem))
-        {
-            this.writeDialogue(dialogue.altText, dialogue.altDelays, preprocess, dialogue.altItem, purple, onComplete);
-            this.scene.events.emit('freezeInput', true);
-
-            return true;
-        }
-        else
-        {
-            this.writeDialogue(dialogue.text, dialogue.delays, preprocess, dialogue.item, purple, onComplete);
-            this.scene.events.emit('freezeInput', true);
-
-            return false;
-        }
+        
+        this.writeDialogue(dialogue.text, dialogue.delays, preprocess, dialogue.item, purple, onComplete);
+        this.scene.events.emit('freezeInput', true);
+        
+        return true;
     }
 
     onDialogueComplete(onComplete=()=>{})

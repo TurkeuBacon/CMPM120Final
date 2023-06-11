@@ -1,0 +1,47 @@
+{
+    "x": 130,
+    "y": 139,
+
+    "scale": 1,
+
+    "texture": "npc11.png",
+    
+    "lines": [
+        {
+            "text": "Oh a seed you ask for? Well I'll have you know that I am also looking for a seed. Lets be rivals!!!!!!!",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "no? oh. alright. we don't have to be rivals.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "My friend said he stashed it behind the Town Hall.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Sorry for wanting to start an artificial rivalry.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "That's just who I am, but deep down I love everyone.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Do you... By chance wanna go out? ;)",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        }
+    ]
+}
