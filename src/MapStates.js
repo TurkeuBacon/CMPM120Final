@@ -5,10 +5,10 @@ import Map from "./Map.js";
 //Interiors will be Maps (Will only contain PresentInterior for testing)
     
 class MapState {
-    constructor(scene, playerCamera, player, map1700, map1960, mapPresent, initalPark, presentInt, earlyInt){
+    constructor(scene, playerCamera, player, map1700, map1960, mapPresent, initialPark, park1700s, park1960s, presentInt, earlyInt, sixtiesInt){
         this.playerCamera = playerCamera;
         this.player = player;
-        this.maps = [map1700, map1960, mapPresent, initalPark, presentInt, earlyInt];
+        this.maps = [map1700, map1960, mapPresent, initialPark, park1700s, park1960s, presentInt, earlyInt, sixtiesInt];
         this.currentMap = this.mapPresent;
         this.scene = scene;
     }
