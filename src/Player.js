@@ -47,7 +47,7 @@ class Player extends Phaser.GameObjects.Sprite
             fontSize: '25px',
             wordWrap: {width: this.taskBox.displayWidth-10}
         }).setOrigin(.5, .5);
-        this.taskxxxxxxxxxxxxxxxxxxxxxxxxxxx.alpha = 0;
+        this.task.alpha = 0;
         scene.cameraManager.addUI(this.taskBox);
         scene.cameraManager.addUI(this.taskText);
 
