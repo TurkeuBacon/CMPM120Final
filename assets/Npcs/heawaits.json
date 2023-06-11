@@ -1,0 +1,43 @@
+{
+    "x": 1038,
+    "y": 821,
+
+    "scale": 1,
+
+    "texture": "npc3.png",
+    
+    "lines": [
+        {
+            "text": "Paradox...",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "My wife, she wants to buy this home.",
+            "delays": [
+                {"charI": 6, "delay": 30}
+            ],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "I love her, I would do anything for her... \n I just want the best for us.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "I just want the best for us.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "us.",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        }
+    ]
+}

@@ -121,9 +121,9 @@ class AudioManager{
             this.backgroundMusic.stop();
         this.backgroundMusic = null;
         this.sfxs.forEach(sfx => {
-            sfx.stop();
+            this.sfx.stop();
         });
-        sfxs = [];
+        this.sfxs = [];
         this.sfxVolumes = [];
     }
 

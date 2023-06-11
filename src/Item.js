@@ -14,8 +14,8 @@ class Item extends Phaser.GameObjects.Sprite
             {
                 this.scene.player.addItem(this);
                 this.scene.dialogueManager.playDialogue({
-                    text: "You got the " + this.itemKey +"!",
-                    delay:[],
+                    text: "You got a " + this.itemKey +"!",
+                    delays:[],
                     repeat: false,
                     item: null
                 });

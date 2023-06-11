@@ -4,6 +4,7 @@ import Hitbox from "./Hitbox.js";
 import Bounds from "./Bounds.js";
 import Sign from "./Sign.js";
 import Npc from "./Npc.js";
+import Item from "./Item.js";
 class Map {
     constructor(scene, mapName, mapImage, group){
         this.Sign = Sign;
@@ -203,7 +204,8 @@ class Map {
                 this.addNPC('Oscar');
                 this.addNPC('Ron');
                 this.addNPC('Mayor');
-
+            //Items
+                this.addItem('Water Can');
 
 
                 break;
@@ -402,6 +404,10 @@ class Map {
     addNPC(name){
         let npc = new Npc(this.scene, name);
         this.group.add(npc);
+    }
+    addItem(name){
+        let item = new Item(this.scene, name);
+        this.group.add(item);
     }
     getName(){
         return this.mapName;

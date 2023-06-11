@@ -103,7 +103,7 @@ class Player extends Phaser.GameObjects.Sprite
         item.setVisible(false);
         item.setActive(false);
         this.scene.physics.world.disable(item);
-        if(this.task.itemKey == item.itemKey)
+        if(this.task != null && this.task.itemKey == item.itemKey)
         {
             console.log("next task");
             //Todo: task completed stuff

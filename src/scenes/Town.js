@@ -84,7 +84,7 @@ class Town extends Phaser.Scene
 
         this.load.image('fsbutton','/HUD/fullscreen_button.png');
 
-        this.loadItem('testItem', '/Items/itemTest.json');
+        this.loadItem('Water Can', '/Items/waterCan.json');
 
         
         this.loadNpc('Susan','/Npcs/Susan.json');
@@ -95,6 +95,7 @@ class Town extends Phaser.Scene
         this.loadNpc('Mayor','/Npcs/Mayor.json');
         this.loadNpc('Ryan','/Npcs/Ryan.json');
         this.loadNpc('Lovely','/Npcs/Lovely.json');
+        this.loadNpc('Heawaits','/Npc/heawaits.json');
     }
     
     create()
@@ -168,7 +169,7 @@ class Town extends Phaser.Scene
         //this.testNpc6 = new Npc(this,'girl6').setPosition(550,125); //Home Repot clerk
         //this.testNpc7 = new Npc(this,'girl7').setPosition(1007,225);//present day mayor
         //this.testNpc8 = new Npc(this, 'girl8').setPosition(300,300);//pokemon go-er
-        //this.testItem = new Item(this, 'testItem');
+        //this.waterCan = new Item(this, 'Water Can');
         //this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
         //this.testNpc.depth = 2;
         //this.testNpc.playDialogue();
