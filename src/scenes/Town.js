@@ -207,7 +207,7 @@ class Town extends Phaser.Scene
         //Interior
         this.presentDayIntBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayInt');
         this.earlyIntBG = this.add.image(screenWidth/2, screenHeight/2, '1700sInt');
-        this.joystick = new TouchJoystick(this, {'width': 0.33, 'height': .5}, 100, 50, 75, 0.5);
+        this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 150, 75, 125, 0.42);
         this.player = new Player(this, 500, 500, 'player', 1, this.joystick);
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
