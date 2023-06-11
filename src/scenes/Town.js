@@ -31,11 +31,11 @@ class Town extends Phaser.Scene
             this.load.spritesheet(key + 'Texture', '/Npcs/NpcTextures/' + data.texture, { frameWidth: 16, frameHeight: 32});
         }, this);
     }
-    loadAudio(audioKey, audioPath, volume=1)
+    loadAudio(audioKey, audioPath)
     {
         this.load.audio(audioKey, audioPath);
         this.load.on("filecomplete-audio-" + audioKey, function (key, type, data) {
-            AudioManager.getInstance(this).addAudio(key, volume);
+            AudioManager.getInstance(this).addAudio(key);
         }, this);
     }
 
@@ -103,7 +103,7 @@ class Town extends Phaser.Scene
 
         this.dialogueManager = new DialogueManager(this, 'dialogueBox');
 
-        AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', true, true);
+        AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', 0.2, true, true);
 
         let purpleGuyData = 
         {
