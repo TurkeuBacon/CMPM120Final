@@ -13,7 +13,7 @@ let config = {
     backgroundColor: 0x00000,
     physics: {
         default: 'arcade',
-        arcade: { debug: false }
+        arcade: { debug: true }
     },
     scene: [MainMenu, IntroCutscene, Town],
 }

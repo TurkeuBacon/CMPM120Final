@@ -61,6 +61,15 @@ class AudioManager{
         return false;
     }
 
+    endBGM()
+    {
+        if(this.backgroundMusic != null)
+        {
+            this.backgroundMusic.stop();
+            this.backgroundMusic = null;
+        }
+    }
+
     addSfx(audioKey, volume, loop=true, rate=1, alone=false, priority=false)
     {
         if(!(audioKey in this.audioList))

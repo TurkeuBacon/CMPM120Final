@@ -165,6 +165,7 @@ class Town extends Phaser.Scene
         this.earlyIntBG = this.add.image(screenWidth/2, screenHeight/2, '1700sInt');
         this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 'JoystickBack', 'JoystickHandle',  150, 75, 125, 0.42);
         this.player = new Player(this, 1014, 351, 'player', 1, this.joystick, 'Button');
+        this.player.addItem(new Item(this, 'researchTreeAssigned'));
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
         //this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
