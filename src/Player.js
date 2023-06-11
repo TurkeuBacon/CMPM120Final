@@ -6,7 +6,7 @@ class Player extends Phaser.GameObjects.Sprite
     {
         super(scene, x, y, texture, frame);
         this.inventory = [];
-        this.playerSpeed = 100;
+        this.playerSpeed = 150;
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setImmovable(false);
@@ -48,7 +48,7 @@ class Player extends Phaser.GameObjects.Sprite
         scene.cameraManager.addUI(this.taskBox);
         scene.cameraManager.addUI(this.taskText);
 
-        this.setTask(new Task('TreeBook', "Research the extinct tree.\n\nThere could be some info at the Library", null));
+        this.setTask(null);
 
         this.anims.create(
             {
@@ -87,9 +87,13 @@ class Player extends Phaser.GameObjects.Sprite
         if(task == null || task == undefined)
         {
             this.taskText.setText("No Task");
+            this.taskBox.setAlpha(0);
+            this.taskText.setAlpha(0);
         }
         else
         {
+            this.taskBox.setAlpha(1);
+            this.taskText.setAlpha(1);
             console.log("Setting Task: " + task.text);
             this.taskText.setText(task.text);
             this.task = task;
@@ -108,6 +112,10 @@ class Player extends Phaser.GameObjects.Sprite
             console.log("next task");
             //Todo: task completed stuff
             this.setTask(this.task.nextTask);
+        }
+        else if(item.task != undefined && item.task != null)
+        {
+            this.setTask(item.task);
         }
     }
     

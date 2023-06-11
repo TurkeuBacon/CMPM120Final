@@ -33,25 +33,26 @@ class DialogueManager
         this.scene.input.on('pointerup', ()=>{ this.click = false; this.waitNextClick = false; this.framesClicked = 0; });
     }
     
-    playDialogue(dialogue, preprocess=true, purple=false)
+    playDialogue(dialogue, preprocess=true, purple=false, onComplete=()=>{})
     {
         if(this.playing) return false;
         this.playing = true;
         this.dialogueBoxContainer.alpha = 1;
         this.purpleDialogueBox.alpha = purple;
         this.dialogueBox.alpha = !purple;
-        this.writeDialogue(dialogue.text, dialogue.delays, preprocess, dialogue.item, purple);
-        this.scene.events.emit('freezeInput', true );
+        this.writeDialogue(dialogue.text, dialogue.delays, preprocess, dialogue.item, purple, onComplete);
+        this.scene.events.emit('freezeInput', true);
 
         return true;
     }
 
-    onDialogueComplete()
+    onDialogueComplete(onComplete=()=>{})
     {
         console.log("dialogue complete");
         this.playing = false;
         this.scene.events.emit('freezeInput', false );
         this.dialogueBoxContainer.alpha = 0;
+        onComplete();
     }
 
     stopDialogue()
@@ -104,7 +105,7 @@ class DialogueManager
         return outputText;
     }
 
-    async writeDialogue(text, delays, preprocess, item=null, purple=false){
+    async writeDialogue(text, delays, preprocess, item=null, purple=false, onComplete=()=>{}){
         let lineCount = 0;
         let currDelay = 0;
         let delayTime = 50;
@@ -154,7 +155,7 @@ class DialogueManager
             this.scene.player.addItem(new Item(this.scene, item));
         }
         while(!this.click || this.waitNextClick) await this.wait(1);
-        this.onDialogueComplete();
+        this.onDialogueComplete(onComplete);
     }
 }
 

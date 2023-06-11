@@ -1,0 +1,12 @@
+{
+    "x": 697,
+    "y": 135,
+    "texture": "itemTest.png",
+    "canPickup": true,
+    "metaphysical": true,
+    "task": {
+        "itemKey": "treeResearchCompleted",
+        "text": "Research the extinct tree.\n\nThere could be some info at the Library",
+        "nextTask": null
+    }
+}

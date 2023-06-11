@@ -12,6 +12,14 @@ class IntroCutscene extends Phaser.Scene
         super('introCutscene');
     }
 
+    loadItem(itemKey, itemPath)
+    {
+        this.load.json(itemKey, itemPath);
+        this.load.on("filecomplete-json-" + itemKey, function (key, type, data) {
+            this.load.image(key + 'Texture', '/Items/ItemTextures/' + data.texture);
+        }, this);
+    }
+
     loadAudio(audioKey, audioPath)
     {
         this.load.audio(audioKey, audioPath);
@@ -37,7 +45,12 @@ class IntroCutscene extends Phaser.Scene
         this.load.image('dialogueBox', '/HUD/text_box.png');
         this.load.image('purpleBox', '/HUD/text_box_wacky_guy.png');
         this.loadAudio('purpleDAudio', 'purpleGuyTextAudio.mp3', 1);
-        this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
+        //this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
+
+        this.loadItem('researchTreeAssigned', '/Items/Metaphysical/researchTreeAssigned.json');
+        this.load.image('JoystickBack', '/HUD/Jbase.png');
+        this.load.image('JoystickHandle', '/HUD/Jhandle.png');
+        this.load.spritesheet('Button', '/HUD/A_Button.png', { frameWidth: 68, frameHeight: 70});
     }
 
     spawnCollision()
@@ -57,8 +70,16 @@ class IntroCutscene extends Phaser.Scene
             this.physics.add.existing(this.add.rectangle(442, 456, 21, 22, 0xff00aa, 0).setOrigin(0, 0)),
             this.physics.add.existing(this.add.rectangle(620, 307, 101, 17, 0xff00aa, 0).setOrigin(0, 0)),
             this.physics.add.existing(this.add.rectangle(613, 432, 25, 51, 0xff00aa, 0).setOrigin(0, 0)),
-            this.physics.add.existing(this.add.rectangle(693, 429, 28, 54, 0xff00aa, 0).setOrigin(0, 0))
+            this.physics.add.existing(this.add.rectangle(693, 429, 28, 54, 0xff00aa, 0).setOrigin(0, 0)),
         ];
+        this.loadingZone = this.add.rectangle(525, 465, 35, 15, 0xff00aa, 0).setOrigin(0, 0);
+        this.physics.add.existing(this.loadingZone);
+        this.loadingZone.body.setImmovable(true);
+        this.physics.add.collider(this.loadingZone, this.player, ()=>{
+            console.log("Player Exits into main scene");
+            AudioManager.getInstance(this).endAllSound();
+            this.scene.start('town');
+        });
 
         this.colliders.forEach(element => {
             element.body.setImmovable(true);
@@ -89,10 +110,10 @@ class IntroCutscene extends Phaser.Scene
         this.dialogueManager = new DialogueManager(this, 'dialogueBox', 'purpleBox');
 
         this.add.image(175, 10, 'InteriorBackground');
-        this.spawnCollision();
-        this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 150, 75, 125, 0.42);
-        this.player = new Player(this, 380, 343, 'player', 0, this.joystick);
+        this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 'JoystickBack', 'JoystickHandle',  150, 75, 125, 0.42);
+        this.player = new Player(this, 380, 343, 'player', 0, this.joystick, 'Button');
         this.player.depth = 2;
+        this.spawnCollision();
         //this.cameraManager.setPlayerCameraTarget(this.player);
 
         //this.purpleGuy = new PurpleGuy(this, 400, 400, this.cache.json.get('purpleGuyData'));
@@ -166,10 +187,21 @@ class IntroCutscene extends Phaser.Scene
                                                 "text": "HeEEeeYYyyY Johnny BoyoOo\n\n\nI just poisoned you!!\n...OOps!!\nHAhAhAHAAhAhaHAHa!\nAnyways!\nThe only antidote comes from a tree thats been extinct for at least a century now\n\nTo make things a bit more Interestinggg, I'll let you time travel!!! (:",
                                                 "delays": [{charI : 50, delay: 400}, {charI : 51, delay: 400}, {charI : 52, delay: 400}, {charI : 53, delay: 400}, {charI : 60, delay: 750}],
                                                 "repeat": false,
-                                                "item": null
+                                                "item": "researchTreeAssigned"
                                             },
                                             true,
-                                            true
+                                            true,
+                                            ()=>{
+                                                this.add.tween({
+                                                    targets: this.purpleGuy,
+                                                    ease: "Sine.easeIn",
+                                                    duration: 1000,
+                                                    x: 900,
+                                                    onComplete: ()=>{
+                                                        AudioManager.getInstance(this).endBGM();
+                                                    }
+                                                });
+                                            }
                                         )
                                     }));
                                 },
