@@ -86,8 +86,11 @@ class Town extends Phaser.Scene
 
         this.loadItem('testItem', '/Items/itemTest.json');
 
-
+        
         this.loadNpc('girl', '/Npcs/npc1.json');
+        this.loadNpc('girl2','/Npcs/npc2.json');
+        this.loadNpc('girl3','/Npcs/npc3.json');
+        this.loadNpc('girl4','/Npcs/npc4.json');
     }
     
     create()
@@ -214,6 +217,10 @@ class Town extends Phaser.Scene
 
         this.testNpc = new Npc(this, 'girl');
         this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
+        this.testNpc2 = new Npc(this, 'girl2').setPosition(1050,300);
+        this.testNpc3 = new Npc(this,'girl3').setPosition(700,200);
+       this.testNpc4 = new Npc(this,'girl4').setPosition(0,500);
+
 
         this.testItem = new Item(this, 'testItem');
         //this.testNpc.addDialogue("This is some long text to test out the dialogue system. Hope it works (:. Here's some more text.\n\n\nHehe.", true);
@@ -235,6 +242,9 @@ class Town extends Phaser.Scene
         this.group1.add(this.buildingPresent);
         this.group1.add(this.testNpc);
         this.group1.add(this.npc2);
+        this.group1.add(this.testNpc2);
+        this.group1.add(this.testNpc3);
+        this.group1.add(this.testNpc4);
         this.group1.add(this.purpleGuy);
         //Present Day Park Group
         this.group5.add(this.treesRight);
