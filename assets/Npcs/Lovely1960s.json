@@ -1,0 +1,18 @@
+{
+    "x": 722,
+    "y": 270,
+
+    "scale": 1,
+
+    "texture": "npc9.png",
+    
+    "lines": [
+        {
+            "text": "Extra Extra! This just in, new Mayor elected! He seems more than happy to be taking the reigns of this beautiful town.",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        }
+        
+    ]
+}

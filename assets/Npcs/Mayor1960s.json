@@ -1,6 +1,6 @@
 {
-    "x": 1007,
-    "y": 225,
+    "x": 138,
+    "y": 809,
 
     "scale": 1,
 
@@ -8,19 +8,25 @@
     
     "lines": [
         {
-            "text": "I'm the mayor of this town.",
+            "text": "Soon.",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "I do mayor things. \n\n\n What kind of mayor things?",
+            "text": "Soon I will finally be Mayor!!!!!!!!!!!!!",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "I'll have you know my duties are very important. \n\n\n I manage things such as",
+            "text": "What an exciting time to be alive!",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Why am I so excited about becoming the Mayor? Well its for reasons as followed:",
             "delays": [],
             "repeat": false,
             "item": null

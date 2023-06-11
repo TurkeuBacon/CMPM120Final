@@ -15,14 +15,12 @@
         },
         {
             "text": "Get out of here!",
-            "delays": [
-                {"charI": 14, "delay": 500}
-            ],
+            "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "I won't ask again...",
+            "text": "If my husband was still here, he would whoop your butt!",
             "delays": [],
             "repeat": false,
             "item": null

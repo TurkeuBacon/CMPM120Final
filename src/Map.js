@@ -126,6 +126,8 @@ class Map {
                 this.addNPC('Janet');
                 this.addNPC('Gabe');
                 this.addNPC('Lovely');
+                this.addNPC('Paradox');
+                
                 //this.addNPC(1000, 750, 'girl5');
 
                 
@@ -328,7 +330,8 @@ class Map {
                 this.addBounds(520, 170, 350, 90, "1700s");
                     //House
                 this.addBounds(956, 760, 295, 90, "1700s");
-                
+                this.addNPC('Heawaits');
+                this.addNPC('Lovely1960s');
                 break;
             case "SixtiesInt":
                 this.addHitbox(998, 375, 50, 20, "1960s", 514, 240);
@@ -382,6 +385,10 @@ class Map {
                  this.addBounds(795-15,850,30,30,"SixtiesInt"); //Left House Flower Table / Middle wall lower section
                  this.addBounds(705-15,740,80,10,"SixtiesInt");//Left House Bed
                  this.addBounds(970-15,825,8,37,"SixtiesInt");//Left House Couch Back
+                 //npcs
+                 this.addNPC('Oscar1960s');
+                 this.addNPC('Mayor1960s');
+                 
                 break;
             case "Sixties Park":
                 this.addBounds(443, 665, 2000, 20, "Sixties Park");

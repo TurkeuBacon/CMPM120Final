@@ -36,6 +36,42 @@
         {
             "text": "us.",
             "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "us.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "us.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "us.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "us.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "us.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "You.",
+            "delays": [],
             "repeat": true,
             "item": null
         }

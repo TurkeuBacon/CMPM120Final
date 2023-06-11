@@ -1,0 +1,47 @@
+{
+    "x": 335,
+    "y": 770,
+
+    "scale": 1,
+
+    "texture": "npc6.png",
+    
+    "lines": [
+        {
+            "text": "Paradox...",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Yo! How's ya doin?",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Not good? That's okay, honestly I'm not doing well myself either.\n I keep finding myself in these random predicaments.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Stuff just keeps happening to me. Like this weird purple guy came up to me and said\n Herreee Johnny Boy!",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "I was so startled but he seemed chill.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Though I do feel kinda weird...",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        }
+    ]
+}

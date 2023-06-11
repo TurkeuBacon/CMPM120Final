@@ -99,7 +99,11 @@ class Town extends Phaser.Scene
         this.loadNpc('Mayor','/Npcs/Mayor.json');
         this.loadNpc('Ryan','/Npcs/Ryan.json');
         this.loadNpc('Lovely','/Npcs/Lovely.json');
-        this.loadNpc('Heawaits','/Npc/heawaits.json');
+        this.loadNpc('Heawaits','/Npcs/heawaits.json');
+        this.loadNpc('Paradox','/Npcs/Paradox.json');
+        this.loadNpc('Oscar1960s', '/Npcs/Oscar1960s.json');
+        this.loadNpc('Mayor1960s', '/Npcs/Mayor1960s.json');
+        this.loadNpc('Lovely1960s', '/Npcs/Lovely1960s.json');
     }
     
     create()
@@ -115,7 +119,7 @@ class Town extends Phaser.Scene
 
         this.dialogueManager = new DialogueManager(this, 'dialogueBox', 'purpleBox');
 
-        AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', 0.2, true, true);
+        AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', 0.5, true, true);
         
         this.purpleGuy = new PurpleGuy(this, 400, 500, this.cache.json.get('purpleGuyData'));
         this.purpleGuy.playAnimation("wackadoodle");
