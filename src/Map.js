@@ -127,7 +127,7 @@ class Map {
                 this.addNPC('Gabe');
                 this.addNPC('Lovely');
                 this.addNPC('Paradox');
-                
+                this.addNPC('Ryan');
                 //this.addNPC(1000, 750, 'girl5');
 
                 
@@ -206,6 +206,7 @@ class Map {
                 this.addNPC('Oscar');
                 this.addNPC('Ron');
                 this.addNPC('Mayor');
+                
             //Items
                 this.addItem('Water Can');
 
@@ -219,7 +220,7 @@ class Map {
                 this.addBounds(530, -340, 2000, 50, "Initial Park");
                 this.addBounds(-100, 75, 50, 2000, "Initial Park");
                 //NPC
-                this.addNPC('Ryan');
+                
                 break;
             case "1700s Park":
                 this.addHitbox(1160, 364, 20, 1000, "1700s", -193, 339, 0, 0, false, true);

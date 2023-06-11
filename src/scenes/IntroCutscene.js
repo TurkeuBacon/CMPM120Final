@@ -170,7 +170,7 @@ class IntroCutscene extends Phaser.Scene
                         duration: 100,
                         onComplete: () => 
                         {
-                            AudioManager.getInstance(this).addBackgroundMusic('purpleGuyTheme', 1, true, true);
+                            AudioManager.getInstance(this).addBackgroundMusic('purpleGuyTheme', 0.8, true, true);
                             this.purpleGuy.playAnimation("wackadoodle");
                             this.player.stop();
                             this.add.tween({

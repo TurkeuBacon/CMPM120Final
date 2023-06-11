@@ -17,7 +17,7 @@ class Player extends Phaser.GameObjects.Sprite
         this.inputDevice = inputDevice;
         let canvas = scene.sys.game.canvas;
         //we want to add a circle here
-        this.interractionButton = this.scene.add.sprite(canvas.width-200, canvas.height-170, aKey).setAlpha(1).setDisplaySize(200, 200);
+        this.interractionButton = this.scene.add.sprite(canvas.width-200, canvas.height-170, aKey).setAlpha(1).setDisplaySize(175, 175);
         this.interractionButton.setInteractive();
         this.interractionButton.on('pointerdown', (pointer, gameObject) =>
         {

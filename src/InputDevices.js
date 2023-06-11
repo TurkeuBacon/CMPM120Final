@@ -68,12 +68,12 @@ class TouchJoystick extends DirectionalInputDevice
                         this.cm.addUI(this.scene.add.image(
                             0,
                             0,
-                            backImg).setAlpha(0.75).setDisplaySize(backRadius*2, backRadius*2)),
+                            backImg).setAlpha(0.90).setDisplaySize(backRadius*2, backRadius*2)),
                     "stick":
                         this.cm.addUI(this.scene.add.image(
                             0,
                             0,
-                            stickImg).setAlpha(0.5).setDisplaySize(stickRadius*2, stickRadius*2)),
+                            stickImg).setAlpha(0.77).setDisplaySize(stickRadius*2, stickRadius*2)),
                 };
     }
 

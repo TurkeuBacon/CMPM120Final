@@ -26,7 +26,9 @@ class MainMenu extends Phaser.Scene
         this.loadAudio('Theme', '/Music/TitleScreen.mp3');
         this.load.image('TitleArt', 'Scene_MainMenu/Title.png');
         this.load.image('BackgroundArt', 'Scene_MainMenu/BackgroundArt.png');
-        this.load.image('ButtonArt', 'Scene_MainMenu/play2.png');
+        this.load.image('ButtonArt', 'Scene_MainMenu/play1.png');
+        this.load.image
+        this.load.image('hoverOn', 'Scene_MainMenu/play2.png');
     }
 
     create()
@@ -44,7 +46,17 @@ class MainMenu extends Phaser.Scene
         this.titleArt.setScale(0.5);
 
         this.startButton = this.add.image(canvasWidth/2, canvasHeight/2+250, 'ButtonArt');
+        this.hoverOn = this.add.image(canvasWidth/2, canvasHeight/2+250, 'hoverOn');
+        this.hoverOn.alpha = 0;
         this.startButton.setScale(1);
+        this.startButton.setInteractive().on('pointerover', () =>{
+            this.startButton.alpha = 0.01;
+            this.hoverOn.alpha = 1;
+        });
+        this.startButton.setInteractive().on('pointerout', () =>{
+            this.startButton.alpha = 1;
+            this.hoverOn.alpha = 0;
+        });
         this.startButton.setInteractive().on('pointerdown', () => 
         {
             AudioManager.getInstance(this).endAllSound();

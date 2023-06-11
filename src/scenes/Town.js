@@ -43,6 +43,7 @@ class Town extends Phaser.Scene
     preload()
     {
         this.load.path = '../assets/';
+        this.loadItem('researchTreeAssigned', '/Items/Metaphysical/researchTreeAssigned.json');
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
         this.load.image('presentDayFloor', '/Scene_PresentDay/PresentDay.png');
         this.load.image('Sign', '/General/TT_Sign.png');
@@ -164,7 +165,7 @@ class Town extends Phaser.Scene
         this.presentDayIntBG = this.add.image(screenWidth/2, screenHeight/2, 'PresentDayInt');
         this.earlyIntBG = this.add.image(screenWidth/2, screenHeight/2, '1700sInt');
         this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 'JoystickBack', 'JoystickHandle',  150, 75, 125, 0.42);
-        this.player = new Player(this, 1014, 351, 'player', 1, this.joystick, 'Button');
+        this.player = new Player(this, 71, 818, 'player', 1, this.joystick, 'Button');
         this.player.addItem(new Item(this, 'researchTreeAssigned'));
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);

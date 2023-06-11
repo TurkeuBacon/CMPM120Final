@@ -131,7 +131,7 @@ class DialogueManager
                 {
                     AudioManager.getInstance(this.scene).stopSfx(purple ? 'purpleDAudio' : 'npcAudio');
                     while(!this.click || this.waitNextClick) await this.wait(1);
-                    AudioManager.getInstance(this.scene).addSfx(purple ? 'purpleDAudio' : 'npcAudio', purple ? 4 : 1, true, 1.5);
+                    AudioManager.getInstance(this.scene).addSfx(purple ? 'purpleDAudio' : 'npcAudio', purple ? 5 : 1, true, 1.5);
                     textProgress = "";
                 }
             }
