@@ -108,6 +108,7 @@ class Town extends Phaser.Scene
         this.loadNpc('Lovely1960s', '/Npcs/Lovely1960s.json');
         this.loadNpc('FetchFirst1700s', '/Npcs/FetchFirst1700s.json')
         this.loadNpc('FetchSecond1700s', '/Npcs/FetchSecond1700s.json')
+        this.loadNpc('FetchThird1700s', '/Npcs/FetchThird1700s.json')
     }
     
     create()
@@ -154,7 +155,7 @@ class Town extends Phaser.Scene
         //this.signImg = this.add.image(screenWidth/2, screenHeight/2, 'Sign');
         //this.signImg.depth = 3;
         this.phoneImg = this.add.image(screenWidth/2, screenHeight + 500, 'Phone');
-        this.phoneImg.depth = 3;
+        this.phoneImg.depth = 6;
         this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
         this.trees.depth = 3;
         this.trees.alpha = 1;
@@ -253,7 +254,7 @@ class Town extends Phaser.Scene
         //this.cameraManager.playerCamera.setBounds(this.PresentDayBG.x - this.PresentDayBG.width/2, this.PresentDayBG.y - this.PresentDayBG.height/2, this.PresentDayBG.width, this.PresentDayBG.height);
         //used to trigger a test on mapstate transitions
         this.input.keyboard.on('keydown-X', function(event) {
-            this.mapManager.loadingZone("1960s", this.player.x, this.player.y);
+            this.mapManager.loadingZone("1700s", this.player.x, this.player.y);
         }, this);
         this.fsbutton = this.add.sprite(25,25,'fsbutton').setInteractive().setOrigin(0, 0).setScale(1.5).on('pointerdown', () => 
         {
@@ -288,8 +289,8 @@ class Town extends Phaser.Scene
         // this.joystick.update();
         // this.player.update();
         //console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
-        console.log("x" + this.player.x);
-        console.log("y" + this.player.y);
+        //console.log("x" + this.player.x);
+        //console.log("y" + this.player.y);
         //console.log(pointer.worldX);
         //console.log(pointer.worldY);
     }

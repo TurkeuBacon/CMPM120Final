@@ -138,7 +138,8 @@ class Player extends Phaser.GameObjects.Sprite
         this.inventory.forEach(element => {
             if(!element.metaphysical)
             {
-                element.setOrigin(0, 0).setPosition(this.taskBox.x + nextXOffset, this.taskBox.displayHeight + nextYOffset).setDisplaySize(itemSize, itemSize);
+                element.setVisible(true);
+                element.setOrigin(0, 0).setPosition(this.taskBox.x + nextXOffset, this.taskBox.displayHeight + nextYOffset).setDisplaySize(itemSize, itemSize).setDepth(1);
                 nextXOffset += (10 + itemSize);
                 if(nextXOffset > (this.taskBox.displayWidth - itemSize - 10))
                 {
@@ -148,6 +149,46 @@ class Player extends Phaser.GameObjects.Sprite
                 itemCount++;
             }
         });
+    }
+
+    hideInventory()
+    {
+        this.inventory.forEach(element => {
+        if(!element.metaphysical)
+        {
+            element.setVisible(false);
+        }
+    });
+    }
+
+    hasItem(itemKey)
+    {
+        let returnVal = false;
+        this.inventory.forEach(element => {
+            console.log("Item: " + element.itemKey + " | " + itemKey + ": " + (element.itemKey == itemKey));
+            if(element.itemKey == itemKey)
+            {
+                console.log("returning true");
+                returnVal = true;
+                return true;
+            }
+        });
+        return returnVal;
+    }
+
+    removeItem(itemKey)
+    {
+        for(let i = 0; i < this.inventory.length; i++)
+        {
+            if(this.inventory[i].itemKey == itemKey)
+            {
+                let item = this.inventory[i];
+                this.inventory = this.inventory.splice(i, i);
+                item.destroy();
+                break;
+            }
+        }
+        this.placeItems();
     }
     
     update(){
@@ -161,6 +202,7 @@ class Player extends Phaser.GameObjects.Sprite
             multiplier = 4;
         }
 
+        console.log();
         switch(this.inputDevice.direction)
         {
             case "neutral":
@@ -168,8 +210,8 @@ class Player extends Phaser.GameObjects.Sprite
                 this.horizontalSpeed = 0;
                 if(!this.disableInput)
                 {
-                    this.stop();
-                    this.setFrame(0);
+                    if(this.anims.currentAnim != null) this.anims.setCurrentFrame(this.anims.currentAnim.getFrameByProgress(1));
+                    this.anims.stop();
                 }
                 break;
             case "up":

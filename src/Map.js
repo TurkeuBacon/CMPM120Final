@@ -309,7 +309,7 @@ class Map {
             this.addBounds(795-20,850,30,30,"1700sInt"); //Left House Flower Table / Middle wall lower section
             this.addBounds(705-20,740,80,10,"1700sInt");//Left House Bed
             this.addBounds(970-20,825,8,37,"1700sInt");//Left House Couch Back
-
+            this.addNPC('FetchThird1700s');
                 break;
             case "1960s":
                 //Town hall

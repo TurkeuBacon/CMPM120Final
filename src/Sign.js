@@ -17,8 +17,22 @@ class Sign extends Phaser.GameObjects.Sprite {
         }
         this.scene.events.on('playerInterractDown', () => {
             if(this.scene.physics.overlap(this.player, this)){
-                this.phone.displayPhone();
-                this.scene.events.emit('freezeInput', true);
+                if(this.player.hasItem("Tree Book"))
+                {
+                    this.player.hideInventory();
+                    this.phone.displayPhone();
+                    this.scene.events.emit('freezeInput', true);
+                }
+                else
+                {
+                    this.scene.dialogueManager.playDialogue(
+                        {
+                            "text": "You should explore the town more before firing up that bad boi.",
+                            "delays": [],
+                            "repeat": false,
+                            "item": null
+                        }, true, true);
+                }
             }
         })
         

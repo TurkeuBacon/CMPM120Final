@@ -7,6 +7,7 @@ class Phone {
         this.cm = cameraManager;
         this.screenHeight = screenAniVal;
         this.cm.addUI(this.phone);
+        this.phone.depth = 10;
         
     }
     displayPhone(){
@@ -27,6 +28,7 @@ class Phone {
         this.exit.alpha = 0.01;
         this.exit.setInteractive().on('pointerdown', () => 
         {
+            this.player.placeItems();
             this.scene.tweens.add({
                 targets: this.phone,
                 y: this.screenHeight + 900,
