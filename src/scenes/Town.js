@@ -268,7 +268,6 @@ class Town extends Phaser.Scene
             }
         });
         this.cameraManager.addUI(this.fsbutton);
-
     }
 
     update(time, delta)
