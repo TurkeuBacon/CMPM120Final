@@ -1,0 +1,34 @@
+{
+    "x": 700,
+    "y": 900,
+
+    "scale": 1,
+
+    "texture": "npc9.png",
+    
+    "lines": [
+        {
+            "text": "Hello! I love reading books.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "There's a library on the left side of the Town Hall.",
+            "delays": [
+                {"charI": 14, "delay": 500}
+            ],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "I borrow all of my books from there!",
+            "delays": [
+                {"charI": 14, "delay": 500}
+            ],
+            "repeat": true,
+            "item": null
+        }
+        
+    ]
+}

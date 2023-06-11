@@ -21,6 +21,7 @@ class AudioManager{
         this.sfxs = [];
         this.sfxVolumes = [];
         this.muted = false;
+        this.cc = false;
     }
 
     addAudio(key)
@@ -152,6 +153,19 @@ class AudioManager{
     toggleMute()
     {
         this.setMute(!this.muted);
+        localStorage.setItem("Muted", (this.muted ? "TRUE": "FALSE"));
+        return this.muted;
+    }
+
+    setCC(caption)
+    {
+        this.cc = caption;
+    }
+
+    toggleCC()
+    {
+        this.setCC(!this.cc);
+        return this.cc;
     }
 }
 

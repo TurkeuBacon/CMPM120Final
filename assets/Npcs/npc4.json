@@ -1,0 +1,37 @@
+{
+    "x": 700,
+    "y": 900,
+
+    "scale": 1,
+
+    "texture": "npc10.png",
+    
+    "lines": [
+        {
+            "text": "I ate too many cookies...",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Why did I eat so many cookies...",
+            "delays": [
+                {"charI": 14, "delay": 500}
+            ],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "I feel sick...",
+            "delays": [],
+            "repeat": false,
+            "item": "testItem"
+        },
+        {
+            "text": "But I love cookies so much... \n\n\n another would hurt...",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        }
+    ]
+}
