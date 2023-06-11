@@ -36,7 +36,7 @@ class Npc extends Phaser.GameObjects.Sprite
 
     playDialogue()
     {
-        console.log(this.scene.player.hasItem(this.jumpItem.itemKey));
+        //console.log(this.scene.player.hasItem(this.jumpItem.itemKey));
         if(this.jumpItem != undefined && this.scene.player.hasItem(this.jumpItem.itemKey))
         {
             console.log("Has Item");
