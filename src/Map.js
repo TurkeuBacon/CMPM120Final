@@ -209,6 +209,7 @@ class Map {
                 
             //Items
                 this.addItem('Water Can');
+                this.addItem('Tree Book');
 
 
                 break;
