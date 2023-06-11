@@ -2,6 +2,7 @@ import sfIntro from "./cinematicscenes/sf.js";
 import sfMeat from "./cinematicscenes/sf2.js";
 import sfCredit from "./cinematicscenes/sfcredits.js";
 import sfPark from "./cinematicscenes/sf3.js";
+import sfSetting from "./cinematicscenes/sfsettings.js";
 
 let config = {
     mode: Phaser.Scale.FIT,
@@ -13,6 +14,6 @@ let config = {
         default: 'arcade',
         arcade: { debug: false }
     },
-    scene: [sfIntro,sfMeat,sfPark,sfCredit],
+    scene: [sfIntro,sfMeat,sfPark,sfCredit,sfSetting,],
 }
 let game = new Phaser.Game(config);
