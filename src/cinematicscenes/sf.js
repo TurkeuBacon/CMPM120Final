@@ -43,6 +43,11 @@ class sfIntro extends Phaser.Scene{
         .on('pointerdown',()=>{
             this.scene.start('credito');
         })
+        let settingtext = this.add.text(canvasWidth/2-300,canvasHeight/2+250,'Settings').setScale(2)
+        .setInteractive()
+        .on('pointerdown',()=>{
+            this.scene.start('boss');
+        })
     }
 }
 export default sfIntro

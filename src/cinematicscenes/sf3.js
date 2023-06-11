@@ -35,6 +35,7 @@ class sfPark extends Phaser.Scene{
         //0,350
         this.player = new Player(this, 500, 500, 'player', 1, this.joystick, 'Button');
         this.player.depth = 2;
+        townText.depth = 2;
     }
 }
 export default sfPark
