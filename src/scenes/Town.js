@@ -63,6 +63,7 @@ class Town extends Phaser.Scene
         this.load.image('1700sInt', '/Scene_1700s/Interior1700s.png');
         //Dialogue
         this.load.image('dialogueBox', '/HUD/text_box.png');
+        this.load.image('purpleBox', '/HUD/text_box_wacky_guy.png');
         //Park
         this.load.image('parkStart', '/Scene_PresentDay/Park_Initial.png');
         this.load.image('park1700s', '/Scene_1700s/Park1700s.png');
@@ -70,6 +71,7 @@ class Town extends Phaser.Scene
         //Music
         this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
+        this.loadAudio('purpleDAudio', 'purpleGuyTextAudio.mp3', 1);
 
         //Music On/Off
         this.load.spritesheet('musicOnOff', '/General/music_on_off.png', { frameWidth: 130, frameHeight: 128 });
@@ -77,7 +79,7 @@ class Town extends Phaser.Scene
         this.load.spritesheet('CCOnOff', '/General/cc_on_off.png', { frameWidth: 130, frameHeight: 128 });
 
         //Purple Guy Stuff
-        //PurpleGuy.loadPurpleGuyData(this);
+        PurpleGuy.loadPurpleGuyData(this);
 
         this.load.image('fsbutton','/HUD/fullscreen_button.png');
 
@@ -105,7 +107,7 @@ class Town extends Phaser.Scene
 
         this.cameraManager = new CameraManager(this);
 
-        this.dialogueManager = new DialogueManager(this, 'dialogueBox');
+        this.dialogueManager = new DialogueManager(this, 'dialogueBox', 'purpleBox');
 
         AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', 0.2, true, true);
         
@@ -162,11 +164,11 @@ class Town extends Phaser.Scene
         this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
         this.testNpc2 = new Npc(this, 'girl2').setPosition(1050,300);
         this.testNpc3 = new Npc(this,'girl3').setPosition(700,200);
-       this.testNpc4 = new Npc(this,'girl4').setPosition(0,500);
-       this.testNpc5 = new Npc(this,'girl5').setPosition(1000,750); //this one is inside the right house
-     this.testNpc6 = new Npc(this,'girl6').setPosition(550,150); //Home Repot clerk
-     this.testNpc7 = new Npc(this,'girl7').setPosition(1007,225);//present day mayor
-     this.testNpc8 = new Npc(this, 'girl8').setPosition(300,300);//pokemon go-er
+        this.testNpc4 = new Npc(this,'girl4').setPosition(0,500);
+        this.testNpc5 = new Npc(this,'girl5').setPosition(1000,750); //this one is inside the right house
+        this.testNpc6 = new Npc(this,'girl6').setPosition(550,150); //Home Repot clerk
+        this.testNpc7 = new Npc(this,'girl7').setPosition(1007,225);//present day mayor
+        this.testNpc8 = new Npc(this, 'girl8').setPosition(300,300);//pokemon go-er
 
 
 
