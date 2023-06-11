@@ -101,72 +101,8 @@ class Town extends Phaser.Scene
         this.dialogueManager = new DialogueManager(this, 'dialogueBox');
 
         AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', 0.2, true, true);
-
-        let purpleGuyData = 
-        {
-            torso:
-            {
-                x: 0,
-                y: 0,
-                image: 'torso'
-            },
-            head:
-            {
-                x: 0,
-                y: -13,
-                image: 'head'
-            },
-            upperArmL:
-            {
-                x: -6,
-                y: -13,
-                image: 'arm_left'
-            },
-            upperArmR:
-            {
-                x: 6.5,
-                y: -12,
-                image: 'arm_right'
-            },
-            forearmL:
-            {
-                x: -8,
-                y: 12,
-                image: 'wrist_hand_left'
-            },
-            forearmR:
-            {
-                x: 8,
-                y: 12,
-                image: 'wrist_hand_right'
-            },
-            legL:
-            {
-                x: -3,
-                y: 16,
-                image: 'leg_left'
-            },
-            legR:
-            {
-                x: 3,
-                y: 16,
-                image: 'leg_right'
-            },
-            ankleL:
-            {
-                x: -4,
-                y: 20,
-                image: 'ankle_foot_left'
-            },
-            ankleR:
-            {
-                x: 4,
-                y: 20,
-                image: 'ankle_foot_right'
-            }
-        };
         
-        this.purpleGuy = new PurpleGuy(this, 400, 500, purpleGuyData);
+        this.purpleGuy = new PurpleGuy(this, 400, 500, this.cache.json.get('purpleGuyData'));
         //trees
         this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
         this.trees.depth = 3;
