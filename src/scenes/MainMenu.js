@@ -50,7 +50,7 @@ class MainMenu extends Phaser.Scene
         this.hoverOn.alpha = 0;
         this.startButton.setScale(1);
         this.credits.setInteractive().on('pointerdown', () =>{
-            
+            this.scene.start('credits');
         });
         this.startButton.setInteractive().on('pointerover', () =>{
             this.startButton.alpha = 0.01;
