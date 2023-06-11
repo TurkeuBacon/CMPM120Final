@@ -23,7 +23,7 @@ class Npc extends Phaser.GameObjects.Sprite
         this.depth = 1;
     }
 
-    addDialogue(text, repeat, delays=[], item)
+    addDialogue(text, repeat, delays=[], item, requiredItem, alternateText)
     {
         this.dialogueLines.push({
             text: text,
