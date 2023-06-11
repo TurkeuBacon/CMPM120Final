@@ -1,0 +1,37 @@
+{
+    "x": 700,
+    "y": 900,
+
+    "scale": 1,
+
+    "texture": "npc8.png",
+    
+    "lines": [
+        {
+            "text": "It's a beautiful day today.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Have you checked out Home Repot?",
+            "delays": [
+                {"charI": 14, "delay": 500}
+            ],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "They sell some pretty useful things there!",
+            "delays": [],
+            "repeat": false,
+            "item": "testItem"
+        },
+        {
+            "text": "I bought a watering can there yesterday. \n\n\n There's still a bunch left!",
+            "delays": [],
+            "repeat": true,
+            "item": null
+        }
+    ]
+}
