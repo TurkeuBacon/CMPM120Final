@@ -3,7 +3,6 @@ class Credits extends Phaser.Scene {
         super('credits')
     }
     preload(){
-        this.
     }
 }
 
