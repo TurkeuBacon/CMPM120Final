@@ -239,6 +239,54 @@ class Map {
                 this.addHitbox(-14, 295, 50, 20, "1700s", -20, 210);
                 this.addHitbox(140, 850, 50, 20,"1700s", 71, 820);
                 this.addHitbox(878, 839, 50, 20, "1700s", 986, 828);
+                //1700s interior for the Town Hall
+                //-50 for x, -50 for y
+                this.addBounds(895-190,300-85,55,46,"1700sInt"); //townhall table 1
+                this.addBounds(1120-190,296-85,55,46,"1700sInt"); //townhall table 2
+                this.addBounds(1007-190,260-85,50,30,"1700sInt"); //townhall front desk
+                this.addBounds(1010-190,190-85,350,20,"1700sInt"); //townhall interior upper bound
+                this.addBounds(1010-190,400-85,350,20,"1700sInt"); //townhall interior lower bound
+                this.addBounds(1198-190,308-85,32,236,"1700sInt");//townhall interior right bound
+                this.addBounds(813-190,284-85,32,236,"1700sInt"); //townhall interior left bound
+                //1700s Library interior
+                this.addBounds(-140+75,170-60,29,420,"1700sInt");//Library interior left bound
+                this.addBounds(200+75,170-60,29,420,"1700sInt");//Library interior right bound
+                this.addBounds(0+75,130-60,350,20,"1700sInt");//Library interior upper bound
+                this.addBounds(-65+75,162-60,68,24,"1700sInt"); //Library bookcase 1
+                this.addBounds(32.5+75,156-60,80,35,"1700sInt"); //Library bookcase 2
+                this.addBounds(120+75,165-60,69,25,"1700sInt"); //Library Bookcase 3
+                this.addBounds(-35+75,285-60,27,109,"1700sInt");//Library Table
+                this.addBounds(154+75,220-60,42,15,"1700sInt");//Library Couch Arm 1
+                this.addBounds(157+75,278-60,42,22,"1700sInt");//Library Couch Arm 2
+                this.addBounds(167+75,243-60,23,43,"1700sInt");//Library Couch Back
+                this.addBounds(69+75,300-60,60,22,"1700sInt");//Library Lower Bounds 1
+                this.addBounds(69+75,322-60,92,22,"1700sInt");//Library Lower Bounds 2
+                this.addBounds(69+75,344-60,172,22,"1700sInt");//Library Lower Bounds 3
+                this.addBounds(69+75,366-60,217,22,"1700sInt");//Library Lower Bounds 4
+                 //Bottom Left House 1700s interior
+                 this.addBounds(-160+45,645,29,420,"1700sInt");//Left House Left Bound
+                 this.addBounds(285+45,645,29,420,"1700sInt");//Left House Right Bound
+                 this.addBounds(105+45,675,490,20,"1700sInt");//Left House Upper Bound
+                 this.addBounds(95+45,863,490,20,"1700sInt");//Left House Lower Bound
+                 this.addBounds(225+45,675,102,46,"1700sInt");//Left House Kitchen
+                 this.addBounds(90+45,710,44,44,"1700sInt");//Left House Table
+                 this.addBounds(-5+45,730,30,65,"1700sInt"); //Left House Flower Table / Middle wall upper section
+                 this.addBounds(-5+45,850,30,30,"1700sInt"); //Left House Flower Table / Middle wall lower section
+                 this.addBounds(-95+45,740,80,10,"1700sInt");//Left House Bed
+                 this.addBounds(170+45,825,8,37,"1700sInt");//Left House Couch Back
+                 //Bottom Right House present day interior
+            //-25
+            this.addBounds(620,645,29,420,"1700sInt");//Left House Left Bound
+            this.addBounds(1085-20,645,29,420,"1700sInt");//Left House Right Bound
+            this.addBounds(905-20,675,490,20,"1700sInt");//Left House Upper Bound
+            this.addBounds(895-20,863,490,20,"1700sInt");//Left House Lower Bound
+            this.addBounds(1025-20,675,102,46,"1700sInt");//Left House Kitchen
+            this.addBounds(890-20,710,44,44,"1700sInt");//Left House Table
+            this.addBounds(795-20,730,30,65,"1700sInt"); //Left House Flower Table / Middle wall upper section
+            this.addBounds(795-20,850,30,30,"1700sInt"); //Left House Flower Table / Middle wall lower section
+            this.addBounds(705-20,740,80,10,"1700sInt");//Left House Bed
+            this.addBounds(970-20,825,8,37,"1700sInt");//Left House Couch Back
+
                 break;
             case "1960s":
                 //Town hall
@@ -271,6 +319,14 @@ class Map {
                 this.addHitbox(525, 272, 50, 20, "1960s", 1001, 212);
                 this.addHitbox(97, 843, 50, 20, "1960s", 71, 816);
                 this.addHitbox(879, 850, 50, 20, "1960s", 976, 825);
+                //townhall present day interior
+                this.addBounds(895,300,55,46,"SixtiesInt"); //townhall table 1
+                this.addBounds(1120,296,55,46,"SixtiesInt"); //townhall table 2
+                this.addBounds(1007,260,50,30,"SixtiesInt"); //townhall front desk
+                this.addBounds(1010,190,350,20,"SixtiesInt"); //townhall interior upper bound
+                this.addBounds(1010,400,350,20,"SixtiesInt"); //townhall interior lower bound
+                this.addBounds(1198,308,32,236,"SixtiesInt");//townhall interior right bound
+                this.addBounds(813,284,32,236,"SixtiesInt"); //townhall interior left bound
                 break;
             case "Sixties Park":
                 this.addBounds(443, 665, 2000, 20, "Initial Park");
