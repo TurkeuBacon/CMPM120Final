@@ -4,17 +4,17 @@
 
     "scale": 1,
 
-    "texture": "npc8.png",
+    "texture": "npc10.png",
     
     "lines": [
         {
-            "text": "It's a beautiful day today.",
+            "text": "I'm the mayor of this town.",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "Have you checked out Home Repot?",
+            "text": "I do mayor things. \n\n\n What kind of mayor things?",
             "delays": [
                 {"charI": 14, "delay": 500}
             ],
@@ -22,16 +22,17 @@
             "item": null
         },
         {
-            "text": "They sell some pretty useful things there!",
+            "text": "I'll have you know my duties are very important. \n\n\n I manage things such as",
             "delays": [],
             "repeat": false,
             "item": null
         },
         {
-            "text": "I bought a watering can there yesterday. \n\n\n There's still a bunch left!",
+            "text": "blah blah blah blah blah \n\n\n blah blah blah",
             "delays": [],
             "repeat": true,
             "item": null
         }
+        
     ]
 }

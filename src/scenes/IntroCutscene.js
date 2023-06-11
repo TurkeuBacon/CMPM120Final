@@ -20,6 +20,7 @@ class IntroCutscene extends Phaser.Scene
 
         this.input.on('pointerdown', () => {
             console.log("POINTER DOWN");
+            this.scene.start('town');
         })
     }
 }

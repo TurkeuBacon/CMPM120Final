@@ -88,6 +88,10 @@ class Town extends Phaser.Scene
         this.loadNpc('girl2','/Npcs/npc2.json');
         this.loadNpc('girl3','/Npcs/npc3.json');
         this.loadNpc('girl4','/Npcs/npc4.json');
+        this.loadNpc('girl5','/Npcs/npc5.json');
+        this.loadNpc('girl6','/Npcs/npc6.json');
+        this.loadNpc('girl7','/Npcs/npc7.json');
+        this.loadNpc('girl8','/Npcs/npc8.json');
     }
     
     create()
@@ -104,72 +108,8 @@ class Town extends Phaser.Scene
         this.dialogueManager = new DialogueManager(this, 'dialogueBox');
 
         AudioManager.getInstance(this).addBackgroundMusic('overworldBGM', 0.2, true, true);
-
-        let purpleGuyData = 
-        {
-            torso:
-            {
-                x: 0,
-                y: 0,
-                image: 'torso'
-            },
-            head:
-            {
-                x: 0,
-                y: -13,
-                image: 'head'
-            },
-            upperArmL:
-            {
-                x: -6,
-                y: -13,
-                image: 'arm_left'
-            },
-            upperArmR:
-            {
-                x: 6.5,
-                y: -12,
-                image: 'arm_right'
-            },
-            forearmL:
-            {
-                x: -8,
-                y: 12,
-                image: 'wrist_hand_left'
-            },
-            forearmR:
-            {
-                x: 8,
-                y: 12,
-                image: 'wrist_hand_right'
-            },
-            legL:
-            {
-                x: -3,
-                y: 16,
-                image: 'leg_left'
-            },
-            legR:
-            {
-                x: 3,
-                y: 16,
-                image: 'leg_right'
-            },
-            ankleL:
-            {
-                x: -4,
-                y: 20,
-                image: 'ankle_foot_left'
-            },
-            ankleR:
-            {
-                x: 4,
-                y: 20,
-                image: 'ankle_foot_right'
-            }
-        };
         
-        this.purpleGuy = new PurpleGuy(this, 400, 500, purpleGuyData);
+        this.purpleGuy = new PurpleGuy(this, 400, 500, this.cache.json.get('purpleGuyData'));
         //trees
         this.signImg = this.add.image(screenWidth/2, screenHeight/2, 'Sign');
         this.signImg.depth = 3;
@@ -223,6 +163,12 @@ class Town extends Phaser.Scene
         this.testNpc2 = new Npc(this, 'girl2').setPosition(1050,300);
         this.testNpc3 = new Npc(this,'girl3').setPosition(700,200);
        this.testNpc4 = new Npc(this,'girl4').setPosition(0,500);
+       this.testNpc5 = new Npc(this,'girl5').setPosition(1000,750); //this one is inside the right house
+     this.testNpc6 = new Npc(this,'girl6').setPosition(550,150); //Home Repot clerk
+     this.testNpc7 = new Npc(this,'girl7').setPosition(1007,225);//present day mayor
+     this.testNpc8 = new Npc(this, 'girl8').setPosition(300,300);//pokemon go-er
+
+
 
 
         this.testItem = new Item(this, 'testItem');
@@ -249,8 +195,13 @@ class Town extends Phaser.Scene
         this.group1.add(this.testNpc3);
         this.group1.add(this.testNpc4);
         this.group1.add(this.purpleGuy);
+        //Present Day interior Group
+        this.group4.add(this.testNpc5);
+        this.group4.add(this.testNpc6);
+        this.group4.add(this.testNpc7);
         //Present Day Park Group
         this.group5.add(this.treesRight);
+        this.group5.add(this.testNpc8);
         //1700s group
         this.group3.add(this.trees1700s);
         this.group3.add(this.building1700s);
