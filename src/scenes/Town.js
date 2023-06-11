@@ -9,7 +9,8 @@ import DialogueManager from '../DialogueManager.js'
 import Npc from '../Npc.js'
 import PurpleGuy from '../PurpleGuy.js'
 import Item from '../Item.js'
-
+import Sign from '../Sign.js'
+import Phone from '../Phone.js'
 class Town extends Phaser.Scene
 {
     constructor()
@@ -44,6 +45,8 @@ class Town extends Phaser.Scene
         this.load.path = '../assets/';
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
         this.load.image('presentDayFloor', '/Scene_PresentDay/PresentDay.png');
+        this.load.image('Sign', '/General/TT_Sign.png');
+        this.load.image('Phone','/General/phone.png');
         //Trees
         this.load.image('trees', '/Scene_PresentDay/trees.png');
         this.load.image ('trees1700s', '/Scene_1700s/trees1700.png');
@@ -104,6 +107,10 @@ class Town extends Phaser.Scene
         
         this.purpleGuy = new PurpleGuy(this, 400, 500, this.cache.json.get('purpleGuyData'));
         //trees
+        this.signImg = this.add.image(screenWidth/2, screenHeight/2, 'Sign');
+        this.signImg.depth = 3;
+        this.phoneImg = this.add.image(screenWidth/2, screenHeight/2, 'Phone');
+        this.phoneImg.depth = 3;
         this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
         this.trees.depth = 3;
         this.trees.alpha = 1;
@@ -145,7 +152,8 @@ class Town extends Phaser.Scene
         this.player = new Player(this, 500, 500, 'player', 1, this.joystick);
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
-
+        this.phone = new Phone (this, this.phoneImg, this.cameraManager);
+        this.Sign = new Sign (this, 1090, 324, this.signImg, this.phone);
         this.testNpc = new Npc(this, 'girl');
         this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
         this.testNpc2 = new Npc(this, 'girl2').setPosition(1050,300);
