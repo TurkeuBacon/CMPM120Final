@@ -1,9 +1,10 @@
 class CinematicInteractive extends Phaser.Scene{
     preload(){
         this.load.path = '../assets/';
-        this.load.image('TitleArt', 'Scene_MainMenu/TitleArtPlaceholder.png');
+        this.load.image('TitleArt', 'Scene_MainMenu/Title.png');
         this.load.image('BackgroundArt', 'Scene_MainMenu/BackgroundArt.png');
-        this.load.image('ButtonArt', 'Scene_MainMenu/ShittyButton.png');
+        this.load.image('ButtonArt', 'Scene_MainMenu/play1.png');
+        this.load.image('hoverOn', 'Scene_MainMenu/play2.png');
     }
     create(){
         let canvasWidth = this.sys.game.canvas.width;
@@ -17,9 +18,21 @@ class CinematicInteractive extends Phaser.Scene{
         titleArt.setOrigin(0.5, 0);
         titleArt.setScale(0.5);
 
-        let startButton = this.add.image(canvasWidth/2, canvasHeight/2+200, 'ButtonArt').setInteractive()
-        .on('pointerdown', () => 
+        let startButton = this.add.image(canvasWidth/2, canvasHeight/2+250, 'ButtonArt');
+        let hoverOn = this.add.image(canvasWidth/2, canvasHeight/2+250, 'hoverOn');
+        hoverOn.alpha = 0;
+        startButton.setScale(1);
+        startButton.setInteractive().on('pointerover', () =>{
+            startButton.alpha = 0.01;
+            hoverOn.alpha = 1;
+        });
+        startButton.setInteractive().on('pointerout', () =>{
+            startButton.alpha = 1;
+            hoverOn.alpha = 0;
+        });
+        startButton.setInteractive().on('pointerdown', () => 
         {
+            
             this.scene.start('iladies');
         });
         startButton.setScale(0.4);
