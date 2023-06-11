@@ -28,7 +28,7 @@ class Phone {
         this.exit.alpha = 0.01;
         this.exit.setInteractive().on('pointerdown', () => 
         {
-            this.player.placeItems();
+            this.scene.player.placeItems();
             this.scene.tweens.add({
                 targets: this.phone,
                 y: this.screenHeight + 900,
@@ -43,6 +43,7 @@ class Phone {
         });
         this.sixteen.setInteractive().on('pointerdown', () => 
         {
+            this.scene.player.placeItems();
             if (this.mm.getCurrentMapName() != '1960s'){
                 this.mm.loadingZone('1960s', this.scene.player.x, this.scene.player.y);
                 this.scene.tweens.add({
@@ -59,6 +60,7 @@ class Phone {
         });
         this.present.setInteractive().on('pointerdown', () => 
         {
+            this.scene.player.placeItems();
             if (this.mm.getCurrentMapName() != 'Present Day'){
                 this.mm.loadingZone('Present Day', this.scene.player.x, this.scene.player.y);
                 this.scene.tweens.add({
@@ -75,6 +77,7 @@ class Phone {
         });
         this.early.setInteractive().on('pointerdown', () => 
         {
+            this.scene.player.placeItems();
             if (this.mm.getCurrentMapName() != '1700s'){
                 this.mm.loadingZone('1700s', this.scene.player.x, this.scene.player.y);
                 this.scene.tweens.add({
