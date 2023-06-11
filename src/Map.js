@@ -148,7 +148,27 @@ class Map {
                 this.addBounds(69,322,92,22,"Present Day");//Library Lower Bounds 2
                 this.addBounds(69,344,172,22,"Present Day");//Library Lower Bounds 3
                 this.addBounds(69,366,217,22,"Present Day");//Library Lower Bounds 4
-
+            //home repo present day interior
+                this.addBounds(320,150,30,278,"Present Day");//Home Repo Left Bound
+                this.addBounds(730,150,30,278,"Present Day");//Home Repo Right Bound
+                this.addBounds(520,30,380,80,"Present Day");//Home Repo Upper Bound
+                this.addBounds(520,330,380,80,"Present Day");//Home Repo Lower Bound
+                this.addBounds(660,85,110,10,"Present Day");//Home Repo First Row End Table
+                this.addBounds(660,135,110,10,"Present Day");//Home Repo Second Row End Table
+                this.addBounds(660,185,110,10,"Present Day");//Home Repo Third Row End Table
+                this.addBounds(365,85,44,21,"Present Day");//Home Repo Cabinet 1
+                this.addBounds(420,85,44,21,"Present Day");//Home Repo Cabinet 2
+                this.addBounds(485,85,44,21,"Present Day");//Home Repo Cabinet 3
+                this.addBounds(540,85,44,21,"Present Day");//Home Repo Cabinet 4
+                this.addBounds(395,150,105,5,"Present Day");//Home Repo Flower Row 
+                this.addBounds(395,250,105,12,"Present Day");//Home Repo Planter Row 1
+                this.addBounds(395,200,105,12,"Present Day");//Home Repo Planter Row 2
+                this.addBounds(700,230,42,1,"Present Day");//Home Repo Couch Arm 1
+                this.addBounds(700,273,42,8,"Present Day");//Home Repo Couch Arm 2
+                this.addBounds(720,243,23,37,"Present Day");//Home Repo Couch Back
+             //Bottom Left House present day interior
+                this.addBounds(-160,645,29,420,"Present Day");//Left House Left Bound
+                this.addBounds(285,645,29,420,"Present Day");//Left House Right Bound
 
                 break;
             case "Initial Park":
