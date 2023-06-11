@@ -169,6 +169,29 @@ class Map {
              //Bottom Left House present day interior
                 this.addBounds(-160,645,29,420,"Present Day");//Left House Left Bound
                 this.addBounds(285,645,29,420,"Present Day");//Left House Right Bound
+                this.addBounds(105,675,490,20,"Present Day");//Left House Upper Bound
+                this.addBounds(95,863,490,20,"Present Day");//Left House Lower Bound
+                this.addBounds(225,675,102,46,"Present Day");//Left House Kitchen
+                this.addBounds(90,710,44,44,"Present Day");//Left House Table
+                this.addBounds(-5,730,30,65,"Present Day"); //Left House Flower Table / Middle wall upper section
+                this.addBounds(-5,850,30,30,"Present Day"); //Left House Flower Table / Middle wall lower section
+                this.addBounds(-95,740,80,10,"Present Day");//Left House Bed
+                this.addBounds(170,825,8,37,"Present Day");//Left House Couch Back
+            //Bottom Right House present day interior
+            //-25
+            this.addBounds(620,645,29,420,"Present Day");//Left House Left Bound
+                this.addBounds(1085-15,645,29,420,"Present Day");//Left House Right Bound
+                this.addBounds(905-15,675,490,20,"Present Day");//Left House Upper Bound
+                this.addBounds(895-15,863,490,20,"Present Day");//Left House Lower Bound
+                this.addBounds(1025-15,675,102,46,"Present Day");//Left House Kitchen
+                this.addBounds(890-15,710,44,44,"Present Day");//Left House Table
+                this.addBounds(795-15,730,30,65,"Present Day"); //Left House Flower Table / Middle wall upper section
+                this.addBounds(795-15,850,30,30,"Present Day"); //Left House Flower Table / Middle wall lower section
+                this.addBounds(705-15,740,80,10,"Present Day");//Left House Bed
+                this.addBounds(970-15,825,8,37,"Present Day");//Left House Couch Back
+
+
+
 
                 break;
             case "Initial Park":
