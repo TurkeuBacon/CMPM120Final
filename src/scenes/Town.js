@@ -113,8 +113,8 @@ class Town extends Phaser.Scene
         //trees
         this.signImg = this.add.image(screenWidth/2, screenHeight/2, 'Sign');
         this.signImg.depth = 3;
-        this.phoneImg = this.add.image(screenWidth/2, screenHeight/2, 'Phone');
-        this.phoneImg.depth = 3;
+        //this.phoneImg = this.add.image(screenWidth/2, screenHeight/2, 'Phone');
+        //this.phoneImg.depth = 3;
         this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
         this.trees.depth = 3;
         this.trees.alpha = 1;
