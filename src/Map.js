@@ -111,6 +111,31 @@ class Map {
                 this.addHitbox(525, 272, 50, 20, "Present Day", 1001, 212);
                 this.addHitbox(879, 850, 50, 20, "Present Day", 976, 825);
                 this.addHitbox(97, 843, 50, 20, "Present Day", 71, 816);
+                //townhall present day interior
+                this.addBounds(895,300,55,46,"Present Day"); //townhall table 1
+                this.addBounds(1120,296,55,46,"Present Day"); //townhall table 2
+                this.addBounds(1007,260,50,30,"Present Day"); //townhall front desk
+                this.addBounds(1010,190,350,20,"Present Day"); //townhall interior upper bound
+                this.addBounds(1010,400,350,20,"Present Day"); //townhall interior lower bound
+                this.addBounds(1198,308,32,236,"Present Day");//townhall interior right bound
+                this.addBounds(813,284,32,236,"Present Day"); //townhall interior left bound
+                //library present day interior
+                this.addBounds(-140,170,29,420,"Present Day");//Library interior left bound
+                this.addBounds(200,170,29,420,"Present Day");//Library interior right bound
+                this.addBounds(0,130,350,20,"Present Day");//Library interior upper bound
+                this.addBounds(-65,162,68,24,"Present Day"); //Library bookcase 1
+                this.addBounds(32.5,156,80,35,"Present Day"); //Library bookcase 2
+                this.addBounds(120,165,69,25,"Present Day"); //Library Bookcase 3
+                this.addBounds(-35,285,27,109,"Present Day");//Library Table
+                this.addBounds(154,220,42,15,"Present Day");//Library Couch Arm 1
+                this.addBounds(157,278,42,22,"Present Day");//Library Couch Arm 2
+                this.addBounds(167,243,23,43,"Present Day");//Library Couch Back
+                this.addBounds(69,300,60,22,"Present Day");//Library Lower Bounds 1
+                this.addBounds(69,322,92,22,"Present Day");//Library Lower Bounds 2
+                this.addBounds(69,344,172,22,"Present Day");//Library Lower Bounds 3
+                this.addBounds(69,366,217,22,"Present Day");//Library Lower Bounds 4
+
+
                 break;
             case "Initial Park":
                 this.addHitbox(1160, 364, 20, 1000, "Present Day", -193, 339, false, true);
