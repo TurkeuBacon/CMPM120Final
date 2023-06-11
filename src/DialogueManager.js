@@ -3,14 +3,16 @@ import Item from "./Item.js";
 
 class DialogueManager
 {
-    constructor(scene, dialogueBoxKey)
+    constructor(scene, dialogueBoxKey, purpleDialogueKey)
     {
         this.dialogues = {};
         this.scene = scene;
         this.cm = this.scene.cameraManager;
         this.dialogueBoxContainer = this.cm.addUI(this.scene.add.container(scene.sys.game.canvas.width/2, 650));
         this.dialogueBox = this.scene.add.image(0, 0, dialogueBoxKey).setAlpha(1).setOrigin(0.5, 0.5);
+        this.purpleDialogueBox = this.scene.add.image(0, 0, purpleDialogueKey).setAlpha(1).setOrigin(0.5, 0.5);
         this.dialogueBoxContainer.add(this.dialogueBox);
+        this.dialogueBoxContainer.add(this.purpleDialogueBox);
         this.textObj = this.scene.add.text(0, 0, 'TESTING',{
             fontSize: '45px',
             maxLines: 3,
@@ -31,12 +33,14 @@ class DialogueManager
         this.scene.input.on('pointerup', ()=>{ this.click = false; this.waitNextClick = false; this.framesClicked = 0; });
     }
     
-    playDialogue(dialogue, preprocess=true)
+    playDialogue(dialogue, preprocess=true, purple=false)
     {
         if(this.playing) return false;
         this.playing = true;
         this.dialogueBoxContainer.alpha = 1;
-        this.writeDialogue(dialogue.text, dialogue.delays, preprocess, dialogue.item);
+        this.purpleDialogueBox.alpha = purple;
+        this.dialogueBox.alpha = !purple;
+        this.writeDialogue(dialogue.text, dialogue.delays, preprocess, dialogue.item, purple);
         this.scene.events.emit('freezeInput', true );
 
         return true;
@@ -100,7 +104,7 @@ class DialogueManager
         return outputText;
     }
 
-    async writeDialogue(text, delays, preprocess, item=null){
+    async writeDialogue(text, delays, preprocess, item=null, purple=false){
         let lineCount = 0;
         let currDelay = 0;
         let delayTime = 50;
@@ -111,7 +115,7 @@ class DialogueManager
             text = this.preprocessText(text);
         }
         let textProgress = "";
-        AudioManager.getInstance(this.scene).addSfx('npcAudio', 1, true, 1.5);
+        AudioManager.getInstance(this.scene).addSfx(purple ? 'purpleDAudio' : 'npcAudio', purple ? 4 : 1, true, 1.5);
         for (let i = 0; i < text.length; i++){
             if(currDelay < delays.length && i+1 == delays[currDelay].charI)
             {
@@ -124,9 +128,9 @@ class DialogueManager
                 lineCount++;
                 if(lineCount % 3 == 0)
                 {
-                    AudioManager.getInstance(this.scene).stopSfx('npcAudio');
+                    AudioManager.getInstance(this.scene).stopSfx(purple ? 'purpleDAudio' : 'npcAudio');
                     while(!this.click || this.waitNextClick) await this.wait(1);
-                    AudioManager.getInstance(this.scene).addSfx('npcAudio', 1, true, 1.5);
+                    AudioManager.getInstance(this.scene).addSfx(purple ? 'purpleDAudio' : 'npcAudio', purple ? 4 : 1, true, 1.5);
                     textProgress = "";
                 }
             }
@@ -143,7 +147,7 @@ class DialogueManager
             await this.wait(delayTime);
             delayTime = 50;
         }
-        AudioManager.getInstance(this.scene).stopSfx('npcAudio');
+        AudioManager.getInstance(this.scene).stopSfx(purple ? 'purpleDAudio' : 'npcAudio');
         console.log(item);
         if(item != null)
         {

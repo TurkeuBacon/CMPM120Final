@@ -132,7 +132,8 @@ class AudioManager{
         if(!mute)
         {
             console.log("BGM Volume: " + this.bgmVolume);
-            this.backgroundMusic.volume = this.bgmVolume;
+            if(this.backgroundMusic != null)
+                this.backgroundMusic.volume = this.bgmVolume;
             // for(let i = 0; i < this.sfxs.length; i++)
             // {
             //     console.log("SFX " + i + " Volume: " + this.sfxVolumes[i]);
@@ -141,7 +142,8 @@ class AudioManager{
         }
         else
         {
-            this.backgroundMusic.volume = 0;
+            if(this.backgroundMusic != null)
+                this.backgroundMusic.volume = 0;
             // for(let i = 0; i < this.sfxs.length; i++)
             // {
             //     this.sfxs[i].volume = 0;

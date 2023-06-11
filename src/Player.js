@@ -48,7 +48,7 @@ class Player extends Phaser.GameObjects.Sprite
         scene.cameraManager.addUI(this.taskBox);
         scene.cameraManager.addUI(this.taskText);
 
-        //this.setTask(new Task('testItem', "Find The Gun", null));
+        this.setTask(new Task('TreeBook', "Research the extinct tree.\n\nThere could be some info at the Library", null));
 
         this.anims.create(
             {
@@ -125,11 +125,13 @@ class Player extends Phaser.GameObjects.Sprite
         switch(this.inputDevice.direction)
         {
             case "neutral":
-                this.verticalSpeed = 0;
-                this.horizontalSpeed = 0;
-                this.stop();
-                //this.stopOnFrame(this.anims.get(this.anims.getCurrentKey()).getFrameByProgress(0));
-                this.setFrame(0);
+                if(!this.disableInput)
+                {
+                    this.verticalSpeed = 0;
+                    this.horizontalSpeed = 0;
+                    this.stop();
+                    this.setFrame(0);
+                }
                 break;
             case "up":
                 this.verticalSpeed = -this.playerSpeed * multiplier;
