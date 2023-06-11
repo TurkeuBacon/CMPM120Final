@@ -258,7 +258,7 @@ class Town extends Phaser.Scene
         //this.cameraManager.playerCamera.setBounds(this.PresentDayBG.x - this.PresentDayBG.width/2, this.PresentDayBG.y - this.PresentDayBG.height/2, this.PresentDayBG.width, this.PresentDayBG.height);
         //used to trigger a test on mapstate transitions
         this.input.keyboard.on('keydown-X', function(event) {
-            this.mapManager.loadingZone("1960s", this.player.x, this.player.y);
+            this.mapManager.loadingZone("1700s", this.player.x, this.player.y);
         }, this);
         this.fsbutton = this.add.sprite(100,100,'fsbutton').setInteractive().on('pointerdown', () => 
         {
@@ -276,7 +276,8 @@ class Town extends Phaser.Scene
         // this.joystick.update();
         // this.player.update();
         console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
-
+        //console.log("x" + this.player.x);
+        //console.log("y" + this.player.y);
     }
 }
 

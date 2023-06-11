@@ -18,10 +18,13 @@ class Map {
         if (this.mapName.includes("Int") && this.scene.player.x){
             //this.cm.playerCamera.stopFollowing();
             //this.cm.playerCamera.setScroll(camX, camY);
+            this.cm.playerCamera.useBounds = false;
         } else {
             this.cm.playerCamera.startFollowing();
+            this.cm.playerCamera.useBounds = true;
+            this.cm.playerCamera.setBounds(this.mapImage.x - this.mapImage.width/2, this.mapImage.y - this.mapImage.height/2, this.mapImage.width, this.mapImage.height);
         }
-        this.cm.playerCamera.setBounds(this.mapImage.x - this.mapImage.width/2, this.mapImage.y - this.mapImage.height/2, this.mapImage.width, this.mapImage.height);
+        
         let children = this.group.getChildren();
         //WEIRD
             children.forEach((child) => { 
@@ -88,11 +91,15 @@ class Map {
         switch (this.mapName){
             case "Present Day":
                 //town hall
-                this.addHitbox(518, 210, 50, 20, "PresentDayInt", 998, 349, 466, -80);
-                this.addHitbox(-16, 178, 40, 20, "PresentDayInt", -84, 329);
-                this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
-                this.addHitbox(986, 795, 50, 20, "PresentDayInt", 879, 811);
-                this.addHitbox(71, 790, 50, 20, "PresentDayInt", 97, 814);
+                this.addHitbox(518, 210, 50, 20, "PresentDayInt", 998, 349, 490, -110);
+                //library
+                this.addHitbox(-16, 178, 40, 20, "PresentDayInt", -84, 329, -466, -165);
+                //home repo
+                this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244, 15, -246);
+                //house bottom right
+                this.addHitbox(986, 795, 50, 20, "PresentDayInt", 879, 811, 328, 355);
+                //house bottom left
+                this.addHitbox(71, 790, 50, 20, "PresentDayInt", 97, 814, -463, 338);
                 this.addHitbox(-220, 400, 30, 1000, "Initial Park", 1122, 538, false, true);
                 //Bounds Initialization
                 this.addBounds(500, 950, 1500, 50, "Present Day");
@@ -114,7 +121,7 @@ class Map {
                 break;
             case "PresentDayInt":
                 this.addHitbox(998, 375, 50, 20, "Present Day", 514, 240);
-                this.addHitbox(-84, 355, 50, 20, "Present Day", -16, 206);
+                this.addHitbox(-84, 355, 100, 20, "Present Day", -16, 206);
                 this.addHitbox(525, 272, 50, 20, "Present Day", 1001, 212);
                 this.addHitbox(879, 850, 50, 20, "Present Day", 976, 825);
                 this.addHitbox(97, 843, 50, 20, "Present Day", 71, 816);
@@ -162,7 +169,7 @@ class Map {
             case "1700s":
                 console.log("when here for some reason");
                 //Town
-                this.addHitbox(518, 210, 50, 20, "1700sInt", 786, 255);
+                this.addHitbox(518, 210, 50, 20, "1700sInt", 786, 255, 274, -233);
                 //library
                 this.addHitbox(-16, 178, 40, 20, "1700sInt", -26, 331);
                 //this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
@@ -192,15 +199,15 @@ class Map {
                 break;
             case "1960s":
                 //Town hall
-                this.addHitbox(518, 210, 50, 20, "SixtiesInt", 998, 349);
+                this.addHitbox(518, 210, 50, 20, "SixtiesInt", 998, 349, 490, -110);
                 //library
-                this.addHitbox(-16, 178, 40, 20, "SixtiesInt", -84, 329);
+                this.addHitbox(-16, 178, 40, 20, "SixtiesInt", -84, 329, -466, -165);
                 //this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
                 //House Bottom Right
                 this.addHitbox(-220, 354, 30, 1000, "Sixties Park", 1122, 538, false, true);
-                this.addHitbox(986, 795, 50, 20, "SixtiesInt", 879, 811);
+                this.addHitbox(986, 795, 50, 20, "SixtiesInt", 879, 811, 328, 355);
                 //House Bottom Left
-                this.addHitbox(71, 790, 50, 20, "SixtiesInt", 97, 811);
+                this.addHitbox(71, 790, 50, 20, "SixtiesInt", 97, 811, -463, 338);
                 this.addBounds(500, 950, 1500, 50, "1700s");
                 this.addBounds(1218, 473, 50, 1500, "1700s");
                 this.addBounds(501, -48, 1500, 50, "1700s");
