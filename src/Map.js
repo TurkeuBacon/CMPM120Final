@@ -14,10 +14,10 @@ class Map {
     showMap(){
         this.group.setVisible(true);
         this.mapImage.setVisible(true);
+        console.log(this.mapName);
         let children = this.group.getChildren();
         //WEIRD
             children.forEach((child) => { 
-                console.log(child);
                 console.log("being enabled");
                 this.scene.physics.world.enable(child);
             });
@@ -80,6 +80,7 @@ class Map {
         //console.log(this.mapName);
         switch (this.mapName){
             case "Present Day":
+                //town hall
                 this.addHitbox(518, 210, 50, 20, "PresentDayInt", 998, 349);
                 this.addHitbox(-16, 178, 40, 20, "PresentDayInt", -84, 329);
                 this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
@@ -119,7 +120,15 @@ class Map {
                 this.addBounds(530, -340, 2000, 50, "Initial Park");
                 this.addBounds(-100, 75, 50, 2000, "Initial Park");
                 break;
+            case "1700s Park":
+                this.addHitbox(1160, 364, 20, 1000, "1700s", -193, 339, false, true);
+                this.addBounds(443, 665, 2000, 20, "1700s");
+                this.addBounds(1140, -520, 50, 1000, "1700s");
+                this.addBounds(530, -340, 2000, 50, "1700s");
+                this.addBounds(-100, 75, 50, 2000, "1700s");
+                break;
             case "1700s":
+                console.log("when here for some reason");
                 //Town
                 this.addHitbox(518, 210, 50, 20, "1700sInt", 786, 255);
                 //library
@@ -129,13 +138,65 @@ class Map {
                 this.addHitbox(986, 795, 50, 20, "1700sInt", 923, 801);
                 //House Bottom Left
                 this.addHitbox(71, 790, 50, 20, "1700sInt", 205, 818);
-                this.addHitbox(-220, 354, 30, 1000, "Initial Park", 1122, 538, false, true);
+                this.addHitbox(-220, 354, 30, 1000, "1700s Park", 1122, 538, false, true);
+                this.addBounds(500, 950, 1500, 50, "1700s");
+                this.addBounds(1218, 473, 50, 1500, "1700s");
+                this.addBounds(501, -48, 1500, 50, "1700s");
+                this.addBounds(-175, 690, 50, 500, "1700s");
+                    //Library
+                this.addBounds(44, 139, 266, 100,"1700s");
+                    //house
+                this.addBounds(47, 755, 295, 90,"1700s");
+                    //Town Hall
+                this.addBounds(520, 170, 350, 90, "1700s");
+                    //House
+                this.addBounds(956, 760, 295, 90, "1700s");
                 break;
             case "1700sInt":
                 this.addHitbox(785, 287, 50, 20, "1700s", 518, 240);
                 this.addHitbox(-29, 359, 50, 20, "1700s", -20, 210);
                 this.addHitbox(200, 850, 50, 20,"1700s", 71, 820);
-                this.addHitbox(920, 839, 50, 20, "1700s", 986, 805);
+                this.addHitbox(920, 839, 50, 20, "1700s", 986, 830);
+                break;
+            case "1960s":
+                //Town hall
+                this.addHitbox(518, 210, 50, 20, "SixtiesInt", 998, 349);
+                //library
+                this.addHitbox(-16, 178, 40, 20, "SixtiesInt", -84, 329);
+                //this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
+                //House Bottom Right
+                this.addHitbox(-220, 354, 30, 1000, "Sixties Park", 1122, 538, false, true);
+                this.addHitbox(986, 795, 50, 20, "SixtiesInt", 879, 811);
+                //House Bottom Left
+                this.addHitbox(71, 790, 50, 20, "SixtiesInt", 97, 811);
+                this.addBounds(500, 950, 1500, 50, "1700s");
+                this.addBounds(1218, 473, 50, 1500, "1700s");
+                this.addBounds(501, -48, 1500, 50, "1700s");
+                this.addBounds(-175, 690, 50, 500, "1700s");
+                    //Library
+                this.addBounds(44, 139, 266, 100,"1700s");
+                    //house
+                this.addBounds(47, 755, 295, 90,"1700s");
+                    //Town Hall
+                this.addBounds(520, 170, 350, 90, "1700s");
+                    //House
+                this.addBounds(956, 760, 295, 90, "1700s");
+                
+                break;
+            case "SixtiesInt":
+                this.addHitbox(998, 375, 50, 20, "1960s", 514, 240);
+                this.addHitbox(-84, 355, 50, 20, "1960s", -16, 206);
+                this.addHitbox(525, 272, 50, 20, "1960s", 1001, 212);
+                this.addHitbox(97, 843, 50, 20, "1960s", 71, 816);
+                this.addHitbox(879, 850, 50, 20, "1960s", 976, 825);
+                break;
+            case "Sixties Park":
+                this.addBounds(443, 665, 2000, 20, "Initial Park");
+                this.addBounds(1140, -520, 50, 1000, "Initial Park");
+                this.addBounds(530, -340, 2000, 50, "Initial Park");
+                this.addBounds(-100, 75, 50, 2000, "Initial Park");
+                this.addHitbox(1160, 364, 20, 1000, "1960s", -193, 339, false, true);
+                break;
         }
     }
     addHitbox(x,y, width, height, mapName, destX, destY, keepX=false, keepY=false){
