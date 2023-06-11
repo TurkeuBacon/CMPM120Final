@@ -39,12 +39,15 @@ class Player extends Phaser.GameObjects.Sprite
         });
         this.scene.cameraManager.addUI(this.interractionButton);
 
-        let taskBoxSize = {w: 400, h: 200}
-        this.taskBox = scene.add.rectangle(canvas.width-taskBoxSize.w, 0, taskBoxSize.w, taskBoxSize.h, 0x00aaff, 0.5).setOrigin(0, 0);
-        this.taskText = scene.add.text(canvas.width - this.taskBox.width/2, this.taskBox.height/2, "No Task",{
-            fontSize: '30px',
-            wordWrap: {width: this.taskBox.width-10}
+        this.taskBox = scene.add.image(0, 0, 'taskHub', 1);
+        this.taskBox.setPosition(canvas.width-this.taskBox.displayWidth, 0).setOrigin(0, 0);
+        this.taskBox.alpha = 0;
+        //this.taskBox = scene.add.rectangle(canvas.width-taskBoxSize.w, 0, taskBoxSize.w, taskBoxSize.h, 0x00aaff, 0.5).setOrigin(0, 0);
+        this.taskText = scene.add.text(canvas.width - this.taskBox.displayWidth/2, this.taskBox.displayHeight/2, "No Task",{
+            fontSize: '25px',
+            wordWrap: {width: this.taskBox.displayWidth-10}
         }).setOrigin(.5, .5);
+        this.taskText.alpha = 0;
         scene.cameraManager.addUI(this.taskBox);
         scene.cameraManager.addUI(this.taskText);
 
@@ -86,14 +89,19 @@ class Player extends Phaser.GameObjects.Sprite
     setTask(task) {
         if(task == null || task == undefined)
         {
-            this.taskText.setText("No Task");
-            this.taskBox.setAlpha(0);
-            this.taskText.setAlpha(0);
+            this.scene.add.tween({
+                targets: [this.taskBox, this.taskText],
+                duration: 1000,
+                alpha: 0
+            });
         }
         else
         {
-            this.taskBox.setAlpha(1);
-            this.taskText.setAlpha(1);
+            this.scene.add.tween({
+                targets: [this.taskBox, this.taskText],
+                duration: 1000,
+                alpha: 1
+            });
             console.log("Setting Task: " + task.text);
             this.taskText.setText(task.text);
             this.task = task;
