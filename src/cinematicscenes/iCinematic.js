@@ -51,7 +51,14 @@ class interactiveCinematic extends Phaser.Scene{
         this.load.image('presentDayFloor', '/Scene_PresentDay/PresentDay.png');
         this.load.image('presentDayHousing', '/Scene_PresentDay/buildings_all.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
-        this.loadNpc('girl', '/Npcs/npc1.json');
+
+        this.loadNpc('girl', '/Npcs/Ryan.json');
+        this.loadNpc('bacon','/Npcs/Gabe.json');
+        this.loadNpc('girl2','/NPcs/Lovely.json');
+
+        this.load.image('JoystickBack', '/HUD/Jbase.png');
+        this.load.image('JoystickHandle', '/HUD/Jhandle.png');
+        this.load.spritesheet('Button', '/HUD/A_Button.png', { frameWidth: 68, frameHeight: 70});
     }
     create(){
         const screenWidth = this.sys.game.config.width;
@@ -72,8 +79,11 @@ class interactiveCinematic extends Phaser.Scene{
         {
             this.npc2.playDialogue();
         });
-       this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 150, 75, 125, 0.42);
-        this.player = new Player(this, 0, 350, 'player', 1, this.joystick);
+        this.npc3 = new Npc(this,'bacon').setPosition(300,400);
+        this.npc4 = new Npc(this,'girl2').setPosition(600,500);
+        this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 'JoystickBack', 'JoystickHandle',  150, 75, 125, 0.42);
+        //0,350
+        this.player = new Player(this, 0, 350, 'player', 1, this.joystick, 'Button');
         this.player.depth = 2;
         this.tweens.add({
             targets:this.player,

@@ -23,18 +23,7 @@ class C2 extends Phaser.Scene{
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
 
         
-        this.load.image('torso', '/PurpleGuy/torso.png');
-        this.load.image('head', '/PurpleGuy/head.png');
-
-        this.load.image('arm_left', '/PurpleGuy/arm_left.png');
-        this.load.image('arm_right', '/PurpleGuy/arm_right.png');
-        this.load.image('wrist_hand_left', '/PurpleGuy/wrist_hand_left.png');
-        this.load.image('wrist_hand_right', '/PurpleGuy/wrist_hand_right.png');
-
-        this.load.image('leg_left', '/PurpleGuy/leg_left.png');
-        this.load.image('leg_right', '/PurpleGuy/leg_right.png');
-        this.load.image('ankle_foot_left', '/PurpleGuy/ankle_foot_left.png');
-        this.load.image('ankle_foot_right', '/PurpleGuy/ankle_foot_right.png');
+        PurpleGuy.loadPurpleGuyData(this);
 
         this.load.image('presentDayFloor', '/Scene_PresentDay/PresentDay.png');
         this.load.image('presentDayHousing', '/Scene_PresentDay/buildings_all.png');
@@ -89,72 +78,7 @@ class C2 extends Phaser.Scene{
         player.depth = 2;
       //  purplehead.depth = 2;
         //purpletorso.depth = 2;
-        let purpleGuyData = 
-        {
-            torso:
-            {
-                x: 0,
-                y: 0,
-                image: 'torso'
-            },
-            head:
-            {
-                x: 0,
-                y: -13,
-                image: 'head'
-            },
-            upperArmL:
-            {
-                x: -6,
-                y: -13,
-                image: 'arm_left'
-            },
-            upperArmR:
-            {
-                x: 6.5,
-                y: -12,
-                image: 'arm_right'
-            },
-            forearmL:
-            {
-                x: -8,
-                y: 12,
-                image: 'wrist_hand_left'
-            },
-            forearmR:
-            {
-                x: 8,
-                y: 12,
-                image: 'wrist_hand_right'
-            },
-            legL:
-            {
-                x: -3,
-                y: 16,
-                image: 'leg_left'
-            },
-            legR:
-            {
-                x: 3,
-                y: 16,
-                image: 'leg_right'
-            },
-            ankleL:
-            {
-                x: -4,
-                y: 20,
-                image: 'ankle_foot_left'
-            },
-            ankleR:
-            {
-                x: 4,
-                y: 20,
-                image: 'ankle_foot_right'
-            }
-        };
-        this.purpleGuy = new PurpleGuy(this, 825, 345, purpleGuyData);
-
-
+        this.purpleGuy = new PurpleGuy(this, 825, 345, this.cache.json.get('purpleGuyData'));
         this.anims.create(
             {
                 key: 'walk_up',
