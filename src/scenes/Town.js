@@ -164,7 +164,7 @@ class Town extends Phaser.Scene
         this.testNpc3 = new Npc(this,'girl3').setPosition(700,200);
        this.testNpc4 = new Npc(this,'girl4').setPosition(0,500);
        this.testNpc5 = new Npc(this,'girl5').setPosition(1000,750); //this one is inside the right house
-     this.testNpc6 = new Npc(this,'girl6').setPosition(550,150); //Home Repot clerk
+     this.testNpc6 = new Npc(this,'girl6').setPosition(550,125); //Home Repot clerk
      this.testNpc7 = new Npc(this,'girl7').setPosition(1007,225);//present day mayor
      this.testNpc8 = new Npc(this, 'girl8').setPosition(300,300);//pokemon go-er
 
