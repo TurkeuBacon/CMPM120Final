@@ -20,7 +20,7 @@ class MapState {
         this.currentMap = this.maps[2];
     }
     //Function to take care of Loading Zones (Time Switches, Interior buildings, etc.)
-    loadingZone(MapName, destX, destY, keepX, keepY){
+    loadingZone(MapName, destX, destY, camX, camY, keepX, keepY){
         //this.nextMap;
         console.log(MapName)
         for (let i = 0; i < this.maps.length;   i++){
@@ -34,7 +34,7 @@ class MapState {
         if (typeof this.nextMap != 'undefined' && this.currentMap.getName() != this.nextMap.getName()){
             console.log("Next Map " + this.nextMap.mapName);
             if(this.nextMap.getName().includes("Int") || this.nextMap.getName().includes("Park")){
-                    this.currentMap.Vanish(this.nextMap, 700);
+                    this.currentMap.Vanish(this.nextMap, 700, camX, camY);
                     this.currentMap = this.nextMap;
                     console.log("Set Current Map 1 " + this.currentMap.mapName);
                     this.scene.time.delayedCall(700, () => {

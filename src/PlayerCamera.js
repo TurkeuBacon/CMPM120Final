@@ -16,6 +16,12 @@ class PlayerCamera extends Phaser.Cameras.Scene2D.Camera
         this.target = target;
         this.startFollow(this.target);
     }
+    stopFollowing(){
+        this.stopFollow();
+    }
+    startFollowing(){
+        this.startFollow(this.target);
+    }
 }
 
 export default PlayerCamera;

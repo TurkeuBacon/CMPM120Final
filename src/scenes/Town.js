@@ -255,6 +255,7 @@ class Town extends Phaser.Scene
         this.sixtiesPark = new Map (this, "Sixties Park", this.initalParkBG, this.group9)
         this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.earlyPark, this.initialPark, this.sixtiesPark, this.presentDayInt, this.earlyInt, this.sixtiesInt);
         this.mapManager.initialize();
+        //this.cameraManager.playerCamera.setBounds(this.PresentDayBG.x - this.PresentDayBG.width/2, this.PresentDayBG.y - this.PresentDayBG.height/2, this.PresentDayBG.width, this.PresentDayBG.height);
         //used to trigger a test on mapstate transitions
         this.input.keyboard.on('keydown-X', function(event) {
             this.mapManager.loadingZone("1960s", this.player.x, this.player.y);
@@ -274,8 +275,7 @@ class Town extends Phaser.Scene
     {
         // this.joystick.update();
         // this.player.update();
-        console.log("x " + this.player.x);
-        console.log("y " + this.player.y);
+        console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
 
     }
 }

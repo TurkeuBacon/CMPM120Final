@@ -10,11 +10,18 @@ class Map {
         this.mapImage = mapImage;
         this.visible = false;
         this.initialized = false;
+        this.cm = this.scene.cameraManager;
     }
-    showMap(){
+    showMap(camX, camY){
         this.group.setVisible(true);
         this.mapImage.setVisible(true);
-        console.log(this.mapName);
+        if (this.mapName.includes("Int") && this.scene.player.x){
+            //this.cm.playerCamera.stopFollowing();
+            //this.cm.playerCamera.setScroll(camX, camY);
+        } else {
+            this.cm.playerCamera.startFollowing();
+        }
+        this.cm.playerCamera.setBounds(this.mapImage.x - this.mapImage.width/2, this.mapImage.y - this.mapImage.height/2, this.mapImage.width, this.mapImage.height);
         let children = this.group.getChildren();
         //WEIRD
             children.forEach((child) => { 
@@ -42,7 +49,7 @@ class Map {
         this.group.setVisible(false);
         this.mapImage.setVisible(false);
     }
-    Vanish(nextMap, vanishTime){
+    Vanish(nextMap, vanishTime, camX, camY){
         const blackScreen = this.scene.add.rectangle(
             this.scene.game.canvas.width /2,
             this.scene.game.canvas.height /2,
@@ -70,7 +77,7 @@ class Map {
                 });
                 this.mapImage.setVisible(false);
                 blackScreen.setVisible(false);
-                nextMap.showMap();
+                nextMap.showMap(camX, camY);
                 return true;
             }
         });
@@ -81,7 +88,7 @@ class Map {
         switch (this.mapName){
             case "Present Day":
                 //town hall
-                this.addHitbox(518, 210, 50, 20, "PresentDayInt", 998, 349);
+                this.addHitbox(518, 210, 50, 20, "PresentDayInt", 998, 349, 466, -80);
                 this.addHitbox(-16, 178, 40, 20, "PresentDayInt", -84, 329);
                 this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
                 this.addHitbox(986, 795, 50, 20, "PresentDayInt", 879, 811);
@@ -199,8 +206,8 @@ class Map {
                 break;
         }
     }
-    addHitbox(x,y, width, height, mapName, destX, destY, keepX=false, keepY=false){
-        let hitBox = new Hitbox(this.scene, x, y, width, height, mapName, destX, destY, keepX, keepY);
+    addHitbox(x,y, width, height, mapName, destX, destY, camX=0, camY=0, keepX=false, keepY=false){
+        let hitBox = new Hitbox(this.scene, x, y, width, height, mapName, destX, destY, camX, camY, keepX, keepY);
         this.group.add(hitBox);
         return hitBox;
     }
