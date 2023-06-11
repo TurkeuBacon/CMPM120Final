@@ -275,9 +275,9 @@ class Town extends Phaser.Scene
     {
         // this.joystick.update();
         // this.player.update();
-        console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
-        //console.log("x" + this.player.x);
-        //console.log("y" + this.player.y);
+        //console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
+        console.log("x" + this.player.x);
+        console.log("y" + this.player.y);
     }
 }
 

@@ -169,14 +169,14 @@ class Map {
             case "1700s":
                 console.log("when here for some reason");
                 //Town
-                this.addHitbox(518, 210, 50, 20, "1700sInt", 786, 255, 274, -233);
+                this.addHitbox(518, 210, 50, 20, "1700sInt", 810, 265, 274, -233);
                 //library
-                this.addHitbox(-16, 178, 40, 20, "1700sInt", -26, 331);
+                this.addHitbox(-16, 178, 40, 20, "1700sInt", -7, 264);
                 //this.addHitbox(1000, 185, 70, 20, "PresentDayInt", 527, 244);
                 //House Bottom Right
-                this.addHitbox(986, 795, 50, 20, "1700sInt", 923, 801);
+                this.addHitbox(986, 795, 50, 20, "1700sInt", 878, 810);
                 //House Bottom Left
-                this.addHitbox(71, 790, 50, 20, "1700sInt", 205, 818);
+                this.addHitbox(71, 790, 50, 20, "1700sInt", 140, 818);
                 this.addHitbox(-220, 354, 30, 1000, "1700s Park", 1122, 538, false, true);
                 this.addBounds(500, 950, 1500, 50, "1700s");
                 this.addBounds(1218, 473, 50, 1500, "1700s");
@@ -192,10 +192,10 @@ class Map {
                 this.addBounds(956, 760, 295, 90, "1700s");
                 break;
             case "1700sInt":
-                this.addHitbox(785, 287, 50, 20, "1700s", 518, 240);
-                this.addHitbox(-29, 359, 50, 20, "1700s", -20, 210);
-                this.addHitbox(200, 850, 50, 20,"1700s", 71, 820);
-                this.addHitbox(920, 839, 50, 20, "1700s", 986, 830);
+                this.addHitbox(805, 295, 50, 20, "1700s", 518, 240);
+                this.addHitbox(-14, 295, 50, 20, "1700s", -20, 210);
+                this.addHitbox(140, 850, 50, 20,"1700s", 71, 820);
+                this.addHitbox(878, 839, 50, 20, "1700s", 986, 828);
                 break;
             case "1960s":
                 //Town hall
