@@ -68,20 +68,14 @@ class Town extends Phaser.Scene
         this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
 
+        //Music On/Off
+        this.load.spritesheet('musicOnOff', '/General/music_on_off.png', { frameWidth: 130, frameHeight: 128 });
+        //CC On/Off
+        this.load.spritesheet('CCOnOff', '/General/cc_on_off.png', { frameWidth: 130, frameHeight: 128 });
+
         //Purple Guy Stuff
-        this.load.image('torso', '/PurpleGuy/torso.png');
+        //PurpleGuy.loadPurpleGuyData(this);
 
-        this.load.image('head', '/PurpleGuy/head.png');
-
-        this.load.image('arm_left', '/PurpleGuy/arm_left.png');
-        this.load.image('arm_right', '/PurpleGuy/arm_right.png');
-        this.load.image('wrist_hand_left', '/PurpleGuy/wrist_hand_left.png');
-        this.load.image('wrist_hand_right', '/PurpleGuy/wrist_hand_right.png');
-
-        this.load.image('leg_left', '/PurpleGuy/leg_left.png');
-        this.load.image('leg_right', '/PurpleGuy/leg_right.png');
-        this.load.image('ankle_foot_left', '/PurpleGuy/ankle_foot_left.png');
-        this.load.image('ankle_foot_right', '/PurpleGuy/ankle_foot_right.png');
         this.load.image('fsbutton','/HUD/fullscreen_button.png');
 
         this.loadItem('testItem', '/Items/itemTest.json');
@@ -168,6 +162,7 @@ class Town extends Phaser.Scene
                 image: 'ankle_foot_right'
             }
         };
+        
         this.purpleGuy = new PurpleGuy(this, 400, 500, purpleGuyData);
         //trees
         this.trees = this.add.image(screenWidth/2, screenHeight/2, 'trees');
@@ -260,7 +255,7 @@ class Town extends Phaser.Scene
         this.input.keyboard.on('keydown-X', function(event) {
             this.mapManager.loadingZone("1700s", this.player.x, this.player.y);
         }, this);
-        this.fsbutton = this.add.sprite(100,100,'fsbutton').setInteractive().on('pointerdown', () => 
+        this.fsbutton = this.add.sprite(25,25,'fsbutton').setInteractive().setOrigin(0, 0).setScale(1.5).on('pointerdown', () => 
         {
             if(this.scale.isFullscreen){
                 this.scale.stopFullscreen();
@@ -269,6 +264,22 @@ class Town extends Phaser.Scene
             }
         });
         this.cameraManager.addUI(this.fsbutton);
+        let mutedItem = localStorage.getItem("Muted");
+        console.log("Muted Item: " + mutedItem);
+        this.musicButton = this.add.sprite(this.fsbutton.x, this.fsbutton.y + this.fsbutton.displayHeight + 65, 'musicOnOff', 0).setOrigin(0, 0).setScale(.6).setInteractive().on('pointerdown', ()=>{
+            this.musicButton.setFrame(AudioManager.getInstance(this).toggleMute() ? 1 : 0);
+        });
+        this.cameraManager.addUI(this.musicButton);
+        if(mutedItem != null)
+        {
+            let shouldMute = mutedItem == "TRUE";
+            this.musicButton.setFrame(shouldMute ? 1 : 0);
+            AudioManager.getInstance(this).setMute(shouldMute);
+        }
+        this.ccButton = this.add.sprite(this.fsbutton.x, this.fsbutton.y + this.fsbutton.displayWidth + 65, 'CCOnOff', 0).setOrigin(0, 0).setScale(.6).setInteractive().on('pointerdown', ()=>{
+            this.ccButton.setFrame(AudioManager.getInstance(this).toggleCC() ? 1 : 0);
+        });
+        this.cameraManager.addUI(this.ccButton);
     }
 
     update(time, delta)
@@ -276,8 +287,8 @@ class Town extends Phaser.Scene
         // this.joystick.update();
         // this.player.update();
         //console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
-        console.log("x" + this.player.x);
-        console.log("y" + this.player.y);
+        //console.log("x" + this.player.x);
+        //console.log("y" + this.player.y);
     }
 }
 

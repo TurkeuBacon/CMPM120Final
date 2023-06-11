@@ -31,7 +31,7 @@ class MainMenu extends Phaser.Scene
         this.startButton.setScale(0.4);
         this.startButton.setInteractive().on('pointerdown', () => 
         {
-            this.scene.start('town');
+            this.scene.start('introCutscene');
         });
     }
 

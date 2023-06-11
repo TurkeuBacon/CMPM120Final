@@ -1,5 +1,6 @@
 import MainMenu from "./scenes/MainMenu.js";
 import Town from "./scenes/Town.js";
+import IntroCutscene from "./scenes/IntroCutscene.js";
 
 let config = {
 //     width: 1280,
@@ -14,7 +15,7 @@ let config = {
         default: 'arcade',
         arcade: { debug: true }
     },
-    scene: [MainMenu, Town],
+    scene: [MainMenu, IntroCutscene, Town],
 }
 
 let game = new Phaser.Game(config);

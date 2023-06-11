@@ -1,5 +1,26 @@
 class PurpleGuy extends Phaser.GameObjects.Container
 {
+    static loadPurpleGuyData(scene)
+    {
+        scene.load.path = '../assets/';
+        
+        scene.load.image('torso', '/PurpleGuy/torso.png');
+
+        scene.load.image('head', '/PurpleGuy/head.png');
+
+        scene.load.image('arm_left', '/PurpleGuy/arm_left.png');
+        scene.load.image('arm_right', '/PurpleGuy/arm_right.png');
+        scene.load.image('wrist_hand_left', '/PurpleGuy/wrist_hand_left.png');
+        scene.load.image('wrist_hand_right', '/PurpleGuy/wrist_hand_right.png');
+
+        scene.load.image('leg_left', '/PurpleGuy/leg_left.png');
+        scene.load.image('leg_right', '/PurpleGuy/leg_right.png');
+        scene.load.image('ankle_foot_left', '/PurpleGuy/ankle_foot_left.png');
+        scene.load.image('ankle_foot_right', '/PurpleGuy/ankle_foot_right.png');
+
+        scene.load.json('purpleGuyData', '/PurpleGuy/data.json');
+    }
+
     constructor(scene, x, y, parts)
     {
         super(scene, x, y);
@@ -46,7 +67,7 @@ class PurpleGuy extends Phaser.GameObjects.Container
 
         this.depth = 3;
 
-        this.playAnimation("idle");
+        this.playAnimation("wackadoodle");
     }
 
     update(time, delta)
@@ -56,95 +77,101 @@ class PurpleGuy extends Phaser.GameObjects.Container
 
     playAnimation(name)
     {
-        this.headImage.angle = 35;
-        this.ankleLImage.angle = 20;
-        this.ankleRImage.angle = -20;
-        this.legLContainer.angle = 0;
-        this.legRContainer.angle = 0;
-        this.upperArmLContainer.angle = 80;
-        this.upperArmRContainer.angle = -60;
-        this.forearmLImage.angle = -90;
-        this.forearmRImage.angle = 80;
-        this.angle = 0;
 
-        this.scene.add.tween({
-            targets: this,
-            angle: 10,
-            duration: 2000,
-            repeat: -1,
-            ease: "Elastic"
-        });
-
-        this.scene.add.tween({
-            targets: this.headImage,
-            angle: -35,
-            duration: 700,
-            yoyo: true,
-            repeat: -1,
-            ease: "Elastic"
-        });
-        this.scene.add.tween({
-            targets: this.legLContainer,
-            angle: 30,
-            duration: 250,
-            yoyo: true,
-            repeat: -1,
-        });
-        this.scene.add.tween({
-            targets: this.legRContainer,
-            angle: -30,
-            duration: 300,
-            ease: "Quart",
-            yoyo: true,
-            repeat: -1,
-        });
-        this.scene.add.tween({
-            targets: this.ankleLImage,
-            angle: -30,
-            duration: 400,
-            yoyo: true,
-            ease: "Quint",
-            repeat: -1,
-        });
-        this.scene.add.tween({
-            targets: this.ankleRImage,
-            angle: 30,
-            duration: 320,
-            yoyo: true,
-            repeat: -1,
-        });
-        this.scene.add.tween({
-            targets: this.upperArmLContainer,
-            angle: 10,
-            duration: 300,
-            yoyo: true,
-            repeat: -1,
-            ease: "Quart"
-        });
-        this.scene.add.tween({
-            targets: this.upperArmRContainer,
-            angle: -30,
-            duration: 400,
-            yoyo: true,
-            repeat: -1,
-            ease: "Quint"
-        });
-        this.scene.add.tween({
-            targets: this.forearmLImage,
-            angle: 50,
-            duration: 200,
-            yoyo: true,
-            repeat: -1,
-            ease: "Quart"
-        });
-        this.scene.add.tween({
-            targets: this.forearmRImage,
-            angle: -43,
-            duration: 300,
-            yoyo: true,
-            repeat: -1,
-            ease: "Quint"
-        });
+        switch(name)
+        {
+            case "wackadoodle":
+                this.headImage.angle = 0;
+                this.ankleLImage.angle = 20;
+                this.ankleRImage.angle = -20;
+                this.legLContainer.angle = 0;
+                this.legRContainer.angle = 0;
+                this.upperArmLContainer.angle = 80;
+                this.upperArmRContainer.angle = -60;
+                this.forearmLImage.angle = -90;
+                this.forearmRImage.angle = 80;
+                this.angle = 0;
+        
+                // this.scene.add.tween({
+                //     targets: this,
+                //     angle: 10,
+                //     duration: 2000,
+                //     repeat: -1,
+                //     ease: "Elastic"
+                // });
+        
+                // this.scene.add.tween({
+                //     targets: this.headImage,
+                //     angle: -35,
+                //     duration: 700,
+                //     yoyo: true,
+                //     repeat: -1,
+                //     ease: "Elastic"
+                // });
+                this.scene.add.tween({
+                    targets: this.legLContainer,
+                    angle: 30,
+                    duration: 250,
+                    yoyo: true,
+                    repeat: -1,
+                });
+                this.scene.add.tween({
+                    targets: this.legRContainer,
+                    angle: -30,
+                    duration: 300,
+                    ease: "Quart",
+                    yoyo: true,
+                    repeat: -1,
+                });
+                this.scene.add.tween({
+                    targets: this.ankleLImage,
+                    angle: -30,
+                    duration: 400,
+                    yoyo: true,
+                    ease: "Quint",
+                    repeat: -1,
+                });
+                this.scene.add.tween({
+                    targets: this.ankleRImage,
+                    angle: 30,
+                    duration: 320,
+                    yoyo: true,
+                    repeat: -1,
+                });
+                this.scene.add.tween({
+                    targets: this.upperArmLContainer,
+                    angle: 10,
+                    duration: 300,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "Quart"
+                });
+                this.scene.add.tween({
+                    targets: this.upperArmRContainer,
+                    angle: -30,
+                    duration: 400,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "Quint"
+                });
+                this.scene.add.tween({
+                    targets: this.forearmLImage,
+                    angle: 50,
+                    duration: 200,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "Quart"
+                });
+                this.scene.add.tween({
+                    targets: this.forearmRImage,
+                    angle: -43,
+                    duration: 300,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: "Quint"
+                });
+                break;
+        }
     }
 }
 
