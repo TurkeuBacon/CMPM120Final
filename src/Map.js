@@ -229,13 +229,21 @@ class Map {
                 this.addBounds(1140, -520, 50, 1000, "1700s");
                 this.addBounds(530, -340, 2000, 50, "1700s");
                 this.addBounds(-100, 75, 50, 2000, "1700s");
-                this.rect = this.scene.add.rectangle(193, 96, 20, 20, 0x0000, 0.01);
-                this.scene.physics.add.existing(this.rectangle);
+                this.addItem('Plant Tree');
+                this.rect = this.scene.add.rectangle(193, 96, 20, 20, 0xff00aa, 1);
+                this.scene.physics.add.existing(this.rect);
                 this.rect.body.setImmovable(true);
-                this.scene.physics.add.collider(this.player, this.rect, () => {
-                    if (this.player.hasItem("Tree Seed")){
-                        this.player.addItem(new Item(this.scene, "Plant Tree"));
-                    }
+                this.scene.events.on('playerInterractDown', ()=>{
+                    this.scene.physics.collide(this.scene.player, this.rect, () => {
+                        console.log("colliding");
+                        if (this.scene.player.hasItem("Tree Seed")){
+                            this.scene.player.addItem(new Item(this.scene, "Plant Tree"));
+                            this.scene.player.removeItem("Tree Seed");
+                        } else if (this.scene.player.hasItem("Plant Tree") && this.scene.player.hasItem("Water Can"))
+                        {
+                            
+                        }
+                    });
                 });
                 break;
             case "1700s":
