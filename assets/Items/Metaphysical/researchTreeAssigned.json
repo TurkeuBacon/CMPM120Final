@@ -1,7 +1,7 @@
 {
     "x": 697,
     "y": 135,
-    "texture": "itemTest.png",
+    "texture": "ItemTest.png",
     "canPickup": true,
     "metaphysical": true,
     "task": {
