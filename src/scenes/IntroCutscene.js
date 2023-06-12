@@ -33,7 +33,7 @@ class IntroCutscene extends Phaser.Scene
         this.load.path = '../assets/';
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
         this.load.image('InteriorBackground', '/Scene_PresentDay/Interior.png');
-        this.loadAudio('purpleGuyTheme', '/Music/Wacky Man.mp3');
+        this.loadAudio('purpleGuyTheme', '/Music/Wackyman.mp3');
         this.loadAudio('houseMusic', '/Music/BeneathTheMask-instrumental.mp3');
         PurpleGuy.loadPurpleGuyData(this);
         //Music On/Off
