@@ -37,7 +37,7 @@ class sfMeat extends Phaser.Scene{
         this.load.path = '../assets/';
         this.load.audio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.load.audio('npcAudio', 'npcAudio.mp3', 1);
-        this.load.audio('leanguy','/Music/Wacky man.mp3',0,2);
+        this.load.audio('leanguy','/Music/Wackyman.mp3',0,2);
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
 
         
