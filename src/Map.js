@@ -229,7 +229,7 @@ class Map {
                 this.addBounds(1140, -520, 50, 1000, "1700s");
                 this.addBounds(530, -340, 2000, 50, "1700s");
                 this.addBounds(-100, 75, 50, 2000, "1700s");
-                this.addItem('Plant Tree');
+                // this.addItem('Plant Tree');
                 this.rect = this.scene.add.rectangle(193, 96, 20, 20, 0xff00aa, 1);
                 this.scene.physics.add.existing(this.rect);
                 this.rect.body.setImmovable(true);
@@ -241,7 +241,7 @@ class Map {
                             this.scene.player.removeItem("Tree Seed");
                         } else if (this.scene.player.hasItem("Plant Tree") && this.scene.player.hasItem("Water Can"))
                         {
-                            
+
                         }
                     });
                 });
