@@ -5,9 +5,15 @@ import Bounds from "./Bounds.js";
 import Sign from "./Sign.js";
 import Npc from "./Npc.js";
 import Item from "./Item.js";
+import AudioManager from "./AudioManager.js";
 class Map {
-    constructor(scene, mapName, mapImage, group){
+    constructor(scene, mapName, mapImage, group, bad){
         this.Sign = Sign;
+      //  this.badPark = this.add.image(this.scene.sys.game.width/2, this.scene.sys.game.width/2, bad);
+        this.badPark = bad;
+        console.log(this.badPark);
+        this.badPark.setDepth(0);
+        this.badparkHitbox;
         this.scene = scene;
         this.mapName = mapName;
         this.group = group;
@@ -15,7 +21,7 @@ class Map {
         this.visible = false;
         this.initialized = false;
         this.cm = this.scene.cameraManager;
-        
+        this.scene.events.on('update', (time, delta) => { this.update(time, delta)} );
     }
     showMap(camX, camY){
         this.group.setVisible(true);
@@ -29,7 +35,84 @@ class Map {
             this.cm.playerCamera.useBounds = true;
             this.cm.playerCamera.setBounds(this.mapImage.x - this.mapImage.width/2, this.mapImage.y - this.mapImage.height/2, this.mapImage.width, this.mapImage.height);
         }
-        
+        if(!this.scene.player.hasItem("Apartments Found") && this.mapName == "Present Day" && this.scene.player.hasItem("Plant Tree") && !this.scene.player.hasItem("Petition Completed"))
+        {
+            this.scene.player.addItem(new Item(this.scene, "Apartments Found"));
+        }
+
+        if (this.scene.player.hasItem("Apartments Found") && this.mapName == "Initial Park"){
+            this.mapImage.setDepth(0);
+            this.badPark.setDepth(1);
+            this.badparkHitbox = this.addBounds(481,290,5000,5,"Initial Park");//apartment bounds
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 1500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 2500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 3500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 4500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 5500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 6500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 7500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 8500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 9500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 10500);
+            }
+            for(let i = 0; i < 1; i++){
+                setTimeout(() => {
+                    this.scene.player.addItem(new Item(this.scene, "Depression"));
+                  }, 11500);
+            }
+            AudioManager.getInstance(this.scene).endAllSound();
+            this.chaos = new Npc(this.scene, 'paranoia');
+            this.chaos.playDialogue();
+            //this.addItem('gottem');
+            
+            
+        } else if (this.scene.player.hasItem('Depression')) {
+            this.mapImage.setDepth(1);
+            this.badPark.setDepth(0);
+            //this. this.add.rectangle
+        } else {
+            this.mapImage.setDepth(1);
+            this.badPark.setDepth(0);
+        }
         let children = this.group.getChildren();
         //WEIRD
             children.forEach((child) => { 
@@ -47,6 +130,9 @@ class Map {
                 this.scene.physics.world.enable(child);
             });
         }
+        if (this.scene.player.hasItem("Depression")){
+            this.god  = this.addNPC('deadGuy');
+            }
         this.visible = true;
         this.scene.events.emit('freezeInput', false);
         
@@ -110,6 +196,7 @@ class Map {
                 this.addBounds(500, 950, 1500, 50, "Present Day");
                 this.addBounds(1218, 473, 50, 1500, "Present Day");
                 this.addBounds(501, -48, 1500, 50, "Present Day");
+                this.addBounds(-175, 7, 50, 500, "Present Day");
                 this.addBounds(-175, 690, 50, 500, "Present Day");
                     //Library
                 this.addBounds(44, 139, 266, 100,"Present Day");
@@ -121,6 +208,8 @@ class Map {
                 this.addBounds(520, 170, 350, 90, "Present Day");
                     //House
                 this.addBounds(956, 760, 295, 90, "Present Day");
+
+                //this.addItem('dose of revenge');
                 //NPC
                 this.addNPC('Susan');
                 this.addNPC('Janet');
@@ -128,8 +217,9 @@ class Map {
                 this.addNPC('Lovely');
                 this.addNPC('Paradox');
                 this.addNPC('Ryan');
+                
                 //this.addNPC(1000, 750, 'girl5');
-
+              //  this.addItem('Apartments Found');
                 
                 break;
             case "PresentDayInt":
@@ -202,6 +292,7 @@ class Map {
                 this.addBounds(795-15,850,30,30,"Present Day"); //Left House Flower Table / Middle wall lower section
                 this.addBounds(705-15,740,80,10,"Present Day");//Left House Bed
                 this.addBounds(970-15,825,8,37,"Present Day");//Left House Couch Back
+                
             //NPCS
                 this.addNPC('Oscar');
                 this.addNPC('Ron');
@@ -210,6 +301,7 @@ class Map {
             //Items
                 this.addItem('Water Can');
                 this.addItem('Tree Book');
+                this.addItem('Apartments Found');
 
 
                 break;
@@ -230,7 +322,7 @@ class Map {
                 this.addBounds(530, -340, 2000, 50, "1700s");
                 this.addBounds(-100, 75, 50, 2000, "1700s");
                 // this.addItem('Plant Tree');
-                this.rect = this.scene.add.rectangle(193, 96, 20, 20, 0xff00aa, 1);
+                this.rect = this.scene.add.rectangle(193, 96, 40, 40, 0xff00aa, 0.01);
                 this.scene.physics.add.existing(this.rect);
                 this.rect.body.setImmovable(true);
                 this.scene.events.on('playerInterractDown', ()=>{
@@ -420,6 +512,15 @@ class Map {
                 break;
         }
     }
+    update(time,delta){
+        
+        if (this.scene.player.hasItem("dose of revenge")){
+                
+                setTimeout(() => {
+                    this.scene.scene.start('credits');
+                  }, 3000);
+        }
+    }
     addHitbox(x,y, width, height, mapName, destX, destY, camX=0, camY=0, keepX=false, keepY=false){
         let hitBox = new Hitbox(this.scene, x, y, width, height, mapName, destX, destY, camX, camY, keepX, keepY);
         this.group.add(hitBox);
@@ -428,6 +529,7 @@ class Map {
     addBounds(x, y, width, height, mapName){
         let bound = new Bounds (this.scene, x, y, width, height, mapName);
         this.group.add(bound); 
+        return bound;
     }
     addNPC(name){
         let npc = new Npc(this.scene, name);

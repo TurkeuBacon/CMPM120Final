@@ -161,14 +161,14 @@ class IntroCutscene extends Phaser.Scene
             this.add.tween({
                 targets: this.player,
                 y:425,
-                duration: 100,
+                duration: 1100,
                 onComplete: () => 
                 {
                     this.player.play('walk_right', true);
                     this.add.tween({
                         targets: this.player,
                         x: 500,
-                        duration: 100,
+                        duration: 1000,
                         onComplete: () => 
                         {
                             AudioManager.getInstance(this).addBackgroundMusic('purpleGuyTheme', 0.8, true, true);

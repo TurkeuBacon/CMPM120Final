@@ -6,7 +6,7 @@ class Player extends Phaser.GameObjects.Sprite
     {
         super(scene, x, y, texture, frame);
         this.inventory = [];
-        this.playerSpeed = 100;
+        this.playerSpeed = 170;
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setImmovable(false);
@@ -167,6 +167,7 @@ class Player extends Phaser.GameObjects.Sprite
         let returnVal = false;
         this.inventory.forEach(element => {
             console.log("Item: " + element.itemKey + " | " + itemKey + ": " + (element.itemKey == itemKey));
+            console.log("Checking " + element.itemKey + ": " + element.itemKey == itemKey);
             if(element.itemKey == itemKey)
             {
                 console.log("returning true");
@@ -196,9 +197,16 @@ class Player extends Phaser.GameObjects.Sprite
         {
             if(this.inventory[i].itemKey == itemKey)
             {
+                console.log("Removing: " + this.inventory[i].itemKey);
                 let item = this.inventory[i];
-                this.inventory = this.inventory.splice(i, i);
-                item.destroy();
+                this.inventory.splice(i, 1);
+                let arrStr = "";
+                this.inventory.forEach(element => {
+                    arrStr += element.itemKey + ", ";
+                });
+                console.log("Removed: " + item.itemKey + " new inventory: " + arrStr);
+                item.setActive(false);
+                item.setVisible(false);
                 break;
             }
         }

@@ -30,9 +30,8 @@ class MapState {
             }
         }
         console.log(this.nextMap.getName());
-
+        
         if (typeof this.nextMap != 'undefined' && this.currentMap.getName() != this.nextMap.getName()){
-            console.log("Next Map " + this.nextMap.mapName);
             if(this.nextMap.getName().includes("Int") || this.nextMap.getName().includes("Park")){
                     this.currentMap.Vanish(this.nextMap, 700, camX, camY);
                     this.currentMap = this.nextMap;

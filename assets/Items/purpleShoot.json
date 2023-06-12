@@ -1,8 +1,8 @@
 {
-    "x": 193,
-    "y": 96,
+    "x": 2000,
+    "y": 2000,
     "metaphysical": true,
     "texture": "placetoplanttree.png",
     "canPickup": true,
-    "extraText": "Planting the Tree!"
+    "extraText": "You shot him."
 }
