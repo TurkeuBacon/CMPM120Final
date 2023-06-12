@@ -60,7 +60,7 @@ class sfMeat extends Phaser.Scene{
 
         this.loadNpc('girl', '/Npcs/SceneFlowNpc.json');
         this.loadNpc('bacon','/Npcs/Gabe.json');
-        this.loadNpc('girl2','/NPcs/Lovely.json');
+        this.loadNpc('girl2','/Npcs/Lovely.json');
 
         this.load.image('JoystickBack', '/HUD/Jbase.png');
         this.load.image('JoystickHandle', '/HUD/Jhandle.png');
