@@ -176,6 +176,19 @@ class Player extends Phaser.GameObjects.Sprite
         });
         return returnVal;
     }
+    hasNumItems(itemKey, num)
+    {
+        let count = 0;
+        this.inventory.forEach(element => {
+            console.log("Item: " + element.itemKey + " | " + itemKey + ": " + (element.itemKey == itemKey));
+            if(element.itemKey == itemKey)
+            {
+                console.log("returning true");
+                count++;
+            }
+        });
+        return count >= num;
+    }
 
     removeItem(itemKey)
     {

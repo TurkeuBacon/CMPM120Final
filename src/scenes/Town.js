@@ -92,6 +92,7 @@ class Town extends Phaser.Scene
         this.loadItem('Water Can', '/Items/waterCan.json');
         this.loadItem('Tree Book', '/Items/TreeBook.json');
         this.loadItem('Tree Seed', '/Items/Seed.json');
+        this.loadItem('Plant Tree', '/Items/plantTree.json');
 
         
         this.loadNpc('Susan','/Npcs/Susan.json');
@@ -197,6 +198,7 @@ class Town extends Phaser.Scene
         this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 'JoystickBack', 'JoystickHandle',  150, 75, 125, 0.42);
         this.player = new Player(this, 71, 818, 'player', 1, this.joystick, 'Button');
         this.player.addItem(new Item(this, 'researchTreeAssigned'));
+        this.player.addItem(new Item(this, 'Tree Book'));
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
         //this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
@@ -290,7 +292,7 @@ class Town extends Phaser.Scene
         // this.joystick.update();
         // this.player.update();
         //console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
-        console.log("Player: (" + this.player.x + ", " + this.player.y + ")");
+        //console.log("Player: (" + this.player.x + ", " + this.player.y + ")");
         // console.log("y" + this.player.y);
         //console.log(pointer.worldX);
         //console.log(pointer.worldY);
