@@ -50,7 +50,7 @@ class Town extends Phaser.Scene
         this.load.image('Phone','/General/phone.png');
         this.load.image('JoystickBack', '/HUD/Jbase.png');
         this.load.image('JoystickHandle', '/HUD/Jhandle.png');
-        this.load.spritesheet('Button', '/HUD/a_Button.png', { frameWidth: 68, frameHeight: 70});
+        this.load.spritesheet('Button', '/HUD/A_button.png', { frameWidth: 68, frameHeight: 70});
         //Trees
         this.load.image('trees', '/Scene_PresentDay/trees.png');
         this.load.image ('trees1700s', '/Scene_1700s/trees1700.png');

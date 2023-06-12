@@ -19,7 +19,7 @@ class sfPark extends Phaser.Scene{
 
         this.load.image('JoystickBack', '/HUD/Jbase.png');
         this.load.image('JoystickHandle', '/HUD/Jhandle.png');
-        this.load.spritesheet('Button', '/HUD/A_Button.png', { frameWidth: 68, frameHeight: 70});
+        this.load.spritesheet('Button', '/HUD/A_button.png', { frameWidth: 68, frameHeight: 70});
 
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
     }
