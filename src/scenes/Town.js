@@ -93,7 +93,7 @@ class Town extends Phaser.Scene
 
         this.loadItem('Water Can', '/Items/waterCan.json');
         this.loadItem('Tree Book', '/Items/TreeBook.json');
-        this.loadItem('Tree Seed', '/Items/Seed.json');
+        this.loadItem('Tree Seed', '/Items/seed.json');
         this.loadItem('Plant Tree', '/Items/plantTree.json');
         this.loadItem('Apartments Found', '/Items/ApartmentsFound.json');
         this.loadItem('Depression','/Items/depression.json');
