@@ -38,3 +38,29 @@ Progression<br />
 -progression of narrative, certain scenes change as player obtains items and interacts with world<br />
 Prefabs<br />
 -NPC jsons, item jsons, multiple Scene subclasses, many Game object subclasses to handle different aspects of the <br />game
+
+Project Archive<br />
+------------------------------------ <br />
+[Main Game] <br />
+https://turkeubacon.github.io/CMPM120Final/Pages/main-gameplay-1.html <br />
+[Prototypes] <br />
+Core Gameplay: <br />
+https://turkeubacon.github.io/CMPM120Final/Pages/core-gameplay-1.html <br />
+Scene Flow: <br />
+https://turkeubacon.github.io/CMPM120Final/Pages/scene-flow-1.html <br />
+Cinematics: <br />
+https://turkeubacon.github.io/CMPM120Final/Pages/cinematics-1.html <br />
+[Theme] <br />
+The theme is shown through its time travel mechanic taking place in the same town. <br />
+[Selectable Requirements] <br />
+Data Driven Experience Progression <br />
+    eg: All Jsons in the NPC and items folders, plantTree.json <br />
+Procedural Graphics<br />
+    eg: One of our assets was created using a container with multiple parts. We have a being known as the “Purple Guy” who is composed of a container full of objects. All of his limbs are fully controllable using tweens, which satisfies the requirement of an advanced visual asset. <br />  
+[Contributor credits] <br />
+Daniel Bustan (Production Lead) <br />
+Gabriel Bacon (Tech Lead) <br />
+Jacob Tennis (Tech Lead/Art Lead) <br />
+Gordon Cai (Programmer) <br />
+[Asset Credits] <br />
+@gif_not_jif (Assets around the map) <br />
