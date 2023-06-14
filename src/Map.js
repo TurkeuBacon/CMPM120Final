@@ -44,60 +44,10 @@ class Map {
             this.mapImage.setDepth(0);
             this.badPark.setDepth(1);
             this.badparkHitbox = this.addBounds(481,290,5000,5,"Initial Park");//apartment bounds
-            for(let i = 0; i < 1; i++){
+            for(let i = 0; i < 20; i++){
                 setTimeout(() => {
                     this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 1500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 2500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 3500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 4500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 5500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 6500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 7500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 8500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 9500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 10500);
-            }
-            for(let i = 0; i < 1; i++){
-                setTimeout(() => {
-                    this.scene.player.addItem(new Item(this.scene, "Depression"));
-                  }, 11500);
+                  }, 1500*(i+1));
             }
             AudioManager.getInstance(this.scene).endAllSound();
             this.chaos = new Npc(this.scene, 'paranoia');
