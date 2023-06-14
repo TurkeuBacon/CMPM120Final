@@ -236,9 +236,6 @@ class Player extends Phaser.GameObjects.Sprite
                 }
                 this.verticalSpeed = 0;
                 this.horizontalSpeed = 0;
-                this.stop();
-                //this.stopOnFrame(this.anims.get(this.anims.getCurrentKey()).getFrameByProgress(0));
-                this.setFrame(0);
                 break;
             case "up":
                 this.verticalSpeed = -this.playerSpeed * multiplier;
