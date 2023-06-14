@@ -10,7 +10,7 @@ class Credits extends Phaser.Scene {
     create(){
         const screenWidth = this.sys.game.config.width;
         const screenHeight = this.sys.game.config.height;
-        this.credits = this.add.image(screenWidth/2, screenHeight/2, 'credits1').setScale(0.8);
+        this.credits = this.add.image(screenWidth/2, 350, 'credits1').setScale(0.8);
         /*this.input.on('pointerdown', () =>{
             this.scene.start('main_menu');
         });*/
