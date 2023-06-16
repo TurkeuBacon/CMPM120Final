@@ -56,7 +56,9 @@ The theme is shown through its time travel mechanic taking place in the same tow
 Data Driven Experience Progression <br />
     eg: All Jsons in the NPC and items folders, plantTree.json <br />
 Procedural Graphics<br />
-    eg: One of our assets was created using a container with multiple parts. We have a being known as the “Purple Guy” who is composed of a container full of objects. All of his limbs are fully controllable using tweens, which satisfies the requirement of an advanced visual asset. <br />  
+    eg: One of our assets was created using a container with multiple parts. We have a being known as the “Purple Guy” who is composed of a container full of objects. All of his limbs are fully controllable using tweens, which satisfies the requirement of an advanced visual asset. <br />
+Complete Closed Captioning <br />
+    eg: All audio that is played will display a caption on the right side of the screen. Music that is currently playing will be constantly captioned, while sound effects have their captions fade out after two seconds. <br />  
 [Contributor credits] <br />
 Daniel Bustan (Production Lead) <br />
 Gabriel Bacon (Tech Lead) <br />
