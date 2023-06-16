@@ -1,0 +1,18 @@
+{
+    "x": 400,
+    "y": 500,
+
+    "scale": 5,
+
+    "texture": "npc5.png",
+    
+    "lines": [
+        {
+            "text": "You shot him. \n\n\n But is it really over?",
+            "delays": [],
+            "repeat": false,
+            "item": "dose of revenge"
+        }
+        
+    ]
+}

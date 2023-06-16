@@ -180,8 +180,8 @@ class AudioManager{
             if(this.sfxs[i].key == audioKey)
             {
                 this.sfxs[i].loop = false;
-                this.sfxVolumes = this.sfxVolumes.splice(i, i);
-                this.sfxs = this.sfxs.splice(i, i);
+                this.sfxVolumes.splice(i, 1);
+                this.sfxs.splice(i, );
                 break;
             }
         }

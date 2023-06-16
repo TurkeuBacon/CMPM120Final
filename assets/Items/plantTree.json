@@ -1,6 +1,7 @@
 {
     "x": 193,
     "y": 96,
+    "metaphysical": true,
     "texture": "placetoplanttree.png",
     "canPickup": true,
     "extraText": "Planting the Tree!"

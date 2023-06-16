@@ -5,7 +5,7 @@
     "scale": 1,
 
     "texture": "npc2.png",
-    "jumpItem": {"itemKey": "Tree Book", "lineNumber": 4},
+    "jumpItem": {"itemKey": "Apartments Found", "lineNumber": 4},
     "lines": [
         {
             "text": "I'm the mayor of this town.",
@@ -32,11 +32,18 @@
             "item": null
         },
         {
-            "text": "Ohohoh, you have the book!",
+            "text": "They finally did it, after long last...\nVery excited to finally be able to live in my dream home, thanks to Industry Corp!\nHopefully more of our taxes can go to them to help fund bigger and brighter things...",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        },
+        {
+            "text": "Hopefully more of our taxes can go to them to help fund bigger and brighter things...",
             "delays": [],
             "repeat": true,
             "item": null
         }
+        
         
     ]
 }

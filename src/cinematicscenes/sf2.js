@@ -37,7 +37,7 @@ class sfMeat extends Phaser.Scene{
         this.load.path = '../assets/';
         this.load.audio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.load.audio('npcAudio', 'npcAudio.mp3', 1);
-        this.load.audio('leanguy','/Music/Wacky man.mp3',0,2);
+        this.load.audio('leanguy','/Music/Wackyman.mp3',0,2);
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
 
         
@@ -60,11 +60,11 @@ class sfMeat extends Phaser.Scene{
 
         this.loadNpc('girl', '/Npcs/SceneFlowNpc.json');
         this.loadNpc('bacon','/Npcs/Gabe.json');
-        this.loadNpc('girl2','/NPcs/Lovely.json');
+        this.loadNpc('girl2','/Npcs/Lovely.json');
 
         this.load.image('JoystickBack', '/HUD/Jbase.png');
         this.load.image('JoystickHandle', '/HUD/Jhandle.png');
-        this.load.spritesheet('Button', '/HUD/A_Button.png', { frameWidth: 68, frameHeight: 70});
+        this.load.spritesheet('Button', '/HUD/A_button.png', { frameWidth: 68, frameHeight: 70});
 
         this.loadItem('Water Can', '/Items/waterCan.json');
     }

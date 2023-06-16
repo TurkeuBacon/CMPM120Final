@@ -1,0 +1,7 @@
+{
+    "x": 2000,
+    "y": 2000,
+    "metaphysical": true,
+    "texture": "ItemTest.png",
+    "canPickup": true
+}

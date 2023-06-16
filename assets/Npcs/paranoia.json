@@ -1,0 +1,18 @@
+{
+    "x":900,
+    "y":900,
+
+    "scale": 1,
+
+    "texture": "npc6.png",
+    
+    "lines": [
+        {
+            "text": "H̵͛͘e̷̒̋'̴̂̈s̶̺̈́ ̷̑̅ĭ̴͘n̵̄͝ ̴̆͘m̴̒̉ŷ̵̓ ̵̈͑ḧ̷́͊e̵̒̂a̸͛͘d̷̈́̉...\n\n\n I loved him.",
+            "delays": [],
+            "repeat": false,
+            "item": null
+        }
+       
+    ]
+}

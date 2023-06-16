@@ -33,7 +33,7 @@ class IntroCutscene extends Phaser.Scene
         this.load.path = '../assets/';
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
         this.load.image('InteriorBackground', '/Scene_PresentDay/Interior.png');
-        this.loadAudio('purpleGuyTheme', '/Music/Wacky Man.mp3');
+        this.loadAudio('purpleGuyTheme', '/Music/Wackyman.mp3');
         this.loadAudio('houseMusic', '/Music/BeneathTheMask-instrumental.mp3');
         PurpleGuy.loadPurpleGuyData(this);
         //Music On/Off
@@ -51,7 +51,7 @@ class IntroCutscene extends Phaser.Scene
         this.loadItem('researchTreeAssigned', '/Items/Metaphysical/researchTreeAssigned.json');
         this.load.image('JoystickBack', '/HUD/Jbase.png');
         this.load.image('JoystickHandle', '/HUD/Jhandle.png');
-        this.load.spritesheet('Button', '/HUD/A_Button.png', { frameWidth: 68, frameHeight: 70});
+        this.load.spritesheet('Button', '/HUD/A_button.png', { frameWidth: 68, frameHeight: 70});
     }
 
     spawnCollision()
@@ -161,14 +161,14 @@ class IntroCutscene extends Phaser.Scene
             this.add.tween({
                 targets: this.player,
                 y:425,
-                duration: 100,
+                duration: 1100,
                 onComplete: () => 
                 {
                     this.player.play('walk_right', true);
                     this.add.tween({
                         targets: this.player,
                         x: 500,
-                        duration: 100,
+                        duration: 1000,
                         onComplete: () => 
                         {
                             AudioManager.getInstance(this).addBackgroundMusic('purpleGuyTheme', 0.8, true, true);

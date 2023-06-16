@@ -63,7 +63,7 @@ class MainMenu extends Phaser.Scene
         this.startButton.setInteractive().on('pointerdown', () => 
         {
             AudioManager.getInstance(this).endAllSound();
-            this.scene.start('town');
+            this.scene.start('introCutscene');
         });
         this.fsbutton = this.add.sprite(25,25,'fsbutton').setInteractive().setOrigin(0, 0).setScale(1.2).on('pointerdown', () => 
         {

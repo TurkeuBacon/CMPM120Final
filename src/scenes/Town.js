@@ -50,7 +50,7 @@ class Town extends Phaser.Scene
         this.load.image('Phone','/General/phone.png');
         this.load.image('JoystickBack', '/HUD/Jbase.png');
         this.load.image('JoystickHandle', '/HUD/Jhandle.png');
-        this.load.spritesheet('Button', '/HUD/A_Button.png', { frameWidth: 68, frameHeight: 70});
+        this.load.spritesheet('Button', '/HUD/A_button.png', { frameWidth: 68, frameHeight: 70});
         //Trees
         this.load.image('trees', '/Scene_PresentDay/trees.png');
         this.load.image ('trees1700s', '/Scene_1700s/trees1700.png');
@@ -72,7 +72,9 @@ class Town extends Phaser.Scene
         this.load.image('parkStart', '/Scene_PresentDay/Park_Initial.png');
         this.load.image('park1700s', '/Scene_1700s/Park1700s.png');
         this.load.image('park1960s', '/Scene_1960s/1960sPark.png');
+        this.load.image('apartments','/Scene_PresentDay/FailedPark.png');
         //Music
+        this.loadAudio('Theme', '/Music/TitleScreen.mp3', 1);
         this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
         this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
         this.loadAudio('purpleDAudio', 'purpleGuyTextAudio.mp3', 1);
@@ -91,8 +93,11 @@ class Town extends Phaser.Scene
 
         this.loadItem('Water Can', '/Items/waterCan.json');
         this.loadItem('Tree Book', '/Items/TreeBook.json');
-        this.loadItem('Tree Seed', '/Items/Seed.json');
+        this.loadItem('Tree Seed', '/Items/seed.json');
         this.loadItem('Plant Tree', '/Items/plantTree.json');
+        this.loadItem('Apartments Found', '/Items/ApartmentsFound.json');
+        this.loadItem('Depression','/Items/depression.json');
+        this.loadItem('dose of revenge','/Items/purpleShoot.json');
 
         
         this.loadNpc('Susan','/Npcs/Susan.json');
@@ -108,9 +113,11 @@ class Town extends Phaser.Scene
         this.loadNpc('Oscar1960s', '/Npcs/Oscar1960s.json');
         this.loadNpc('Mayor1960s', '/Npcs/Mayor1960s.json');
         this.loadNpc('Lovely1960s', '/Npcs/Lovely1960s.json');
-        this.loadNpc('FetchFirst1700s', '/Npcs/FetchFirst1700s.json')
-        this.loadNpc('FetchSecond1700s', '/Npcs/FetchSecond1700s.json')
-        this.loadNpc('FetchThird1700s', '/Npcs/FetchThird1700s.json')
+        this.loadNpc('FetchFirst1700s', '/Npcs/FetchFirst1700s.json');
+        this.loadNpc('FetchSecond1700s', '/Npcs/FetchSecond1700s.json');
+        this.loadNpc('FetchThird1700s', '/Npcs/FetchThird1700s.json');
+        this.loadNpc('paranoia','/Npcs/paranoia.json');
+        this.loadNpc('deadGuy','/Npcs/revenge.json');
     }
     
     create()
@@ -170,6 +177,8 @@ class Town extends Phaser.Scene
         this.trees1700s.alpha = 1;
         
         //Buildings
+        this.badPark = this.add.image(screenWidth/2, screenHeight/2, 'apartments');
+        //this.badPark.
         this.buildingPresent = this.add.image(screenWidth/2, screenHeight/2, 'presentDayHousing');
         this.buildingPresent.depth = 4;
         this.buildingPresent.alpha = 1;
@@ -198,7 +207,7 @@ class Town extends Phaser.Scene
         this.joystick = new TouchJoystick(this, {'width': 0.4, 'height': .5}, 'JoystickBack', 'JoystickHandle',  150, 75, 125, 0.42);
         this.player = new Player(this, 71, 818, 'player', 1, this.joystick, 'Button');
         this.player.addItem(new Item(this, 'researchTreeAssigned'));
-        this.player.addItem(new Item(this, 'Tree Book'));
+        //this.player.addItem(new Item(this, 'Tree Book'));
         this.player.depth = 2;
         this.cameraManager.setPlayerCameraTarget(this.player);
         //this.npc2 = new Npc(this, 'girl').setPosition(400, 400);
@@ -238,15 +247,15 @@ class Town extends Phaser.Scene
         //1960s group
         this.group2.add(this.trees);
         this.group2.add(this.buildings1960s);
-        this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1);
-        this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2);
-        this.earlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3);
-        this.presentDayInt = new Map (this, "PresentDayInt",  this.presentDayIntBG, this.group4);
-        this.sixtiesInt = new Map (this, "SixtiesInt", this.presentDayIntBG, this.group8);
-        this.earlyInt = new Map (this, "1700sInt", this.earlyIntBG, this.group6);
-        this.initialPark = new Map (this, "Initial Park", this.initalParkBG, this.group5);
-        this.earlyPark = new Map (this, "1700s Park", this.park1700BG, this.group7);
-        this.sixtiesPark = new Map (this, "Sixties Park", this.initalParkBG, this.group9)
+        this.presentDayMap = new Map(this, "Present Day", this.PresentDayBG, this.group1, this.badPark);
+        this.sixtiesMap = new Map(this, "1960s", this.MiddleTimeBG, this.group2, this.badPark);
+        this.earlyMap = new Map(this, "1700s", this.BeginningTimeBG, this.group3, this.badPark);
+        this.presentDayInt = new Map (this, "PresentDayInt",  this.presentDayIntBG, this.group4, this.badPark);
+        this.sixtiesInt = new Map (this, "SixtiesInt", this.presentDayIntBG, this.group8, this.badPark);
+        this.earlyInt = new Map (this, "1700sInt", this.earlyIntBG, this.group6, this.badPark);
+        this.initialPark = new Map (this, "Initial Park", this.initalParkBG, this.group5, this.badPark);
+        this.earlyPark = new Map (this, "1700s Park", this.park1700BG, this.group7, this.badPark);
+        this.sixtiesPark = new Map (this, "Sixties Park", this.initalParkBG, this.group9, this.badPark);
         this.mapManager = new MapState(this,this.PlayerCamera, this.player, this.earlyMap, this.sixtiesMap, this.presentDayMap, this.earlyPark, this.initialPark, this.sixtiesPark, this.presentDayInt, this.earlyInt, this.sixtiesInt);
         this.mapManager.initialize();
         this.phone = new Phone (this, this.phoneImg, this.cameraManager, screenHeight/2);
@@ -292,7 +301,7 @@ class Town extends Phaser.Scene
         // this.joystick.update();
         // this.player.update();
         //console.log("Cam Scroll: (" + this.cameraManager.playerCamera.scrollX + ", " + this.cameraManager.playerCamera.scrollY + ")");
-        //console.log("Player: (" + this.player.x + ", " + this.player.y + ")");
+        console.log("Player: (" + this.player.x + ", " + this.player.y + ")");
         // console.log("y" + this.player.y);
         //console.log(pointer.worldX);
         //console.log(pointer.worldY);
