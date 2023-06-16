@@ -22,9 +22,68 @@ class AudioManager{
         this.sfxVolumes = [];
         this.muted = false;
         this.cc = false;
+
+        this.ccs = [];
     }
 
-    addAudio(key)
+    playClosedCaptioning(caption, length)
+    {
+        let canvas = this.scene.sys.game.canvas;
+        let ccText = this.scene.cameraManager.addUI(this.scene.add.text(canvas.width - 20, 0, caption, {
+            color: "#000000",
+            fontSize: "24px",
+            fontStyle: "Bold"
+        }).setOrigin(1, .5));
+        let ccObj = {text: ccText, index: this.ccs.length, bgm: length < 0};
+        this.ccs.push(ccObj);
+        if(length >= 0)
+        {
+            this.scene.add.tween({
+                targets: ccText,
+                duration: length,
+                alpha: 0,
+                onComplete:()=>{
+                    this.ccs.splice(ccObj.index, 1);
+                    ccObj.text.destroy();
+                    for(let i = 0; i < this.ccs.length; i++)
+                    {
+                        this.ccs[i].text.y = 400 + 40*(this.ccs.length/2.0 - .5 - i);
+                        this.ccs[i].index = i;
+                    }
+                }
+            });
+        }
+        for(let i = 0; i < this.ccs.length; i++)
+        {
+            this.ccs[i].text.y = 400 + 40*(this.ccs.length/2.0 - .5 - i);
+        }
+    }
+
+    fadeOutBGMCaptions()
+    {
+        for(let i = 0; i < this.ccs.length; i++)
+        {
+            if(this.ccs[i].bgm = true)
+            {
+                this.scene.add.tween({
+                    targets: ccText,
+                    duration: 750,
+                    alpha: 0,
+                    onComplete:()=>{
+                        this.ccs.splice(this.ccs[i].index, 1);
+                        this.ccs[i].text.destroy();
+                        for(let j = 0; j < this.ccs.length; j++)
+                        {
+                            this.ccs[j].text.y = 400 + 40*(this.ccs.length/2.0 - .5 - j);
+                            this.ccs[j].index = j;
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    addAudio(key, caption)
     {
         if(key in this.audioList)
         {
@@ -32,7 +91,7 @@ class AudioManager{
             return;
         }
         console.log("Adding " + key + " to audioList");
-        this.audioList[key] = this.scene.sound.add(key);
+        this.audioList[key] = {audio: this.scene.sound.add(key), caption: caption};
     }
 
     addBackgroundMusic(audioKey, volume, loop=true, priority=false)
@@ -42,13 +101,15 @@ class AudioManager{
             console.error("Key does not exist, please check the spelling");
             return false;
         }
-        let audio = this.audioList[audioKey];
+        let audio = this.audioList[audioKey].audio;
         if(priority || this.backgroundMusic == null)
         {
             if(this.backgroundMusic != null)
             {
                 this.backgroundMusic.stop();
+                this.fadeOutBGMCaptions();
             }
+            this.playClosedCaptioning(this.audioList[audioKey].caption, -1);
             audio.loop = loop;
             audio.volume = volume;
             audio.play();
@@ -77,7 +138,7 @@ class AudioManager{
             console.error("Key does not exist, please check the spelling");
             return false;
         }
-        let audio = this.audioList[audioKey];
+        let audio = this.audioList[audioKey].audio;
         if(alone)
         {
             if(this.sfxs.length > 0 && priority)
@@ -93,6 +154,7 @@ class AudioManager{
                 this.sfxs = [audio];
                 this.sfxVolumes = [volume];
                 //if(this.muted) this.sfxs[0].volume = 0;
+                this.playClosedCaptioning(this.audioList[audioKey].caption, -1);
                 return true;
             }
             return false;
@@ -106,6 +168,7 @@ class AudioManager{
             this.sfxVolumes.push(volume);
             this.sfxs.push(audio);
             //if(this.muted) audio.volume = 0;
+            this.playClosedCaptioning(this.audioList[audioKey].caption, -1);
             return true;
         }
     }

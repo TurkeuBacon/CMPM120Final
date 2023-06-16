@@ -7,11 +7,11 @@ class MainMenu extends Phaser.Scene
     {
         super("main_menu");
     }
-    loadAudio(audioKey, audioPath)
+    loadAudio(audioKey, audioPath, caption)
     {
         this.load.audio(audioKey, audioPath);
         this.load.on("filecomplete-audio-" + audioKey, function (key, type, data) {
-            AudioManager.getInstance(this).addAudio(key);
+            AudioManager.getInstance(this).addAudio(key, caption);
         }, this);
     }
 
@@ -23,7 +23,7 @@ class MainMenu extends Phaser.Scene
         this.load.spritesheet('musicOnOff', '/General/music_on_off.png', { frameWidth: 130, frameHeight: 128 });
         //CC On/Off
         this.load.spritesheet('CCOnOff', '/General/cc_on_off.png', { frameWidth: 130, frameHeight: 128 });
-        this.loadAudio('Theme', '/Music/TitleScreen.mp3');
+        this.loadAudio('Theme', '/Music/TitleScreen.mp3', 'Music: Title Theme');
         this.load.image('TitleArt', 'Scene_MainMenu/Title.png');
         this.load.image('BackgroundArt', 'Scene_MainMenu/BackgroundArt.png');
         this.load.image('ButtonArt', 'Scene_MainMenu/play1.png');
