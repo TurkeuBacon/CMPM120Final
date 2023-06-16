@@ -30,10 +30,11 @@ class AudioManager{
     {
         let canvas = this.scene.sys.game.canvas;
         let ccText = this.scene.cameraManager.addUI(this.scene.add.text(canvas.width - 20, 0, caption, {
-            color: "#000000",
+            color: "#ffffff",
             fontSize: "24px",
-            fontStyle: "Bold"
-        }).setOrigin(1, .5));
+            fontStyle: "Bold",
+            backgroundColor: "#000000"
+        }).setOrigin(1, .5).setVisible(this.cc));
         let ccObj = {text: ccText, index: this.ccs.length, bgm: length < 0};
         this.ccs.push(ccObj);
         if(length >= 0)
@@ -47,7 +48,7 @@ class AudioManager{
                     ccObj.text.destroy();
                     for(let i = 0; i < this.ccs.length; i++)
                     {
-                        this.ccs[i].text.y = 400 + 40*(this.ccs.length/2.0 - .5 - i);
+                        this.ccs[i].text.y = 300 - 24*(this.ccs.length/2.0 - .5 - i);
                         this.ccs[i].index = i;
                     }
                 }
@@ -55,7 +56,7 @@ class AudioManager{
         }
         for(let i = 0; i < this.ccs.length; i++)
         {
-            this.ccs[i].text.y = 400 + 40*(this.ccs.length/2.0 - .5 - i);
+            this.ccs[i].text.y = 300 - 24*(this.ccs.length/2.0 - .5 - i);
         }
     }
 
@@ -154,7 +155,7 @@ class AudioManager{
                 this.sfxs = [audio];
                 this.sfxVolumes = [volume];
                 //if(this.muted) this.sfxs[0].volume = 0;
-                this.playClosedCaptioning(this.audioList[audioKey].caption, -1);
+                this.playClosedCaptioning(this.audioList[audioKey].caption, 3000);
                 return true;
             }
             return false;
@@ -168,7 +169,7 @@ class AudioManager{
             this.sfxVolumes.push(volume);
             this.sfxs.push(audio);
             //if(this.muted) audio.volume = 0;
-            this.playClosedCaptioning(this.audioList[audioKey].caption, -1);
+            this.playClosedCaptioning(this.audioList[audioKey].caption, 3000);
             return true;
         }
     }
@@ -233,13 +234,16 @@ class AudioManager{
 
     setCC(caption)
     {
+        this.ccs.forEach(element => {
+            element.text.setVisible(caption);
+        });
         this.cc = caption;
     }
 
     toggleCC()
     {
         this.setCC(!this.cc);
-        return this.cc;
+        return !this.cc;
     }
 }
 

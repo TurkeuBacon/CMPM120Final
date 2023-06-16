@@ -32,11 +32,11 @@ class Town extends Phaser.Scene
             this.load.spritesheet(key + 'Texture', '/Npcs/NpcTextures/' + data.texture, { frameWidth: 16, frameHeight: 32});
         }, this);
     }
-    loadAudio(audioKey, audioPath)
+    loadAudio(audioKey, audioPath, caption)
     {
         this.load.audio(audioKey, audioPath);
         this.load.on("filecomplete-audio-" + audioKey, function (key, type, data) {
-            AudioManager.getInstance(this).addAudio(key);
+            AudioManager.getInstance(this).addAudio(key, caption);
         }, this);
     }
 
@@ -74,10 +74,10 @@ class Town extends Phaser.Scene
         this.load.image('park1960s', '/Scene_1960s/1960sPark.png');
         this.load.image('apartments','/Scene_PresentDay/FailedPark.png');
         //Music
-        this.loadAudio('Theme', '/Music/TitleScreen.mp3', 1);
-        this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', 0.2);
-        this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
-        this.loadAudio('purpleDAudio', 'purpleGuyTextAudio.mp3', 1);
+        this.loadAudio('Theme', '/Music/TitleScreen.mp3', "Music: Title Theme");
+        this.loadAudio('overworldBGM', '/Music/GAME SONG.mp3', "Music: Overworld Theme");
+        this.loadAudio('npcAudio', 'npcAudio.mp3', "NPC Speaks");
+        this.loadAudio('purpleDAudio', 'purpleGuyTextAudio.mp3', "Purple Guy Speaks");
 
         //Music On/Off
         this.load.spritesheet('musicOnOff', '/General/music_on_off.png', { frameWidth: 130, frameHeight: 128 });
@@ -289,7 +289,7 @@ class Town extends Phaser.Scene
             this.musicButton.setFrame(shouldMute ? 1 : 0);
             AudioManager.getInstance(this).setMute(shouldMute);
         }
-        this.ccButton = this.add.sprite(this.fsbutton.x, this.fsbutton.y + this.fsbutton.displayWidth + 65, 'CCOnOff', 0).setOrigin(0, 0).setScale(.6).setInteractive().on('pointerdown', ()=>{
+        this.ccButton = this.add.sprite(this.fsbutton.x, this.fsbutton.y + this.fsbutton.displayWidth + 65, 'CCOnOff', 1).setOrigin(0, 0).setScale(.6).setInteractive().on('pointerdown', ()=>{
             this.ccButton.setFrame(AudioManager.getInstance(this).toggleCC() ? 1 : 0);
         });
         this.cameraManager.addUI(this.ccButton);

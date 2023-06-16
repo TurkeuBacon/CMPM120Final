@@ -86,7 +86,7 @@ class MainMenu extends Phaser.Scene
             this.musicButton.setFrame(shouldMute ? 1 : 0);
             AudioManager.getInstance(this).setMute(shouldMute);
         }
-        this.ccButton = this.add.sprite(this.fsbutton.x, this.fsbutton.y + this.fsbutton.displayWidth + 65, 'CCOnOff', 0).setOrigin(0, 0).setScale(.6).setInteractive().on('pointerdown', ()=>{
+        this.ccButton = this.add.sprite(this.fsbutton.x, this.fsbutton.y + this.fsbutton.displayWidth + 65, 'CCOnOff', 1).setOrigin(0, 0).setScale(.6).setInteractive().on('pointerdown', ()=>{
             this.ccButton.setFrame(AudioManager.getInstance(this).toggleCC() ? 1 : 0);
         });
         this.cameraManager.addUI(this.ccButton);

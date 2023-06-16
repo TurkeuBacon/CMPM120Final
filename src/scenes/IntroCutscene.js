@@ -20,11 +20,11 @@ class IntroCutscene extends Phaser.Scene
         }, this);
     }
 
-    loadAudio(audioKey, audioPath)
+    loadAudio(audioKey, audioPath, caption)
     {
         this.load.audio(audioKey, audioPath);
         this.load.on("filecomplete-audio-" + audioKey, function (key, type, data) {
-            AudioManager.getInstance(this).addAudio(key);
+            AudioManager.getInstance(this).addAudio(key, caption);
         }, this);
     }
 
@@ -33,8 +33,7 @@ class IntroCutscene extends Phaser.Scene
         this.load.path = '../assets/';
         this.load.spritesheet('player', '/General/Player_spritesheet.png', { frameWidth: 16, frameHeight: 32});
         this.load.image('InteriorBackground', '/Scene_PresentDay/Interior.png');
-        this.loadAudio('purpleGuyTheme', '/Music/Wackyman.mp3');
-        this.loadAudio('houseMusic', '/Music/BeneathTheMask-instrumental.mp3');
+        this.loadAudio('purpleGuyTheme', '/Music/Wackyman.mp3', "Music: Purple Guy Theme");
         PurpleGuy.loadPurpleGuyData(this);
         //Music On/Off
         this.load.spritesheet('musicOnOff', '/General/music_on_off.png', { frameWidth: 130, frameHeight: 128 });
@@ -44,7 +43,7 @@ class IntroCutscene extends Phaser.Scene
         this.load.image('fsbutton','/HUD/fullscreen_button.png');
         this.load.image('dialogueBox', '/HUD/text_box.png');
         this.load.image('purpleBox', '/HUD/text_box_wacky_guy.png');
-        this.loadAudio('purpleDAudio', 'purpleGuyTextAudio.mp3', 1);
+        this.loadAudio('purpleDAudio', 'purpleGuyTextAudio.mp3', "Purple Guy Speaks");
         //this.loadAudio('npcAudio', 'npcAudio.mp3', 1);
         this.load.image('taskHub', '/HUD/task_hub.png');
 
@@ -145,7 +144,7 @@ class IntroCutscene extends Phaser.Scene
             this.musicButton.setFrame(shouldMute ? 1 : 0);
             AudioManager.getInstance(this).setMute(shouldMute);
         }
-        this.ccButton = this.add.sprite(this.fsbutton.x, this.fsbutton.y + this.fsbutton.displayWidth + 65, 'CCOnOff', 0).setOrigin(0, 0).setScale(.6).setInteractive().on('pointerdown', ()=>{
+        this.ccButton = this.add.sprite(this.fsbutton.x, this.fsbutton.y + this.fsbutton.displayWidth + 65, 'CCOnOff', 1).setOrigin(0, 0).setScale(.6).setInteractive().on('pointerdown', ()=>{
             this.ccButton.setFrame(AudioManager.getInstance(this).toggleCC() ? 1 : 0);
         });
         this.cameraManager.addUI(this.ccButton);
